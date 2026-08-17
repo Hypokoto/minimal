@@ -1,0 +1,42 @@
+@import "theme.rasi"
+
+window {
+    width: 420px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 16px;
+    children: [ listview ];
+}
+
+listview {
+    columns:      1;
+    lines:        20;
+    spacing:      0px;
+    fixed-height: false;
+    background-color: transparent;
+    dynamic:      false;
+}
+
+element {
+    padding: 1px 6px;
+}
+
+element-text {
+    font:       "AdwaitaMono Nerd Font Mono 10";
+    text-color: @muted;
+}
+
+/* The calendar week-row containing today is marked active (-a) from the
+   script and rendered in @primary. Agenda entries are marked urgent (-u)
+   purely to get a distinct @fg color — no urgency implied. */
+element.normal.active {
+    text-color: @primary;
+}
+
+element.normal.urgent {
+    text-color: @fg;
+}

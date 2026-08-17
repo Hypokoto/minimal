@@ -1,0 +1,151 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 34,
+    "margin-top": 8,
+    "margin-left": 16,
+    "margin-right": 16,
+    "margin-bottom": 0,
+    "spacing": 0,
+    "exclusive": false,
+    "on-sigusr1": "toggle",
+    "on-sigusr2": "show",
+
+    // Zone assignment — each entry is a group, not a raw module list.
+    // This is what makes true independent pills possible.
+    "modules-left": ["group/left"],
+    "modules-center": ["group/center"],
+    "modules-right": ["group/right"],
+
+    "group/left": {
+        "orientation": "horizontal",
+        "modules": ["custom/logo", "hyprland/workspaces", "hyprland/submap", "hyprland/window"]
+    },
+
+    "group/center": {
+        "orientation": "horizontal",
+        "modules": ["clock"]
+    },
+
+    "group/right": {
+        "orientation": "horizontal",
+        "modules": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "tray"]
+    },
+
+    "custom/logo": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "~/.config/rofi/scripts/launcher.sh",
+        "on-click-right": "~/.config/hypr/wallpaper/picker.sh"
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    "hyprland/submap": {
+        "format": " {}",
+        "max-length": 16,
+        "tooltip": false
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 32,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+            "(.*) - Neovim": " $1"
+        }
+    },
+
+    "clock": {
+        "format": "  {:%H:%M}",
+        "format-alt": "  {:%A, %d %B %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "on-click": "~/.config/rofi/scripts/calendar.sh",
+        "on-click-right": "mode",
+        "interval": 1
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰝟  Muted",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "󰏲",
+            "portable": "󰦦",
+            "car": "󰄋",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 5,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-right": "pavucontrol",
+        "tooltip-format": "{desc} — {volume}%"
+    },
+
+    "backlight": {
+        "format": "{icon}  {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "tooltip": false
+    },
+
+    "network": {
+        "format-wifi": "󰤨  {signalStrength}%",
+        "format-ethernet": "󰈀  {ipaddr}",
+        "format-linked": "󰈀  {ifname} (No IP)",
+        "format-disconnected": "󰤮  Offline",
+        "tooltip-format-wifi": "{essid} · {bandwidthDownBits} ↓ / {bandwidthUpBits} ↑",
+        "interval": 5,
+        "on-click": "~/.config/rofi/scripts/network.sh",
+        "on-click-right": "nm-connection-editor"
+    },
+
+    "cpu": {
+        "format": "󰍛  {usage}%",
+        "interval": 2,
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "memory": {
+        "format": "󰘚  {percentage}%",
+        "interval": 5,
+        "states": {
+            "warning": 70,
+            "critical": 90
+        },
+        "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB used"
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-charging": "󰂄  {capacity}%",
+        "format-plugged": "󰚥  {capacity}%",
+        "format-alt": "{icon}  {time}",
+        "format-icons": ["󰂎", "󰁺", "󰁼", "󰁾", "󰂀", "󰁹"],
+        "interval": 15
+    },
+
+    "tray": {
+        "icon-size": 15,
+        "spacing": 10
+    }
+}

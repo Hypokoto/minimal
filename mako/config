@@ -1,0 +1,33 @@
+# Aetheria mako config
+# Generated from palette.md — DO NOT edit directly.
+# Requires mako >= 1.7 for progress-bar 'value' hint rendering
+
+font=AdwaitaMono Nerd Font 10
+background-color=#11141D
+text-color=#F2F6FF
+border-color=#A05CFF
+border-size=2
+border-radius=10
+padding=10
+margin=8
+width=320
+height=100
+default-timeout=4000
+progress-color=source #00D9FF
+
+[urgency=low]
+border-color=#8D95B3
+
+[urgency=normal]
+border-color=#A05CFF
+
+[urgency=critical]
+border-color=#FF5470
+default-timeout=0
+
+# OSD notifications (volume/brightness) — replace in place, no stacking
+[app-name="aetheria-osd"]
+group-by=category
+default-timeout=1500
+border-color=#00D9FF
+progress-color=source #00D9FF

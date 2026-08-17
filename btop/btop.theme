@@ -1,0 +1,61 @@
+# btop tty theme
+# Name: Aetheria
+# Generated from palette.md — DO NOT edit directly.
+
+# Main UI Element Colors
+theme[main_bg]="#0A0C12"
+theme[main_fg]="#F2F6FF"
+theme[title]="#00D9FF"
+theme[hi_fg]="#00D9FF"
+theme[selected_bg]="#1C2230"
+theme[selected_fg]="#F2F6FF"
+theme[inactive_fg]="#8D95B3"
+theme[graph_text]="#8D95B3"
+theme[proc_misc]="#5B8CFF"
+
+# Box Outlines
+theme[cpu_box]="#1C2230"
+theme[mem_box]="#1C2230"
+theme[net_box]="#1C2230"
+theme[proc_box]="#1C2230"
+theme[div_line]="#1C2230"
+
+# CPU Graph Colors
+theme[cpu_start]="#4DFF91"
+theme[cpu_mid]="#123456"
+theme[cpu_end]="#FF5470"
+
+# Temperature Colors
+theme[temp_start]="#4DFF91"
+theme[temp_mid]="#123456"
+theme[temp_end]="#FF5470"
+
+# Mem/Disk free meter
+theme[free_start]="#4DFF91"
+theme[free_mid]="#123456"
+theme[free_end]="#FF5470"
+
+# Mem/Disk cached meter
+theme[cached_start]="#4DFF91"
+theme[cached_mid]="#123456"
+theme[cached_end]="#FF5470"
+
+# Mem/Disk available meter
+theme[available_start]="#4DFF91"
+theme[available_mid]="#123456"
+theme[available_end]="#FF5470"
+
+# Mem/Disk used meter
+theme[used_start]="#4DFF91"
+theme[used_mid]="#123456"
+theme[used_end]="#FF5470"
+
+# Download graph colors
+theme[download_start]="#A05CFF"
+theme[download_mid]="#5B8CFF"
+theme[download_end]="#61E6FF"
+
+# Upload graph colors
+theme[upload_start]="#A05CFF"
+theme[upload_mid]="#5B8CFF"
+theme[upload_end]="#61E6FF"

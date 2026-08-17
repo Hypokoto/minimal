@@ -1,0 +1,92 @@
+# ~/.config/starship.toml — Aetheria / Oxocarbon Starship Theme
+# Blisteringly fast, high-signal, dark minimal aesthetic.
+
+add_newline = false
+command_timeout = 500
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$package\
+$c\
+$cmake\
+$golang\
+$java\
+$nodejs\
+$python\
+$rust\
+$cmd_duration\
+$line_break\
+$character"""
+
+# --- Directory ---
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+home_symbol = "~"
+style = "bold #00D9FF"
+format = "[$path]($style) "
+
+# --- Git Branch ---
+[git_branch]
+symbol = " "
+style = "bold #5B8CFF"
+format = "on [$symbol$branch]($style) "
+
+# --- Git Status ---
+[git_status]
+style = "bold #FF5470"
+format = "([$all_status$ahead_behind]($style) )"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "?"
+stashed = "$"
+modified = "*"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# --- Languages / Toolchains ---
+[c]
+symbol = " "
+style = "#61E6FF"
+format = "via [$symbol$version]($style) "
+
+[golang]
+symbol = " "
+style = "#00D9FF"
+format = "via [$symbol$version]($style) "
+
+[java]
+symbol = " "
+style = "#FF5470"
+format = "via [$symbol$version]($style) "
+
+[nodejs]
+symbol = " "
+style = "#4DFF91"
+format = "via [$symbol$version]($style) "
+
+[python]
+symbol = " "
+style = "#61E6FF"
+format = "via [$symbol$version]($style) "
+
+[rust]
+symbol = " "
+style = "#FF5470"
+format = "via [$symbol$version]($style) "
+
+# --- Execution Time ---
+[cmd_duration]
+min_time = 2_000
+style = "bold #8D95B3"
+format = "took [$duration]($style) "
+
+# --- Prompt Character ---
+[character]
+success_symbol = "[λ](bold #61E6FF)"
+error_symbol = "[λ](bold #FF5470)"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Aetheria — Toggle Waybar visibility via shortcut key
+
+pid=$(pgrep -x waybar | head -n1)
+
+if [ -n "$pid" ]; then
+    kill -SIGUSR1 "$pid"
+else
+    waybar &
+fi

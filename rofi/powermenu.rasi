@@ -1,0 +1,66 @@
+@import "theme.rasi"
+
+window {
+    width: 480px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 16px;
+    children: [ listview ];
+}
+
+listview {
+    columns:      5;
+    lines:        1;
+    spacing:      10px;
+    fixed-height: true;
+    background-color: transparent;
+}
+
+element {
+    orientation:    vertical;
+    padding:        14px 6px;
+    border-radius:  10px;
+    background-color: @surface;
+}
+
+element-text {
+    horizontal-align: 0.5;
+    text-color: inherit;
+}
+
+/* Per-entry hover colors are matched by icon/text convention in the
+   backing script (entries are labeled so state below applies uniformly);
+   rofi rasi cannot target hover color by element *content*, only by
+   selection state, so Shutdown/Reboot get their emphasis colors via
+   the urgent/active element markers set from the script's -a/-u flags. */
+element.selected.normal {
+    background-color: @overlay;
+    border:           0px 0px 0px 2px;
+    border-color:     @primary;
+}
+
+element.selected.urgent {
+    background-color: @overlay;
+    border:           0px 0px 0px 2px;
+    border-color:     @danger;
+    text-color:        @danger;
+}
+
+element.selected.active {
+    background-color: @overlay;
+    border:           0px 0px 0px 2px;
+    border-color:     @warning;
+    text-color:        @warning;
+}
+
+element.normal.urgent {
+    text-color: @danger;
+}
+
+element.normal.active {
+    text-color: @warning;
+}

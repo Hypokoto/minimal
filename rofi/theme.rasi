@@ -1,0 +1,50 @@
+/**
+ * theme.rasi — Emperor's Mirror centralized token palette
+ * Generated from palette.md — DO NOT edit directly.
+ */
+
+* {
+    bg:        #0A0C12;
+    surface:   #11141D;
+    overlay:   #1C2230;
+    fg:        #F2F6FF;
+    muted:     #8D95B3;
+    primary:   #00D9FF;
+    secondary: #5B8CFF;
+    highlight: #A05CFF;
+    success:   #4DFF91;
+    warning:   #123456;
+    danger:    #FF5470;
+    info:      #61E6FF;
+
+    /* transparent variants for hover/alpha layering */
+    bg-trans:      #0A0C12CC;
+    overlay-trans: #1C2230AA;
+
+    font: "AdwaitaMono Nerd Font 11";
+
+    background-color: transparent;
+    text-color:        @fg;
+    margin:  0px;
+    padding: 0px;
+    spacing: 0px;
+}
+
+window {
+    background-color: @bg-trans;
+    border:           2px;
+    border-color:     @primary;
+    border-radius:    12px;
+}
+
+element selected {
+    background-color: @overlay;
+    text-color:        @primary;
+    border:            0px 0px 0px 2px;
+    border-color:      @primary;
+}
+
+element normal {
+    background-color: transparent;
+    text-color:        @fg;
+}

@@ -1,0 +1,27 @@
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	line-numbers = true
+	side-by-side = false
+	syntax-theme = OneHalfDark
+	minus-style = syntax "#3a1d28"
+	plus-style = syntax "#1d3a2b"
+	file-style = bold #5B8CFF
+	file-decoration-style = "#1C2230" ul
+	hunk-header-style = file line-number syntax #8D95B3
+	hunk-header-decoration-style = "#1C2230" box
+
+[merge]
+	conflictstyle = zdiff3
+
+[diff]
+	colorWords = true
+
+[color]
+	ui = auto

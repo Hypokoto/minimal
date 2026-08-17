@@ -1,0 +1,52 @@
+@import "theme.rasi"
+
+window {
+    width: 480px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 14px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius:    8px;
+    padding:          8px 12px;
+    margin:           0px 0px 10px 0px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color: @secondary;
+    padding:    0px 8px 0px 0px;
+}
+
+entry {
+    text-color:        @fg;
+    placeholder-color:  @muted;
+}
+
+listview {
+    columns:      1;
+    lines:        10;
+    spacing:      2px;
+    fixed-height: false;
+    background-color: transparent;
+}
+
+element {
+    padding:        7px 10px;
+    border-radius:  4px;
+}
+
+element-text {
+    text-color: inherit;
+}
+
+/* Currently-connected SSID marked active (info color) */
+element.normal.active   { text-color: @info; }
+element.selected.active { background-color: @overlay; border: 0px 0px 0px 2px; border-color: @info; text-color: @info; }

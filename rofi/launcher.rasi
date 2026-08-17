@@ -1,0 +1,64 @@
+@import "theme.rasi"
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    display-drun: "Launch";
+    drun-display-format: "{name}";
+    font: "AdwaitaMono Nerd Font 11";
+}
+
+window {
+    width: 640px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: @bg;
+    padding: 16px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius:    8px;
+    padding:          10px 14px;
+    margin:           0px 0px 12px 0px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color:  @primary;
+    padding:     0px 8px 0px 0px;
+}
+
+entry {
+    text-color:        @fg;
+    placeholder:        "Search...";
+    placeholder-color:  @muted;
+}
+
+listview {
+    columns:    2;
+    lines:      6;
+    spacing:    8px;
+    fixed-height: true;
+    background-color: transparent;
+}
+
+element {
+    padding:        8px;
+    border-radius:  8px;
+    orientation:    horizontal;
+}
+
+element-icon {
+    size:   28px;
+    margin: 0px 10px 0px 0px;
+}
+
+element-text {
+    text-color: inherit;
+    vertical-align: 0.5;
+}

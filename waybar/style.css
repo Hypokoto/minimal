@@ -1,0 +1,269 @@
+/* ============================================================
+   AETHERIA — Variable Definitions
+   ============================================================ */
+@define-color background #0A0C12;
+@define-color surface    #11141D;
+@define-color overlay    #1C2230;
+@define-color text       #F2F6FF;
+@define-color muted      #8D95B3;
+@define-color primary    #00D9FF;
+@define-color secondary  #5B8CFF;
+@define-color highlight  #A05CFF;
+@define-color success    #4DFF91;
+@define-color warning    #FFCC66;
+@define-color danger     #FF5470;
+@define-color info       #61E6FF;
+
+/* ============================================================
+   BASE RESET
+   ============================================================ */
+* {
+    font-family: "AdwaitaMono Nerd Font", "JetBrainsMono NF", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    color: @text;
+}
+
+window#waybar {
+    background: transparent;
+    color: @text;
+}
+
+/* ============================================================
+   PILL CONTAINERS
+   Waybar assigns group/left  → box#left
+                   group/center → box#center
+                   group/right  → box#right
+   Verified from GTK widget tree debug output.
+   ============================================================ */
+box#left {
+    background-color: @surface;
+    border: 1px solid @overlay;
+    border-radius: 14px;
+    padding: 0 12px;
+    margin: 0;
+}
+
+box#center {
+    background-color: @surface;
+    border: 1px solid @overlay;
+    border-radius: 14px;
+    padding: 0 16px;
+    margin: 0;
+}
+
+box#right {
+    background-color: @surface;
+    border: 1px solid @overlay;
+    border-radius: 14px;
+    padding: 0 12px;
+    margin: 0;
+}
+
+/* ============================================================
+   INNER MODULE SPACING
+   ============================================================ */
+#custom-logo,
+#workspaces,
+#submap,
+#window,
+#clock,
+#pulseaudio,
+#backlight,
+#network,
+#cpu,
+#memory,
+#battery,
+#tray {
+    padding: 4px 8px;
+    margin: 2px 2px;
+    border-radius: 10px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Dividers between right-pill modules */
+#pulseaudio,
+#backlight,
+#network,
+#cpu,
+#memory {
+    border-right: 1px solid rgba(141, 149, 179, 0.15);
+    border-radius: 0;
+    padding-right: 12px;
+    margin-right: 4px;
+}
+
+#battery {
+    padding-left: 4px;
+}
+
+/* ============================================================
+   LEFT PILL — Workspaces / State
+   ============================================================ */
+#workspaces button {
+    padding: 0 6px;
+    margin: 0 2px;
+    color: @muted;
+    background: transparent;
+    border-radius: 8px;
+}
+
+#workspaces button.active {
+    color: @primary;
+    background-color: rgba(0, 217, 255, 0.12);
+    border-bottom: 2px solid @primary;
+}
+
+#workspaces button.urgent {
+    color: @danger;
+    background-color: rgba(141, 149, 179, 0.15);
+}
+
+#workspaces button:hover {
+    background-color: @overlay;
+    color: @text;
+}
+
+#workspaces button.focused {
+    color: @primary;
+}
+
+#submap {
+    color: @highlight;
+    background-color: rgba(0, 217, 255, 0.12);
+    border-radius: 8px;
+}
+
+#window {
+    color: @muted;
+    font-weight: 500;
+}
+
+#custom-logo {
+    color: @primary;
+    font-size: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#custom-logo:hover {
+    color: @text;
+    background-color: rgba(0, 217, 255, 0.15);
+}
+
+#backlight {
+    color: @text;
+}
+
+/* ============================================================
+   CENTER PILL — Clock
+   ============================================================ */
+#clock {
+    color: @text;
+    font-weight: 700;
+    padding: 4px 10px;
+}
+
+/* ============================================================
+   RIGHT PILL — System Metrics
+   ============================================================ */
+#pulseaudio {
+    color: @text;
+}
+#pulseaudio.muted {
+    color: @muted;
+}
+
+#network {
+    color: @text;
+}
+#network.disconnected {
+    color: @danger;
+    background-color: @overlay;
+    border-radius: 8px;
+}
+#network.linked {
+    color: @warning;
+}
+
+#cpu {
+    color: @secondary;
+}
+#cpu.warning {
+    color: @warning;
+}
+#cpu.critical {
+    color: @danger;
+    background-color: @overlay;
+    border-radius: 8px;
+}
+
+#memory {
+    color: @secondary;
+}
+#memory.warning {
+    color: @warning;
+}
+#memory.critical {
+    color: @danger;
+    background-color: @overlay;
+    border-radius: 8px;
+}
+
+#battery {
+    color: @success;
+}
+#battery.charging {
+    color: @success;
+}
+#battery.warning:not(.charging) {
+    color: @warning;
+}
+#battery.critical:not(.charging) {
+    color: @danger;
+    background-color: @overlay;
+    border-radius: 8px;
+    animation: blink-danger 1.5s ease-in-out infinite;
+}
+
+@keyframes blink-danger {
+    0% {
+        background-color: rgba(255, 84, 112, 0.08);
+    }
+    50% {
+        background-color: rgba(255, 84, 112, 0.28);
+    }
+    100% {
+        background-color: rgba(255, 84, 112, 0.08);
+    }
+}
+
+#tray {
+    padding-right: 6px;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: rgba(255, 84, 112, 0.2);
+    border-radius: 8px;
+}
+
+/* ============================================================
+   TOOLTIPS
+   ============================================================ */
+tooltip {
+    background-color: @surface;
+    border: 1px solid @overlay;
+    border-radius: 10px;
+    padding: 6px;
+}
+tooltip label {
+    color: @text;
+}

@@ -1,0 +1,22 @@
+# ~/.config/yazi/yazi.toml — Yazi File Manager Configuration
+
+[opener]
+edit = [
+	{ run = 'nvim "$@"', block = true, for = "unix" },
+]
+
+[preview]
+max_width = 1000
+max_height = 1000
+image_filter = "triangle"
+image_quality = 75
+sixel_fraction = 15
+
+# Enable chafa for terminal graphics previewing if needed
+[plugin]
+previewers = [
+	{ mime = "image/*", run = "image" },
+	{ mime = "video/*", run = "video" },
+	{ mime = "application/pdf", run = "pdf" },
+	{ mime = "font/*", run = "font" },
+]
