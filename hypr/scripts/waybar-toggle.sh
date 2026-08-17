@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Aetheria — Toggle Waybar visibility via shortcut key
+# Minimal — Toggle Waybar visibility via shortcut key
 
 pid=$(pgrep -x waybar | head -n1)
 

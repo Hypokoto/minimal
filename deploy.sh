@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Aetheria deploy.sh — Idempotent user file symlinking and NvChad deployment pipeline
+# Minimal deploy.sh — Idempotent user file symlinking and NvChad deployment pipeline
 # Supports GNU stow or absolute symlink fallback with atomic rotation.
 # ==============================================================================
 set -euo pipefail
 IFS=$'\n\t'
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-LOG_FILE="/tmp/aetheria-deploy.log"
+LOG_FILE="/tmp/minimal-deploy.log"
 
 log()  { printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
 warn() { printf '[%s] WARN: %s\n' "$(date '+%H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
 
-log "=== STARTING AETHERIA DEPLOYMENT PIPELINE ==="
+log "=== STARTING MINIMAL DEPLOYMENT PIPELINE ==="
 
 # --- 1. Binary Presence Verification ---
 log "--- Phase 1: Binary Presence Verification ---"
@@ -110,7 +110,7 @@ if [[ ! -f "$HOME/.config/nvim/lua/nvconfig.lua" && ! -f "$HOME/.config/nvim/ini
     fi
     git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/nvim" || warn "Git clone NvChad failed."
 else
-    log "Existing nvim config detected at ~/.config/nvim. Overlaying Aetheria custom files..."
+    log "Existing nvim config detected at ~/.config/nvim. Overlaying Minimal custom files..."
 fi
 
 mkdir -p "$HOME/.config/nvim/lua/configs" "$HOME/.config/nvim/lua/plugins" "$HOME/.config/nvim/lua/themes" "$HOME/.config/nvim/ftplugin"
@@ -135,5 +135,5 @@ else
     warn "fc-cache binary not found. Skipping font cache refresh."
 fi
 
-log "=== AETHERIA DEPLOYMENT COMPLETE ==="
+log "=== MINIMAL DEPLOYMENT COMPLETE ==="
 log "Log file saved to: $LOG_FILE"

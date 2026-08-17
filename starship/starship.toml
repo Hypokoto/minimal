@@ -1,4 +1,4 @@
-# ~/.config/starship.toml — Aetheria / Oxocarbon Starship Theme
+# ~/.config/starship.toml — Minimal / Oxocarbon Starship Theme
 # Blisteringly fast, high-signal, dark minimal aesthetic.
 
 add_newline = false

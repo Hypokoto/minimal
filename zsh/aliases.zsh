@@ -1,5 +1,5 @@
 # ==============================================================================
-# Aetheria zsh/aliases.zsh — Modular & Defensive Shell Aliases
+# Minimal zsh/aliases.zsh — Modular & Defensive Shell Aliases
 # Every binary alias is wrapped in command -v checks so the shell never breaks
 # if a tool is uninstalled or missing.
 # ==============================================================================

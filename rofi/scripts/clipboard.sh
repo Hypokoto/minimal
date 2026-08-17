@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Aetheria Rofi Clipboard Suite
+# Minimal Rofi Clipboard Suite
 # Interfaced with cliphist + wl-clipboard
 # ==============================================================================
 set -euo pipefail
@@ -33,12 +33,12 @@ set -e
 if [[ ${STATUS} -eq 10 ]]; then
     if [[ -n "${SELECTION}" ]]; then
         cliphist delete <<< "${SELECTION}"
-        notify-send -a "aetheria" "Clipboard Manager" "Entry deleted"
+        notify-send -a "minimal" "Clipboard Manager" "Entry deleted"
     fi
     exit 0
 fi
 
 if [[ -n "${SELECTION}" ]]; then
     cliphist decode <<< "${SELECTION}" | wl-copy
-    notify-send -a "aetheria" "Clipboard Manager" "Copied to clipboard"
+    notify-send -a "minimal" "Clipboard Manager" "Copied to clipboard"
 fi

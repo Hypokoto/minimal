@@ -1,6 +1,6 @@
-# Aetheria — Keybindings Reference
+# Minimal — Keybindings Reference
 
-A comprehensive cheat sheet for all global keyboard shortcuts and shell bindings configured in Aetheria.
+A comprehensive cheat sheet for all global keyboard shortcuts and shell bindings configured in Minimal.
 
 ---
 

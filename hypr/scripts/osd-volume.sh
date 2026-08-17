@@ -11,4 +11,4 @@ ICON="audio-volume-high-symbolic"
 [[ "$MUTED" -gt 0 ]] && ICON="audio-volume-muted-symbolic"
 
 notify-send -r 91110 -h int:value:"$VOL" -h string:x-canonical-private-synchronous:osd \
-  -a "aetheria-osd" -i "$ICON" "Volume" "${VOL}%"
+  -a "minimal-osd" -i "$ICON" "Volume" "${VOL}%"

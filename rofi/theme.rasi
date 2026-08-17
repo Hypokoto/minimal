@@ -13,7 +13,7 @@
     secondary: #5B8CFF;
     highlight: #A05CFF;
     success:   #4DFF91;
-    warning:   #123456;
+    warning:   #FFCC66;
     danger:    #FF5470;
     info:      #61E6FF;
 

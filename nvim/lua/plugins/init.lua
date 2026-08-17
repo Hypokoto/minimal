@@ -32,9 +32,9 @@ return {
           header = table.concat(ascii_header, "\n"),
         },
         sections = {
-          { section = "header", hl = "AetheriaDashboardHeader" },
+          { section = "header", hl = "MinimalDashboardHeader" },
           { section = "keys", gap = 1, padding = 1 },
-          { section = "startup", hl = "AetheriaDashboardFooter" },
+          { section = "startup", hl = "MinimalDashboardFooter" },
         },
       },
     },

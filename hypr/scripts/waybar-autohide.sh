@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Aetheria — Waybar Lifecycle & Low Battery Daemon
+# Minimal — Waybar Lifecycle & Low Battery Daemon
 #
 # Waybar visibility is managed strictly by:
 # 1. Shortcut key: SUPER + B (executes waybar-toggle.sh via SIGUSR1)

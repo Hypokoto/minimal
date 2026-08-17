@@ -1,5 +1,5 @@
 # btop tty theme
-# Name: Aetheria
+# Name: Minimal
 # Generated from palette.md — DO NOT edit directly.
 
 # Main UI Element Colors
@@ -22,32 +22,32 @@ theme[div_line]="#1C2230"
 
 # CPU Graph Colors
 theme[cpu_start]="#4DFF91"
-theme[cpu_mid]="#123456"
+theme[cpu_mid]="#FFCC66"
 theme[cpu_end]="#FF5470"
 
 # Temperature Colors
 theme[temp_start]="#4DFF91"
-theme[temp_mid]="#123456"
+theme[temp_mid]="#FFCC66"
 theme[temp_end]="#FF5470"
 
 # Mem/Disk free meter
 theme[free_start]="#4DFF91"
-theme[free_mid]="#123456"
+theme[free_mid]="#FFCC66"
 theme[free_end]="#FF5470"
 
 # Mem/Disk cached meter
 theme[cached_start]="#4DFF91"
-theme[cached_mid]="#123456"
+theme[cached_mid]="#FFCC66"
 theme[cached_end]="#FF5470"
 
 # Mem/Disk available meter
 theme[available_start]="#4DFF91"
-theme[available_mid]="#123456"
+theme[available_mid]="#FFCC66"
 theme[available_end]="#FF5470"
 
 # Mem/Disk used meter
 theme[used_start]="#4DFF91"
-theme[used_mid]="#123456"
+theme[used_mid]="#FFCC66"
 theme[used_end]="#FF5470"
 
 # Download graph colors

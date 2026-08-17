@@ -1,5 +1,5 @@
 ---@type Base46Theme
--- lua/themes/aetheria.lua — Base46 theme for NvChad
+-- lua/themes/minimal.lua — Base46 theme for NvChad
 -- Single source of truth: palette.md exact tokens.
 
 local M = {}

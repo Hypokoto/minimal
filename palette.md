@@ -1,4 +1,4 @@
-# Aetheria Color Token Spec
+# Minimal Color Token Spec
 
 Single source of truth. Every tool config derives from this table. Do not hardcode hex outside this file's generation targets — if a tool needs a new format, add a row here first.
 
@@ -13,7 +13,7 @@ Single source of truth. Every tool config derives from this table. Do not hardco
 | Secondary  | `#5B8CFF` | `91, 140, 255`     | `5b8cffff`                   | `#5B8CFF`            |
 | Highlight  | `#A05CFF` | `160, 92, 255`     | `a05cffff`                   | `#A05CFF`            |
 | Success    | `#4DFF91` | `77, 255, 145`     | `4dff91ff`                   | `#4DFF91`            |
-| Warning    | `#123456` | `255, 204, 102`    | `ffcc66ff`                   | `#FFCC66`            |
+| Warning    | `#FFCC66` | `255, 204, 102`    | `ffcc66ff`                   | `#FFCC66`            |
 | Danger     | `#FF5470` | `255, 84, 112`     | `ff5470ff`                   | `#FF5470`            |
 | Info       | `#61E6FF` | `97, 230, 255`     | `61e6ffff`                   | `#61E6FF`            |
 

@@ -1,5 +1,5 @@
 # ==============================================================================
-# Aetheria zsh/ai-helper.zsh — AI Natural Language Shell Translator
+# Minimal zsh/ai-helper.zsh — AI Natural Language Shell Translator
 # Bridges plain-English requests to Zsh commands using sgpt or local Ollama.
 # Inserts the generated command into $BUFFER without auto-executing.
 # ==============================================================================

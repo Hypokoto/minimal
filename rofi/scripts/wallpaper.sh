@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Aetheria Rofi Wallpaper Switcher Bridge
+# Minimal Rofi Wallpaper Switcher Bridge
 # Bridges to hypr/wallpaper/picker.sh, hot-reloads via awww, re-injects palette
 # ==============================================================================
 set -euo pipefail

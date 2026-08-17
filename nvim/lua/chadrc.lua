@@ -2,16 +2,16 @@
 local M = {}
 
 M.base46 = {
-  theme = "aetheria",
+  theme = "minimal",
   hl_add = {
-    AetheriaDashboardHeader = { fg = "#00D9FF", bold = true },
-    AetheriaDashboardFooter = { fg = "#8D95B3" },
+    MinimalDashboardHeader = { fg = "#00D9FF", bold = true },
+    MinimalDashboardFooter = { fg = "#8D95B3" },
   },
 }
 
 M.ui = {
-  theme = "aetheria",
-  theme_toggle = { "aetheria", "nice" },
+  theme = "minimal",
+  theme_toggle = { "minimal", "nice" },
   nvdash = {
     load_on_startup = true,
   },

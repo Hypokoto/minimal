@@ -1,4 +1,4 @@
-# Aetheria mako config
+# Minimal mako config
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
@@ -26,7 +26,7 @@ border-color=#FF5470
 default-timeout=0
 
 # OSD notifications (volume/brightness) — replace in place, no stacking
-[app-name="aetheria-osd"]
+[app-name="minimal-osd"]
 group-by=category
 default-timeout=1500
 border-color=#00D9FF

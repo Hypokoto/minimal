@@ -1,5 +1,5 @@
 # ===========================================================================
-#  ZSH CONFIGURATION — Aetheria AI-Native Shell Workspace
+#  ZSH CONFIGURATION — Minimal AI-Native Shell Workspace
 #  Blisteringly fast, zero-framework, native Zsh productivity.
 #  Core Dependencies: zsh >= 5.8, git, starship, zoxide, atuin
 # ===========================================================================
@@ -41,7 +41,7 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
 # ---------------------------------------------------------------------------
-#  §3  COMPLETION ENGINE — Fast, Case-Insensitive, Aetheria-Styled
+#  §3  COMPLETION ENGINE — Fast, Case-Insensitive, Minimal-Styled
 # ---------------------------------------------------------------------------
 
 ZSH_PLUGIN_DIR="${HOME}/.zsh/plugins"
@@ -204,15 +204,15 @@ fi
 # Load defensive guarded aliases module
 if [[ -f "${HOME}/.config/zsh/aliases.zsh" ]]; then
     source "${HOME}/.config/zsh/aliases.zsh"
-elif [[ -f "${HOME}/aetheria/zsh/aliases.zsh" ]]; then
-    source "${HOME}/aetheria/zsh/aliases.zsh"
+elif [[ -f "${HOME}/minimal/zsh/aliases.zsh" ]]; then
+    source "${HOME}/minimal/zsh/aliases.zsh"
 fi
 
 # Load AI Natural Language helper bridge
 if [[ -f "${HOME}/.config/zsh/ai-helper.zsh" ]]; then
     source "${HOME}/.config/zsh/ai-helper.zsh"
-elif [[ -f "${HOME}/aetheria/zsh/ai-helper.zsh" ]]; then
-    source "${HOME}/aetheria/zsh/ai-helper.zsh"
+elif [[ -f "${HOME}/minimal/zsh/ai-helper.zsh" ]]; then
+    source "${HOME}/minimal/zsh/ai-helper.zsh"
 fi
 
 # ---------------------------------------------------------------------------

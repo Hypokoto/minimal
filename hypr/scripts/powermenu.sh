@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Aetheria — Power Menu script wrapper delegating to Rofi powermenu suite
+# Minimal — Power Menu script wrapper delegating to Rofi powermenu suite
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

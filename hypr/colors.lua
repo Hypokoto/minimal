@@ -1,5 +1,5 @@
 -- ==============================================================================
--- Aetheria — Color System Compiler & Lua Export
+-- Minimal — Color System Compiler & Lua Export
 -- Compatible with Lua 5.1 (LuaJIT) and Lua 5.4.
 -- Reads palette.md as single source of truth and updates target configuration files.
 -- ==============================================================================
@@ -48,7 +48,7 @@ local function find_palette_path()
     local paths = {
         "palette.md",
         "../palette.md",
-        os.getenv("HOME") and (os.getenv("HOME") .. "/aetheria/palette.md") or nil,
+        os.getenv("HOME") and (os.getenv("HOME") .. "/minimal/palette.md") or nil,
     }
     if arg and arg[0] then
         local dir = arg[0]:match("^(.*[/\\])")
@@ -96,9 +96,9 @@ local function write_file(filepath, content)
     if f then
         f:write(content)
         f:close()
-        print("[Aetheria] Palette compiled target: " .. filepath)
+        print("[Minimal] Palette compiled target: " .. filepath)
     else
-        print("[Aetheria] WARN: Could not write target: " .. filepath)
+        print("[Minimal] WARN: Could not write target: " .. filepath)
     end
 end
 
@@ -107,7 +107,7 @@ local function generate_targets(base_dir)
 
     -- 1. hypr/colors.conf
     local colors_conf = string.format([[# ==============================================================================
-# Aetheria — Hyprland Color Variables
+# Minimal — Hyprland Color Variables
 # Generated from palette.md — DO NOT edit directly.
 # To update colors, edit palette.md and regenerate.
 # ==============================================================================
@@ -202,7 +202,7 @@ element normal {
 
     -- 3. btop/btop.theme
     local btop_theme = string.format([[# btop tty theme
-# Name: Aetheria
+# Name: Minimal
 # Generated from palette.md — DO NOT edit directly.
 
 # Main UI Element Colors
@@ -278,7 +278,7 @@ theme[upload_end]="%s"
     write_file(base_dir .. "/btop/btop.theme", btop_theme)
 
     -- 4. kitty/kitty.conf
-    local kitty_conf = string.format([[# Aetheria Kitty config
+    local kitty_conf = string.format([[# Minimal Kitty config
 # Generated from palette.md — DO NOT edit directly.
 font_family      AdwaitaMono Nerd Font
 bold_font        auto
@@ -355,7 +355,7 @@ enabled_layouts tall,fat,grid,stack
     write_file(base_dir .. "/kitty/kitty.conf", kitty_conf)
 
     -- 5. mako/config
-    local mako_config = string.format([[# Aetheria mako config
+    local mako_config = string.format([[# Minimal mako config
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
@@ -383,7 +383,7 @@ border-color=%s
 default-timeout=0
 
 # OSD notifications (volume/brightness) — replace in place, no stacking
-[app-name="aetheria-osd"]
+[app-name="minimal-osd"]
 group-by=category
 default-timeout=1500
 border-color=%s

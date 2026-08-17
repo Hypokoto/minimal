@@ -1,5 +1,5 @@
 -- ==============================================================================
--- Aetheria — Core Configuration (Lua, Hyprland 0.55+)
+-- Minimal — Core Configuration (Lua, Hyprland 0.55+)
 -- ==============================================================================
 -- Ported 1:1 from your hyprland.conf. Split into files like the original's
 -- `source =` lines, using require() (each file gets its own Lua scope, so an

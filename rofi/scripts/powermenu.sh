@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Aetheria Rofi Power Menu Suite
+# Minimal Rofi Power Menu Suite
 # Interfaced with hyprctl dispatch exit, systemctl suspend, reboot, poweroff
 # ==============================================================================
 set -euo pipefail

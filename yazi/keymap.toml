@@ -12,5 +12,5 @@ prepend_keymap = [
   # multi-command syntax. If this doesn't navigate automatically, run
   # hypr/scripts/mount-phone.sh separately first, then just open ~/mnt/phone in Yazi
   # normally — that path is guaranteed to work regardless of keymap chaining support.
-  { on = "M", run = "shell '~/aetheria/hypr/scripts/mount-phone.sh' --confirm; cd ~/mnt/phone", desc = "Mount phone (MTP) and navigate to it" },
+  { on = "M", run = "shell '~/minimal/hypr/scripts/mount-phone.sh' --confirm; cd ~/mnt/phone", desc = "Mount phone (MTP) and navigate to it" },
 ]

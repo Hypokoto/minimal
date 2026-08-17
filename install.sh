@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# aetheria install.sh — idempotent, non-interactive, Arch-only.
+# minimal install.sh — idempotent, non-interactive, Arch-only.
 # Installs core utilities, toolchains, system packages, and core systemd layers.
 set -euo pipefail
 IFS=$'\n\t'
 
-LOG_FILE="/tmp/aetheria-install.log"
+LOG_FILE="/tmp/minimal-install.log"
 ARCH="$(uname -m)"
 
 log()  { printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
