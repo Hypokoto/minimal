@@ -12,5 +12,7 @@ prepend_keymap = [
   # multi-command syntax. If this doesn't navigate automatically, run
   # hypr/scripts/mount-phone.sh separately first, then just open ~/mnt/phone in Yazi
   # normally — that path is guaranteed to work regardless of keymap chaining support.
-  { on = "M", run = "shell '~/minimal/hypr/scripts/mount-phone.sh' --confirm; cd ~/mnt/phone", desc = "Mount phone (MTP) and navigate to it" },
+  # Mount phone (MTP) — deploy.sh symlinks mount-phone.sh to ~/.local/bin
+  # so this binding works regardless of where the dotfiles repo lives on disk.
+  { on = "M", run = "shell 'mount-phone.sh' --confirm; cd ~/mnt/phone", desc = "Mount phone (MTP) and navigate to it" },
 ]

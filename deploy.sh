@@ -98,6 +98,12 @@ deploy_link "$DOTFILES_DIR/zsh/ai-helper.zsh"        "$HOME/.config/zsh/ai-helpe
 deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
+
+# Symlink mount-phone.sh into PATH so yazi keymap binding resolves
+# regardless of dotfile repo location.
+mkdir -p "$HOME/.local/bin"
+ln -sfn "$DOTFILES_DIR/hypr/scripts/mount-phone.sh" "$HOME/.local/bin/mount-phone.sh"
+
 mkdir -p "$HOME/Pictures/Wallpapers"
 
 # --- 4. Neovim / NvChad Environment Overlay ---

@@ -347,7 +347,7 @@ export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 } &!
 
 # bun completions
-[ -s "/home/hypokoto/.bun/_bun" ] && source "/home/hypokoto/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
