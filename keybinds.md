@@ -128,4 +128,4 @@ The leader key is **`Space`**.
 
 | Keybinding | Action |
 | --- | --- |
-| `<leader> e` | Toggle / focus Neo-tree / NvimTree file explorer |
+|| `<leader> e` | Toggle / focus NvimTree file explorer |
