@@ -73,7 +73,7 @@ deploy_link() {
     fi
 
     if [[ -e "$dest" || -L "$dest" ]]; then
-        local backup="${dest}.bak.$(date +%s)"
+        local backup="${dest}.bak.$(date +%s%N)"
         log "Rotating existing config: $dest -> $backup"
         mv "$dest" "$backup"
     fi
@@ -111,7 +111,7 @@ log "--- Phase 4: Neovim / NvChad Overlay ---"
 if [[ ! -f "$HOME/.config/nvim/lua/nvconfig.lua" && ! -f "$HOME/.config/nvim/init.lua" ]]; then
     log "NvChad base not detected. Cloning NvChad starter..."
     if [[ -e "$HOME/.config/nvim" ]]; then
-        mv "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%s)"
+        mv "$HOME/.config/nvim" "$HOME/.config/nvim.bak.$(date +%s%N)"
         log "Backed up existing nvim dir."
     fi
     git clone --depth 1 https://github.com/NvChad/starter "$HOME/.config/nvim" || warn "Git clone NvChad failed."

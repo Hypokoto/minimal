@@ -22,12 +22,8 @@ ai_helper() {
 
     local generated_cmd=""
 
-    # 1. Try sgpt (Shell-GPT) CLI if available
-    if command -v sgpt >/dev/null 2>&1; then
-        generated_cmd=$(sgpt --shell --no-md "$user_prompt" 2>/dev/null)
-    
-    # 2. Try local Ollama API (qwen2.5-coder / llama3) if running
-    elif curl -s --connect-timeout 1 http://localhost:11434/api/tags >/dev/null 2>&1; then
+    # 1. Try local Ollama API first (qwen2.5-coder / llama3) — no data leaves the box
+    if curl -s --connect-timeout 1 http://localhost:11434/api/tags >/dev/null 2>&1; then
         local sys_prompt="You are a Linux Zsh CLI command generator. Translate the natural language request into a single executable Zsh command. Return ONLY the exact command string. Do not include markdown code blocks, backticks, or extra explanation."
         local full_prompt="${sys_prompt}
 
@@ -47,6 +43,10 @@ Request: ${user_prompt}"
                 generated_cmd=$(echo "$response" | jq -r '.response // empty' 2>/dev/null)
             fi
         fi
+
+    # 2. Fallback to sgpt (Shell-GPT) — external API, only if Ollama unavailable
+    elif command -v sgpt >/dev/null 2>&1; then
+        generated_cmd=$(sgpt --shell --no-md "$user_prompt" 2>/dev/null)
     fi
 
     # Unified sanitization: strip ANSI escapes, backtick fences, CRs, and surrounding whitespace.
