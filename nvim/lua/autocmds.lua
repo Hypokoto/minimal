@@ -2,7 +2,11 @@ require "nvchad.autocmds"
 
 vim.api.nvim_create_autocmd("BufDelete", {
   group = vim.api.nvim_create_augroup("DashboardAutoOpen", { clear = true }),
-  callback = function()
+  callback = function(ev)
+    if vim.bo[ev.buf].filetype == "snacks_dashboard" then
+      return
+    end
+
     vim.schedule(function()
       for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
