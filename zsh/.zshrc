@@ -1,5 +1,5 @@
 # ===========================================================================
-#  ZSH CONFIGURATION — Minimal AI-Native Shell Workspace
+#  ZSH CONFIGURATION — Minimal Shell Workspace
 #  Blisteringly fast, zero-framework, native Zsh productivity.
 #  Core Dependencies: zsh >= 5.8, git, starship, zoxide, atuin
 # ===========================================================================
@@ -198,7 +198,7 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-#  §7  MODULAR ALIASES & AI HELPER INTEGRATION
+#  §7  MODULAR ALIASES
 # ---------------------------------------------------------------------------
 
 # Load defensive guarded aliases module
@@ -206,13 +206,6 @@ if [[ -f "${HOME}/.config/zsh/aliases.zsh" ]]; then
     source "${HOME}/.config/zsh/aliases.zsh"
 elif [[ -f "${HOME}/minimal/zsh/aliases.zsh" ]]; then
     source "${HOME}/minimal/zsh/aliases.zsh"
-fi
-
-# Load AI Natural Language helper bridge
-if [[ -f "${HOME}/.config/zsh/ai-helper.zsh" ]]; then
-    source "${HOME}/.config/zsh/ai-helper.zsh"
-elif [[ -f "${HOME}/minimal/zsh/ai-helper.zsh" ]]; then
-    source "${HOME}/minimal/zsh/ai-helper.zsh"
 fi
 
 # ---------------------------------------------------------------------------

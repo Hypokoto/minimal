@@ -19,8 +19,7 @@ local ascii_header = {
 
 return {
   -- ==========================================================
-  -- Dashboard — snacks.nvim (NvChad's current dashboard backend,
-  -- NOT alpha/dashboard-nvim; see conflict note in the reply above).
+  -- Dashboard — snacks.nvim
   -- ==========================================================
   {
     "folke/snacks.nvim",
@@ -54,7 +53,9 @@ return {
         "clang-format",
         "jdtls",
         "rust-analyzer",
-        "codelldb", -- rust/C debug adapter, install now since the gap is already documented
+        "codelldb",
+        "pyright",
+        "ruff",
       },
     },
     opts_extend = { "ensure_installed" },
@@ -84,6 +85,7 @@ return {
         "cpp",
         "rust",
         "java",
+        "python",
         "lua",
         "vim",
         "vimdoc",

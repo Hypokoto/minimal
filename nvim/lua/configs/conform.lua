@@ -4,8 +4,7 @@ local options = {
     c = { "clang-format" },
     cpp = { "clang-format" },
     rust = { "rustfmt" },
-    -- java has no first-class conform formatter without extra tooling
-    -- (google-java-format needs a JAR + wrapper script) — flagged, not solved
+    python = { "ruff_format" },
   },
 
   -- format_on_save = {
