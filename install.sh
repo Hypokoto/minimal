@@ -4,12 +4,12 @@
 # Arch Linux is the primary target. On other distros the script warns and skips
 # package installation but still deploys dotfiles via deploy.sh.
 set -euo pipefail
-IFS=$'\\n\\t'
+IFS=$'\n\t'
 
 LOG_FILE="/tmp/minimal-install.log"
 ARCH="$(uname -m)"
 
-log()  { printf '[%s] %s\\n' "$(date '+%H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
+log()  { printf '[%s] %s\n' "$(date '+%H:%M:%S')" "$1" | tee -a "$LOG_FILE"; }
 die()  { log "FATAL: $1"; exit 1; }
 
 [[ "$ARCH" == "x86_64" ]] || die "Untested arch: $ARCH. Aborting — do not assume compatibility."
@@ -71,11 +71,11 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
     )
 
     log "Installing pacman package set (${#PACMAN_PKGS[@]} packages)."
-    sudo pacman -Syu --needed --noconfirm "${PACMAN_PKGS[@]}" \\\
+    sudo pacman -Syu --needed --noconfirm "${PACMAN_PKGS[@]}" \
       || die "pacman install failed. Check $LOG_FILE, do not retry blindly — inspect the actual error."
 
     log "Installing AUR package set (${#AUR_PKGS[@]} packages)."
-    yay -S --needed --noconfirm "${AUR_PKGS[@]}" \\\
+    yay -S --needed --noconfirm "${AUR_PKGS[@]}" \
       || log "WARN: one or more AUR packages failed. Non-fatal — continuing. Check log."
 
     # --- Toolchain init (idempotent) ---
@@ -91,7 +91,7 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
     sudo systemctl enable --now power-profiles-daemon.service
     sudo systemctl enable --now swayosd-libinput-backend.service
 
-    systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service 2>/dev/null || \\
+    systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service 2>/dev/null || \
       log "WARN: user pipewire services not enabled (no active user session in this shell — expected under sudo/chroot install)."
 
 else
