@@ -26,7 +26,7 @@ vim.api.nvim_create_autocmd("BufDelete", {
           end
         end
       end
-      require("snacks.dashboard").open()
+      require("snacks.dashboard").open({ win = 0 })
     end)
   end,
 })
