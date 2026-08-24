@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -48,7 +47,7 @@ if [[ -n "${ACTIVE_LINE_IDX:-}" ]]; then
     ACTIVE_ARG=(-a "$((ACTIVE_LINE_IDX - 1))")
 fi
 
-rofi -dmenu \
+rofi -dmenu -pid /tmp/rofi-calendar.pid \
     -theme "${DIR}/calendar.rasi" \
     -p "$(date +'%B %Y')" \
     -no-custom \

@@ -4,14 +4,13 @@
 # Interfaced with hyprctl dispatch exit, systemctl suspend, reboot, poweroff
 # ==============================================================================
 set -euo pipefail
-pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 OPTIONS=$'Shutdown\nReboot\nSuspend\nLock\nLog Out'
 
 THEME_PATH="${DIR}/powermenu.rasi"
-ROFI_CMD=(rofi -dmenu -p "Power" -u "0" -a "1")
+ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-powermenu.pid -p "Power" -u "0" -a "1")
 
 if [[ -f "${THEME_PATH}" ]]; then
     ROFI_CMD+=(-theme "${THEME_PATH}")

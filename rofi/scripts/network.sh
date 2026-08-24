@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -52,7 +51,7 @@ if [[ -n "${ACTIVE_IDX:-}" ]]; then
 fi
 
 set +e
-CHOICE="$(printf '%s\n' "${MENU}" | rofi -dmenu \
+CHOICE="$(printf '%s\n' "${MENU}" | rofi -dmenu -pid /tmp/rofi-network.pid \
     -theme "${DIR}/network.rasi" \
     -p "Network" \
     "${ACTIVE_ARG[@]}")"
@@ -93,7 +92,7 @@ if [[ "${IS_SECURED}" == false ]]; then
 fi
 
 set +e
-PASSWORD="$(rofi -dmenu -password -theme "${DIR}/network.rasi" -p "Password for ${SSID}")"
+PASSWORD="$(rofi -dmenu -pid /tmp/rofi-network.pid -password -theme "${DIR}/network.rasi" -p "Password for ${SSID}")"
 PW_STATUS=$?
 set -e
 

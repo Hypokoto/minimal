@@ -4,7 +4,6 @@
 # Interfaced with cliphist + wl-clipboard
 # ==============================================================================
 set -euo pipefail
-pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -19,7 +18,7 @@ if ! command -v wl-copy >/dev/null 2>&1; then
 fi
 
 THEME_PATH="${DIR}/clipboard.rasi"
-ROFI_CMD=(rofi -dmenu -p "Clipboard" -mesg "Enter: Copy | Alt+Delete: Delete entry" -kb-custom-1 "Alt+Delete" -format "s")
+ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-clipboard.pid -p "Clipboard" -mesg "Enter: Copy | Alt+Delete: Delete entry" -kb-custom-1 "Alt+Delete" -format "s")
 
 if [[ -f "${THEME_PATH}" ]]; then
     ROFI_CMD+=(-theme "${THEME_PATH}")

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
-pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
@@ -42,7 +41,7 @@ CURRENT="$(get_current)"
 OPTIONS=$'Performance\nBalanced\nPower Saver'
 
 set +e
-CHOICE="$(echo -n "${OPTIONS}" | rofi -dmenu \
+CHOICE="$(echo -n "${OPTIONS}" | rofi -dmenu -pid /tmp/rofi-battery.pid \
     -theme "${DIR}/battery.rasi" \
     -p "Profile: ${CURRENT}" \
     -u "0" \

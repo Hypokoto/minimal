@@ -4,7 +4,6 @@
 # Bridges to hypr/wallpaper/picker.sh, hot-reloads via awww, re-injects palette
 # ==============================================================================
 set -euo pipefail
-pkill -x rofi || true
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 PICKER_SCRIPT="${DOTFILES_DIR}/hypr/wallpaper/picker.sh"
