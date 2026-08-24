@@ -29,3 +29,6 @@ map("n", "<leader>x", function()
   end
   require("nvchad.tabufline").close_buffer()
 end, { desc = "Close buffer" })
+
+-- Markdown render toggle (MeanderingProgrammer/render-markdown.nvim)
+map("n", "<leader>mp", "<cmd>RenderMarkdown toggle<CR>", { desc = "Toggle markdown render" })

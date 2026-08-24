@@ -5,10 +5,10 @@
 font=AdwaitaMono Nerd Font 10
 background-color=#11141D
 text-color=#F2F6FF
-border-color=#A05CFF
-border-size=2
-border-radius=10
-padding=10
+border-color=#1C2230
+border-size=1
+border-radius=12
+padding=16
 margin=8
 width=320
 height=100
@@ -16,10 +16,10 @@ default-timeout=4000
 progress-color=source #00D9FF
 
 [urgency=low]
-border-color=#8D95B3
+border-color=#1C2230
 
 [urgency=normal]
-border-color=#A05CFF
+border-color=#1C2230
 
 [urgency=critical]
 border-color=#FF5470

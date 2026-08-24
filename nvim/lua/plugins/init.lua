@@ -89,6 +89,8 @@ return {
         "lua",
         "vim",
         "vimdoc",
+        "markdown",
+        "markdown_inline",
       },
     },
     opts_extend = { "ensure_installed" },
@@ -123,5 +125,31 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
+  },
+
+  -- ==========================================================
+  -- Markdown rendering — inline buffer rendering for headings,
+  -- code blocks, checkboxes, and tables. Uses treesitter
+  -- markdown parser. Toggled with <leader>mp.
+  -- ==========================================================
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    opts = {
+      code = {
+        border = "thin",
+        width = "block",
+        left_pad = 1,
+        right_pad = 1,
+      },
+      checkbox = {
+        enabled = true,
+      },
+      sign = {
+        enabled = false,
+      },
+      warn = true,
+    },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }

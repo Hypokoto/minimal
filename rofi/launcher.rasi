@@ -16,7 +16,7 @@ window {
 
 mainbox {
     background-color: @bg;
-    padding: 16px;
+    padding: 24px;
     children: [ inputbar, listview ];
 }
 

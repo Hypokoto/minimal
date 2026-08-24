@@ -105,42 +105,7 @@ end
 local function generate_targets(base_dir)
     base_dir = base_dir or "."
 
-    -- 1. hypr/colors.conf
-    local colors_conf = string.format([[# ==============================================================================
-# Minimal — Hyprland Color Variables
-# Generated from palette.md — DO NOT edit directly.
-# To update colors, edit palette.md and regenerate.
-# ==============================================================================
-
-$background = %s
-$surface    = %s
-$overlay    = %s
-$text       = %s
-$muted      = %s
-$primary    = %s
-$secondary  = %s
-$highlight  = %s
-$success    = %s
-$warning    = %s
-$danger     = %s
-$info       = %s
-]],
-        colors.background or "rgba(0A0C12FF)",
-        colors.surface or "rgba(11141DFF)",
-        colors.overlay or "rgba(1C2230FF)",
-        colors.text or "rgba(F2F6FFFF)",
-        colors.muted or "rgba(8D95B3FF)",
-        colors.primary or "rgba(00D9FFFF)",
-        colors.secondary or "rgba(5B8CFFFF)",
-        colors.highlight or "rgba(A05CFFFF)",
-        colors.success or "rgba(4DFF91FF)",
-        colors.warning or "rgba(FFCC66FF)",
-        colors.danger or "rgba(FF5470FF)",
-        colors.info or "rgba(61E6FFFF)"
-    )
-    write_file(base_dir .. "/hypr/colors.conf", colors_conf)
-
-    -- 2. rofi/theme.rasi
+    -- 1. rofi/theme.rasi
     local theme_rasi = string.format([[/**
  * theme.rasi — Emperor's Mirror centralized token palette
  * Generated from palette.md — DO NOT edit directly.
@@ -175,16 +140,15 @@ $info       = %s
 
 window {
     background-color: @bg-trans;
-    border:           2px;
-    border-color:     @primary;
+    border:           1px;
+    border-color:     @overlay;
     border-radius:    12px;
 }
 
 element selected {
     background-color: @overlay;
     text-color:        @primary;
-    border:            0px 0px 0px 2px;
-    border-color:      @primary;
+    border-radius:     8px;
 }
 
 element normal {
@@ -200,7 +164,7 @@ element normal {
     )
     write_file(base_dir .. "/rofi/theme.rasi", theme_rasi)
 
-    -- 3. btop/btop.theme
+    -- 2. btop/btop.theme
     local btop_theme = string.format([[# btop tty theme
 # Name: Minimal
 # Generated from palette.md — DO NOT edit directly.
@@ -277,7 +241,7 @@ theme[upload_end]="%s"
     )
     write_file(base_dir .. "/btop/btop.theme", btop_theme)
 
-    -- 4. kitty/kitty.conf
+    -- 3. kitty/kitty.conf
     local kitty_conf = string.format([[# Minimal Kitty config
 # Generated from palette.md — DO NOT edit directly.
 font_family      AdwaitaMono Nerd Font
@@ -354,7 +318,7 @@ enabled_layouts tall,fat,grid,stack
     )
     write_file(base_dir .. "/kitty/kitty.conf", kitty_conf)
 
-    -- 5. mako/config
+    -- 4. mako/config
     local mako_config = string.format([[# Minimal mako config
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
@@ -363,9 +327,9 @@ font=AdwaitaMono Nerd Font 10
 background-color=%s
 text-color=%s
 border-color=%s
-border-size=2
-border-radius=10
-padding=10
+border-size=1
+border-radius=12
+padding=16
 margin=8
 width=320
 height=100
@@ -389,8 +353,8 @@ default-timeout=1500
 border-color=%s
 progress-color=source %s
 ]],
-        hex_colors.surface, hex_colors.text, hex_colors.highlight, hex_colors.primary,
-        hex_colors.muted, hex_colors.highlight, hex_colors.danger,
+        hex_colors.surface, hex_colors.text, hex_colors.overlay, hex_colors.primary,
+        hex_colors.overlay, hex_colors.overlay, hex_colors.danger,
         hex_colors.primary, hex_colors.primary
     )
     write_file(base_dir .. "/mako/config", mako_config)

@@ -44,7 +44,7 @@ window#waybar {
 box#left {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 0 12px;
     margin: 0;
 }
@@ -52,7 +52,7 @@ box#left {
 box#center {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 0 16px;
     margin: 0;
 }
@@ -60,7 +60,7 @@ box#center {
 box#right {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 14px;
+    border-radius: 12px;
     padding: 0 12px;
     margin: 0;
 }
@@ -81,41 +81,28 @@ box#right {
 #battery,
 #tray {
     padding: 4px 8px;
-    margin: 2px 2px;
-    border-radius: 10px;
+    margin: 4px 2px;
+    border-radius: 8px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Dividers between right-pill modules */
-#pulseaudio,
-#backlight,
-#network,
-#cpu,
-#memory {
-    border-right: 1px solid rgba(141, 149, 179, 0.15);
-    border-radius: 0;
-    padding-right: 12px;
-    margin-right: 4px;
-}
-
-#battery {
-    padding-left: 4px;
-}
+/* Dividers between right-pill modules removed for cleaner look */
 
 /* ============================================================
    LEFT PILL — Workspaces / State
    ============================================================ */
 #workspaces button {
-    padding: 0 6px;
-    margin: 0 2px;
+    padding: 2px 8px;
+    margin: 4px 2px;
     color: @muted;
     background: transparent;
     border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 #workspaces button.active {
-    color: @primary;
-    background-color: rgba(0, 217, 255, 0.12);
+    color: @text;
+    background-color: rgba(255, 255, 255, 0.05);
     border-bottom: 2px solid @primary;
 }
 
@@ -165,8 +152,10 @@ box#right {
    ============================================================ */
 #clock {
     color: @text;
-    font-weight: 700;
+    font-weight: 600;
     padding: 4px 10px;
+    margin: 4px 0;
+    border-radius: 8px;
 }
 
 /* ============================================================
