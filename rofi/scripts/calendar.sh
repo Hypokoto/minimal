@@ -12,30 +12,14 @@ AGENDA_FILE="${AGENDA_FILE:-$HOME/dev/vault/agenda.txt}"
 TODAY_DAY="$(date +%-d)"
 TODAY_ISO="$(date +%Y-%m-%d)"
 
-CAL_OUTPUT="$(cal)"
+CAL_OUTPUT="$(cal | tail -n +2)"
 
-# CONSTRAINT, stated explicitly: rofi's rasi highlighting colors whole
-# listview elements, not substrings. `cal` renders a day-grid, so a single
-# day-of-month cannot be colored independently of the week row it sits in
-# with plain dmenu theming — only the entire week-line containing today
-# can be marked (-a). To still make today's exact number identifiable at
-# a glance, it's bracketed: "07" -> "[7]".
-CAL_MARKED="$(awk -v day="${TODAY_DAY}" '
-    {
-        # Match the day as a whole token (avoid matching inside e.g. "17" for day "7")
-        n = split($0, parts, " ")
-        out = ""
-        for (i = 1; i <= n; i++) {
-            if (parts[i] == day) {
-                parts[i] = "[" parts[i] "]"
-            }
-            out = out (i > 1 ? " " : "") parts[i]
-        }
-        print out
-    }' <<< "${CAL_OUTPUT}")"
+# We use Pango markup to highlight today's date without breaking the monospace
+# grid alignment (which the previous awk script broke by collapsing spaces).
+CAL_MARKED="$(echo "${CAL_OUTPUT}" | sed -E "s/\b${TODAY_DAY}\b/<b><u>&<\/u><\/b>/")"
 
-# Find which line (1-indexed within the full menu) holds the bracketed day.
-ACTIVE_LINE_IDX="$(grep -n "\[${TODAY_DAY}\]" <<< "${CAL_MARKED}" | head -n1 | cut -d: -f1 || true)"
+# Find which line (1-indexed within the full menu) holds the marked day.
+ACTIVE_LINE_IDX="$(grep -n "<b><u>" <<< "${CAL_MARKED}" | head -n1 | cut -d: -f1 || true)"
 
 AGENDA_HEADER="── Agenda ──"
 if [[ -r "${AGENDA_FILE}" ]]; then
@@ -68,6 +52,7 @@ rofi -dmenu \
     -theme "${DIR}/calendar.rasi" \
     -p "$(date +'%B %Y')" \
     -no-custom \
+    -markup-rows \
     "${ACTIVE_ARG[@]}" \
     -u "${URGENT_INDICES}" \
     <<< "${FULL_MENU}" >/dev/null

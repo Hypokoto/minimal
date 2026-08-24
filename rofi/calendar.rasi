@@ -1,14 +1,23 @@
 @import "theme.rasi"
 
 window {
-    width: 420px;
+    width: 340px;
     location: north;
     anchor: north;
     y-offset: 40px;
 }
 
 mainbox {
-    children: [ listview ];
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    children: [ prompt ];
+    /* Hide the blinking cursor/entry completely */
+}
+
+prompt {
+    text-color: @primary;
 }
 
 listview {
@@ -20,11 +29,12 @@ listview {
 }
 
 element {
-    padding: 2px 6px;
+    padding: 2px 16px;
+    border-radius: 4px;
 }
 
 element-text {
-    font:       "AdwaitaMono Nerd Font Mono 10";
+    font:       "AdwaitaMono Nerd Font Mono 11";
     text-color: @muted;
 }
 
