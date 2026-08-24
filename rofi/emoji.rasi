@@ -32,10 +32,10 @@ listview {
 }
 
 element {
-    font:           "AdwaitaMono Nerd Font 16, Noto Color Emoji 16";
 }
 
 element-text {
+    font:             "Noto Color Emoji 16";
     horizontal-align: 0.5;
     vertical-align:   0.5;
 }
