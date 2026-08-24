@@ -45,10 +45,12 @@ case "${CHOICE}" in
         ;;
     "Log Out")
         notify-send "Power" "Exiting Hyprland session..."
-        if command -v hyprctl >/dev/null 2>&1; then
-            hyprctl dispatch exit
+        # We use loginctl because hyprctl dispatch exit might be intercepted
+        # by a Lua wrapper on this system and fail to parse.
+        if [[ -n "${XDG_SESSION_ID:-}" ]]; then
+            loginctl terminate-session "${XDG_SESSION_ID}"
         else
-            loginctl terminate-user "$USER"
+            loginctl terminate-user "${USER}"
         fi
         ;;
     *)
