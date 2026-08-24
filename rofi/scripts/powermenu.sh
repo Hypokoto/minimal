@@ -4,6 +4,7 @@
 # Interfaced with hyprctl dispatch exit, systemctl suspend, reboot, poweroff
 # ==============================================================================
 set -euo pipefail
+pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 

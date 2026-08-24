@@ -4,6 +4,7 @@
 # Interfaced with cliphist + wl-clipboard
 # ==============================================================================
 set -euo pipefail
+pkill -x rofi || true
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 

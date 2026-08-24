@@ -2,8 +2,9 @@
 
 window {
     width: 560px;
-    location: center;
-    anchor: center;
+    location: east;
+    anchor: east;
+    x-offset: -20px;
 }
 
 mainbox {
