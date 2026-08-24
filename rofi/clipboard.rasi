@@ -7,17 +7,11 @@ window {
 }
 
 mainbox {
-    background-color: @bg;
-    padding: 14px;
     children: [ inputbar, listview, message ];
 }
 
 inputbar {
-    background-color: @surface;
-    border-radius:    8px;
-    padding:          8px 12px;
-    margin:           0px 0px 10px 0px;
-    children:         [ prompt, entry ];
+    children: [ prompt, entry ];
 }
 
 prompt {
@@ -34,14 +28,7 @@ entry {
 listview {
     columns:      1;
     lines:        12;
-    spacing:      2px;
     fixed-height: false;
-    background-color: transparent;
-}
-
-element {
-    padding:        6px 10px;
-    border-radius:  4px;
 }
 
 element-text {
@@ -50,8 +37,8 @@ element-text {
 
 message {
     background-color: @overlay;
-    border-radius:    6px;
-    padding:          6px 10px;
+    border-radius:    8px;
+    padding:          10px 12px;
     margin:           8px 0px 0px 0px;
 }
 

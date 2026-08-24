@@ -162,14 +162,16 @@ box#right {
    RIGHT PILL — System Metrics
    ============================================================ */
 #pulseaudio {
-    color: @text;
+    color: @muted;
+    font-weight: 500;
 }
 #pulseaudio.muted {
     color: @muted;
 }
 
 #network {
-    color: @text;
+    color: @muted;
+    font-weight: 500;
 }
 #network.disconnected {
     color: @danger;
@@ -181,7 +183,8 @@ box#right {
 }
 
 #cpu {
-    color: @secondary;
+    color: @muted;
+    font-weight: 500;
 }
 #cpu.warning {
     color: @warning;
@@ -193,7 +196,8 @@ box#right {
 }
 
 #memory {
-    color: @secondary;
+    color: @muted;
+    font-weight: 500;
 }
 #memory.warning {
     color: @warning;
@@ -205,7 +209,8 @@ box#right {
 }
 
 #battery {
-    color: @success;
+    color: @muted;
+    font-weight: 500;
 }
 #battery.charging {
     color: @success;

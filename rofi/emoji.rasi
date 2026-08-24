@@ -1,5 +1,10 @@
 @import "theme.rasi"
 
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+}
+
 window {
     width: 420px;
     location: center;
@@ -7,17 +12,11 @@ window {
 }
 
 mainbox {
-    background-color: @bg;
-    padding: 12px;
     children: [ inputbar, listview ];
 }
 
 inputbar {
-    background-color: @surface;
-    border-radius:    8px;
-    padding:          8px 12px;
-    margin:           0px 0px 8px 0px;
-    children:         [ entry ];
+    children: [ entry ];
 }
 
 entry {
@@ -26,22 +25,13 @@ entry {
     placeholder-color:  @muted;
 }
 
-configuration {
-    show-icons: true;
-    icon-theme: "Papirus-Dark";
-}
-
 listview {
     columns:      6;
     lines:        6;
-    spacing:      4px;
     fixed-height: true;
-    background-color: transparent;
 }
 
 element {
-    padding:        6px;
-    border-radius:  6px;
     font:           "AdwaitaMono Nerd Font 16, Noto Color Emoji 16";
 }
 

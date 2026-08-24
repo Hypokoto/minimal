@@ -5,7 +5,6 @@ configuration {
     icon-theme: "Papirus-Dark";
     display-drun: "Launch";
     drun-display-format: "{name}";
-    font: "AdwaitaMono Nerd Font 11";
 }
 
 window {
@@ -15,17 +14,11 @@ window {
 }
 
 mainbox {
-    background-color: @bg;
-    padding: 24px;
     children: [ inputbar, listview ];
 }
 
 inputbar {
-    background-color: @surface;
-    border-radius:    8px;
-    padding:          10px 14px;
-    margin:           0px 0px 12px 0px;
-    children:         [ prompt, entry ];
+    children: [ prompt, entry ];
 }
 
 prompt {
@@ -42,14 +35,10 @@ entry {
 listview {
     columns:    2;
     lines:      6;
-    spacing:    8px;
     fixed-height: true;
-    background-color: transparent;
 }
 
 element {
-    padding:        8px;
-    border-radius:  8px;
     orientation:    horizontal;
 }
 

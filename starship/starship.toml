@@ -31,12 +31,12 @@ format = "[$path]($style) "
 # --- Git Branch ---
 [git_branch]
 symbol = " "
-style = "bold #5B8CFF"
+style = "#8D95B3"
 format = "on [$symbol$branch]($style) "
 
 # --- Git Status ---
 [git_status]
-style = "bold #FF5470"
+style = "#FF5470"
 format = "([$all_status$ahead_behind]($style) )"
 conflicted = "="
 ahead = "⇡${count}"
@@ -52,38 +52,38 @@ deleted = "✘"
 # --- Languages / Toolchains ---
 [c]
 symbol = " "
-style = "#61E6FF"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 [golang]
 symbol = " "
-style = "#00D9FF"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 [java]
 symbol = " "
-style = "#FF5470"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 [nodejs]
 symbol = " "
-style = "#4DFF91"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 [python]
 symbol = " "
-style = "#61E6FF"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 [rust]
 symbol = " "
-style = "#FF5470"
-format = "via [$symbol$version]($style) "
+style = "#8D95B3"
+format = "[$symbol$version]($style) "
 
 # --- Execution Time ---
 [cmd_duration]
 min_time = 2_000
-style = "bold #8D95B3"
+style = "#8D95B3"
 format = "took [$duration]($style) "
 
 # --- Prompt Character ---

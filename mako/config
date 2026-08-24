@@ -29,5 +29,5 @@ default-timeout=0
 [app-name="minimal-osd"]
 group-by=category
 default-timeout=1500
-border-color=#00D9FF
+border-color=#1C2230
 progress-color=source #00D9FF

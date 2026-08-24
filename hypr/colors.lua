@@ -145,15 +145,37 @@ window {
     border-radius:    12px;
 }
 
+mainbox {
+    background-color: @bg;
+    padding:          24px;
+}
+
+inputbar {
+    background-color: @surface;
+    border-radius:    8px;
+    padding:          12px 14px;
+    margin:           0px 0px 16px 0px;
+}
+
+listview {
+    spacing:          8px;
+    background-color: transparent;
+}
+
+element {
+    padding:          10px 12px;
+    border-radius:    8px;
+    background-color: transparent;
+}
+
 element selected {
     background-color: @overlay;
-    text-color:        @primary;
-    border-radius:     8px;
+    text-color:       @primary;
 }
 
 element normal {
     background-color: transparent;
-    text-color:        @fg;
+    text-color:       @fg;
 }
 ]],
         hex_colors.background, hex_colors.surface, hex_colors.overlay,
@@ -355,7 +377,7 @@ progress-color=source %s
 ]],
         hex_colors.surface, hex_colors.text, hex_colors.overlay, hex_colors.primary,
         hex_colors.overlay, hex_colors.overlay, hex_colors.danger,
-        hex_colors.primary, hex_colors.primary
+        hex_colors.overlay, hex_colors.primary
     )
     write_file(base_dir .. "/mako/config", mako_config)
 end
