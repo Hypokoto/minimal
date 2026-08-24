@@ -77,7 +77,7 @@ hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock")) -- Lock screen (
                                                           -- Hyprland would have taken the later bind
                                                           -- (this one). Consider remapping one.
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(rofiScripts .. "/powermenu.sh"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(hyprScripts .. "/waybar-toggle.sh"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("killall -SIGUSR1 waybar || waybar &"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(rofiScripts .. "/battery.sh"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(rofiScripts .. "/calendar.sh"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(rofiScripts .. "/emoji.sh")) -- NOTE: also conflicts with any
