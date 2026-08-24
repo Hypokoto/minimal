@@ -35,7 +35,7 @@ CAL_MARKED="$(awk -v day="${TODAY_DAY}" '
     }' <<< "${CAL_OUTPUT}")"
 
 # Find which line (1-indexed within the full menu) holds the bracketed day.
-ACTIVE_LINE_IDX="$(grep -n "\[${TODAY_DAY}\]" <<< "${CAL_MARKED}" | head -n1 | cut -d: -f1)"
+ACTIVE_LINE_IDX="$(grep -n "\[${TODAY_DAY}\]" <<< "${CAL_MARKED}" | head -n1 | cut -d: -f1 || true)"
 
 AGENDA_HEADER="── Agenda ──"
 if [[ -r "${AGENDA_FILE}" ]]; then

@@ -45,7 +45,7 @@ build_menu() {
 MENU="$(build_menu)"
 
 # Index of the currently-connected SSID line, for the -a (active) marker.
-ACTIVE_IDX="$(printf '%s\n' "${MENU}" | grep -n '\[connected\]' | head -n1 | cut -d: -f1)"
+ACTIVE_IDX="$(printf '%s\n' "${MENU}" | grep -n '\[connected\]' | head -n1 | cut -d: -f1 || true)"
 ACTIVE_ARG=()
 if [[ -n "${ACTIVE_IDX:-}" ]]; then
     ACTIVE_ARG=(-a "$((ACTIVE_IDX - 1))")
