@@ -107,13 +107,15 @@ hl.config({
     },
 })
 
--- --- Animations ---
-hl.curve("aether", { type = "bezier", points = { { 0.16, 1 }, { 0.3, 1 } } })
+-- --- Animations (Apple-Design Fluid Interface) ---
+-- Replaced default bezier with a critically damped, Apple-inspired spring approximation.
+-- This curve (0.05, 0.9, 0.1, 1.0) mimics a responsive, non-overshooting physical spring.
+hl.curve("apple_fluid", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.0 } } })
 
-hl.animation({ leaf = "windows",    enabled = true, speed = 4, bezier = "aether", style = "popin 90%" })
-hl.animation({ leaf = "fade",       enabled = true, speed = 4, bezier = "aether" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "aether", style = "slide" })
-hl.animation({ leaf = "border",     enabled = true, speed = 6, bezier = "aether" })
+hl.animation({ leaf = "windows",    enabled = true, speed = 4, bezier = "apple_fluid", style = "popin 90%" })
+hl.animation({ leaf = "fade",       enabled = true, speed = 4, bezier = "apple_fluid" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "apple_fluid", style = "slide" })
+hl.animation({ leaf = "border",     enabled = true, speed = 6, bezier = "apple_fluid" })
 
 -- ==============================================================================
 -- Window Rules
