@@ -29,7 +29,7 @@
 
     "group/right": {
         "orientation": "horizontal",
-        "modules": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "tray"]
+        "modules": ["pulseaudio", "network", "battery", "tray"]
     },
 
     "custom/logo": {
