@@ -149,12 +149,13 @@ hl.window_rule({
     size = "25% 100%",
 })
 
-hl.window_rule({ name = "walker-float-center", match = { class = "^(walker)$" }, float = true, center = true })
-hl.window_rule({ name = "nm-editor-float", match = { class = "^(nm-connection-editor)$" }, float = true })
-hl.window_rule({ name = "pavucontrol-float", match = { class = "^(pavucontrol)$" }, float = true, center = true })
+hl.window_rule({ name = "walker-float-center", match = { class = "^(walker)$" }, float = true, center = true, rounding = 12 })
+hl.window_rule({ name = "nm-editor-float", match = { class = "^(nm-connection-editor)$" }, float = true, rounding = 12 })
+hl.window_rule({ name = "pavucontrol-float", match = { class = "^(pavucontrol)$" }, float = true, center = true, rounding = 12 })
 hl.window_rule({ name = "rofi-center", match = { class = "^(Rofi)$" }, float = true, center = true })
 hl.window_rule({
     name = "polkit-agent",
     match = { class = "^(polkit-gnome-authentication-agent-1)$" },
     float = true,
+    rounding = 12,
 })

@@ -29,8 +29,8 @@ listview {
 }
 
 element {
-    padding: 2px 16px;
-    border-radius: 4px;
+    padding: 4px 12px;
+    border-radius: 8px;
 }
 
 element-text {

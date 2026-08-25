@@ -102,10 +102,11 @@
     },
 
     "network": {
-        "format-wifi": "󰤨  {essid}",
-        "format-ethernet": "󰈀  {ipaddr}",
-        "format-linked": "󰈀  {ifname} (No IP)",
-        "format-disconnected": "󰤮  Offline",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀",
+        "format-disconnected": "󰤮",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "tooltip-format-wifi": "{essid} · {bandwidthDownBits} ↓ / {bandwidthUpBits} ↑",
         "interval": 5,
         "on-click": "~/.config/rofi/scripts/network.sh",
