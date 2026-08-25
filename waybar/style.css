@@ -19,8 +19,9 @@
    ============================================================ */
 * {
     font-family: "AdwaitaMono Nerd Font", "JetBrainsMono NF", sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
+    letter-spacing: -0.01em; /* Optical negative tracking for display text */
     min-height: 0;
     margin: 0;
     padding: 0;
@@ -83,7 +84,18 @@ box#right {
     padding: 2px 8px;
     margin: 2px 2px;
     border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    /* Apple fluid spring equivalent */
+    transition: all 0.3s cubic-bezier(0.05, 0.9, 0.1, 1.0);
+}
+
+#custom-logo:active,
+#workspaces button:active,
+#clock:active,
+#network:active,
+#battery:active,
+#pulseaudio:active {
+    transition: none; /* Instant tactile feedback */
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Dividers between right-pill modules removed for cleaner look */
@@ -97,7 +109,7 @@ box#right {
     color: @muted;
     background: transparent;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.05, 0.9, 0.1, 1.0);
 }
 
 #workspaces button.active {
