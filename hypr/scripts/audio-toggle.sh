@@ -1,25 +1,37 @@
 #!/usr/bin/env bash
-# Quick toggle script between Laptop Speakers and HDMI / TV Output
+# Quick toggle script between Laptop Speakers and HDMI / TV Outputs
 set -euo pipefail
 
-CURRENT_SINK="$(pactl info | grep "Default Sink" | awk '{print $3}')"
+# Ensure both HDMI card profiles are active
+pactl set-card-profile alsa_card.pci-0000_03_00.1 pro-audio 2>/dev/null || true
+pactl set-card-profile alsa_card.pci-0000_08_00.1 pro-audio 2>/dev/null || true
 
-HDMI_SINK="$(pactl list sinks short | grep -i "pci-0000_03_00.1\|pci-0000_08_00.1" | awk '{print $2}' | head -n 1 || true)"
-SPEAKER_SINK="$(pactl list sinks short | grep -i "Speaker" | awk '{print $2}' | head -n 1 || true)"
+SINKS=($(pactl list sinks short | awk '{print $2}'))
+CURRENT="$(pactl info | grep "Default Sink" | awk '{print $2}')"
 
-if [[ -z "$HDMI_SINK" ]]; then
-    # Enable pro-audio profile if HDMI profile is inactive
-    pactl set-card-profile alsa_card.pci-0000_03_00.1 pro-audio 2>/dev/null || true
-    pactl set-card-profile alsa_card.pci-0000_08_00.1 pro-audio 2>/dev/null || true
-    HDMI_SINK="$(pactl list sinks short | grep -i "pci-0000_03_00.1\|pci-0000_08_00.1" | awk '{print $2}' | head -n 1 || true)"
+if [[ ${#SINKS[@]} -eq 0 ]]; then
+    exit 0
 fi
 
-if [[ "$CURRENT_SINK" == "$SPEAKER_SINK" && -n "$HDMI_SINK" ]]; then
-    pactl set-default-sink "$HDMI_SINK"
-    notify-send -r 91110 -a "minimal-osd" -i "audio-speakers-symbolic" "Audio Output" "Switched to TV / HDMI Output"
-else
-    if [[ -n "$SPEAKER_SINK" ]]; then
-        pactl set-default-sink "$SPEAKER_SINK"
-        notify-send -r 91110 -a "minimal-osd" -i "audio-speakers-symbolic" "Audio Output" "Switched to Laptop Speaker"
+NEXT_SINK="${SINKS[0]}"
+for i in "${!SINKS[@]}"; do
+    if [[ "${SINKS[$i]}" == "$CURRENT" ]]; then
+        NEXT_INDEX=$(( (i + 1) % ${#SINKS[@]} ))
+        NEXT_SINK="${SINKS[$NEXT_INDEX]}"
+        break
     fi
+done
+
+pactl set-default-sink "$NEXT_SINK"
+
+# Friendly notification label
+LABEL="Default Audio Output"
+if [[ "$NEXT_SINK" == *"Speaker"* ]]; then
+    LABEL="Laptop Speakers"
+elif [[ "$NEXT_SINK" == *"08_00.1"* ]]; then
+    LABEL="TV / HDMI Audio (iGPU)"
+elif [[ "$NEXT_SINK" == *"03_00.1"* ]]; then
+    LABEL="TV / HDMI Audio (dGPU)"
 fi
+
+notify-send -r 91110 -a "minimal-osd" -i "audio-speakers-symbolic" "Audio Output" "Switched to $LABEL"
