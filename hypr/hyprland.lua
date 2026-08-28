@@ -31,9 +31,10 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
 end)
 
--- --- GPU Environment & Optimization (RX 6500, AMDGPU) ---
+-- --- GPU Environment & Optimization (AMD iGPU Cezanne + RX 6500M dGPU) ---
 hl.env("LIBVA_DRIVER_NAME", "radeonsi")
-hl.env("WLR_DRM_NO_ATOMIC", "1")            -- Mitigates flicker/tearing on low-VRAM/RDNA2 mobile parts under Wayland KMS
+-- Multi-GPU: Card2 is iGPU (eDP-1), Card1 is dGPU (HDMI-A-1). Passing both allows Hyprland to output to HDMI.
+hl.env("WLR_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")

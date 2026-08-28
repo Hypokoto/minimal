@@ -13,9 +13,15 @@
 --   hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60", position = "auto", scale = "1" })
 -- ==============================================================================
 
+-- Explicit HDMI output handling for dual-GPU laptops / external monitors
+hl.monitor({
+    output   = "HDMI-A-1",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "1",
+})
+
 -- Catch-all: every connected output gets preferred mode, auto position, scale 1.
--- This single rule handles 1-display laptops, 2-display desks, and hotplugged
--- adapters without requiring you to know connector names ahead of time.
 hl.monitor({
     output   = "",
     mode     = "preferred",
