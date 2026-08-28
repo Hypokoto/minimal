@@ -13,9 +13,23 @@
 --   hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60", position = "auto", scale = "1" })
 -- ==============================================================================
 
--- Explicit HDMI output handling for dual-GPU laptops / external monitors
+-- Explicit external monitor rules (HDMI-A-1, HDMI-A-2, DP-1, DP-2)
 hl.monitor({
     output   = "HDMI-A-1",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "1",
+})
+
+hl.monitor({
+    output   = "HDMI-A-2",
+    mode     = "preferred",
+    position = "auto",
+    scale    = "1",
+})
+
+hl.monitor({
+    output   = "DP-1",
     mode     = "preferred",
     position = "auto",
     scale    = "1",
