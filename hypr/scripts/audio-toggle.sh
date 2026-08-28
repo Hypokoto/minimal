@@ -24,7 +24,6 @@ done
 
 pactl set-default-sink "$NEXT_SINK"
 
-# Friendly notification label
 LABEL="Default Audio Output"
 if [[ "$NEXT_SINK" == *"Speaker"* ]]; then
     LABEL="Laptop Speakers"
