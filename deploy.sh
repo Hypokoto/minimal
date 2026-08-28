@@ -97,7 +97,6 @@ deploy_link "$DOTFILES_DIR/zsh/aliases.zsh"         "$HOME/.config/zsh/aliases.z
 deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
-deploy_link "$DOTFILES_DIR/kanshi"                  "$HOME/.config/kanshi"
 
 # Symlink mount-phone.sh into PATH so yazi keymap binding resolves
 # regardless of dotfile repo location.
