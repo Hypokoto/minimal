@@ -16,21 +16,21 @@
 -- Explicit external monitor rules (HDMI-A-1, HDMI-A-2, DP-1, DP-2)
 hl.monitor({
     output   = "HDMI-A-1",
-    mode     = "preferred",
+    mode     = "1920x1080@144",
     position = "auto",
     scale    = "1",
 })
 
 hl.monitor({
     output   = "HDMI-A-2",
-    mode     = "preferred",
+    mode     = "1920x1080@144",
     position = "auto",
     scale    = "1",
 })
 
 hl.monitor({
     output   = "DP-1",
-    mode     = "preferred",
+    mode     = "1920x1080@144",
     position = "auto",
     scale    = "1",
 })
