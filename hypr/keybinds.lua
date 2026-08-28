@@ -31,14 +31,13 @@ hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "r" })) -- VERIFY
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" })) -- VERIFY
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" })) -- VERIFY
 
--- --- Workspaces (1-9) ---
--- Workspaces are dynamically assigned by Hyprland to whichever monitor is
--- active (see monitors.lua).  This works on single-display laptops, multi-
--- monitor desks, or any hotplugged adapter configuration.
+-- --- Workspaces (1-10) ---
 for i = 1, 9 do
     hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
     hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
 end
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
 
 -- --- Workspace Navigation & Toggling ---
 hl.bind(mainMod .. " + Tab",        hl.dsp.focus({ workspace = "previous" }))

@@ -46,14 +46,21 @@ hl.monitor({
 -- ================================================================
 -- Workspace rules
 -- ================================================================
--- No static monitor→workspace pinning.  Workspaces are dynamically
--- assigned by Hyprland to whichever monitor is active, so the same
--- config works regardless of how many (or which) displays are connected.
--- Workspace 1 is the default landing workspace.
+-- Workspaces 1-5 default to internal laptop display (eDP-1)
+-- Workspaces 6-10 default to connected external display (HDMI-A-1)
 -- ================================================================
-for i = 1, 9 do
+for i = 1, 5 do
     hl.workspace_rule({
         workspace = tostring(i),
+        monitor   = "eDP-1",
         default   = (i == 1),
+    })
+end
+
+for i = 6, 10 do
+    hl.workspace_rule({
+        workspace = tostring(i),
+        monitor   = "HDMI-A-1",
+        default   = (i == 6),
     })
 end
