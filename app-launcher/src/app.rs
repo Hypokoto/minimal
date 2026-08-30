@@ -104,18 +104,20 @@ impl LauncherApp {
     fn launch(&mut self, app: &AppEntry) {
         self.state.record_launch(&app.name);
         
-        // Parse Exec (very simplified)
-        let parts: Vec<&str> = app.exec.split_whitespace().collect();
-        if parts.is_empty() { return; }
-        
-        // Filter out `%u`, `%F`, etc.
-        let args: Vec<&str> = parts[1..].iter()
-            .filter(|a| !a.starts_with('%'))
-            .copied()
-            .collect();
+        let exec = app.exec
+            .replace("%u", "")
+            .replace("%U", "")
+            .replace("%f", "")
+            .replace("%F", "")
+            .replace("%c", &app.name)
+            .replace("%i", &app.icon_name.clone().unwrap_or_default())
+            .trim()
+            .to_string();
             
-        let _ = Command::new(parts[0])
-            .args(args)
+        let _ = Command::new("hyprctl")
+            .arg("dispatch")
+            .arg("exec")
+            .arg(&exec)
             .spawn();
             
         std::process::exit(0);
