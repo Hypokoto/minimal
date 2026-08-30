@@ -2,8 +2,14 @@
 import sys
 import os
 import subprocess
+import datetime
+
+def log_debug(msg):
+    with open("/tmp/rofi-apps-debug.log", "a") as f:
+        f.write(f"{datetime.datetime.now()} - {msg}\n")
 
 def launch_app(desktop_file):
+    log_debug(f"Launching: {desktop_file}")
     exec_cmd = ""
     terminal = False
     with open(desktop_file, 'r', encoding='utf-8', errors='ignore') as f:
@@ -28,9 +34,13 @@ def launch_app(desktop_file):
         if terminal:
             exec_cmd = f"kitty -- {exec_cmd}"
             
+        log_debug(f"Executing command: {exec_cmd}")
         subprocess.Popen(["hyprctl", "dispatch", "exec", "--", exec_cmd], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-if "ROFI_INFO" in os.environ:
+log_debug(f"Invoked with argv: {sys.argv} | ROFI_RETV: {os.environ.get('ROFI_RETV')} | ROFI_INFO: {os.environ.get('ROFI_INFO')}")
+
+if "ROFI_INFO" in os.environ and os.environ.get("ROFI_RETV") in ["1", "2"]:
+    log_debug("ROFI_INFO found in environment. Launching directly.")
     launch_app(os.environ["ROFI_INFO"])
     sys.exit(0)
 
@@ -110,7 +120,6 @@ for d in directories:
                 apps.append(app)
 
 if len(sys.argv) > 1 and sys.argv[1] == "get_modes":
-    # Auto-generate modes based on present categories
     present_categories = set(app["main_category"] for app in apps)
     sorted_cats = sorted(list(present_categories))
     if "Other" in sorted_cats:
@@ -127,10 +136,25 @@ if len(sys.argv) > 1 and sys.argv[1] == "get_modes":
 target_category = sys.argv[1] if len(sys.argv) > 1 else "All"
 apps.sort(key=lambda x: x["name"].lower())
 
+# Build the display list
+for app in apps:
+    generic = f"  <span size='9pt' fgcolor='#8D95B3'>{app['generic']}</span>" if app['generic'] else ""
+    app["display"] = f"{app['name']}{generic}"
+
+# Fallback launch method if ROFI_INFO fails but ROFI_RETV indicates a selection
+if os.environ.get("ROFI_RETV") in ["1", "2"] and len(sys.argv) > 2:
+    selected_text = sys.argv[2]
+    log_debug(f"Selection detected via argv[2]. Text: {selected_text}")
+    for app in apps:
+        if app["display"] == selected_text or app["name"] == selected_text:
+            log_debug(f"Matched app: {app['name']}")
+            launch_app(app["file"])
+            sys.exit(0)
+
+# Otherwise print list
 for app in apps:
     if target_category != "All" and app["main_category"] != target_category:
         continue
-    generic = f"  <span size='9pt' fgcolor='#8D95B3'>{app['generic']}</span>" if app['generic'] else ""
-    display = f"{app['name']}{generic}"
     meta = f"{app['name']} {app['generic']}"
-    print(f"{display}\0icon\x1f{app['icon']}\x1fmeta\x1f{meta}\x1finfo\x1f{app['file']}")
+    # Print rofi entry
+    print(f"{app['display']}\0icon\x1f{app['icon']}\x1fmeta\x1f{meta}\x1finfo\x1f{app['file']}")
