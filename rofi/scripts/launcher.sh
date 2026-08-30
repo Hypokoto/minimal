@@ -8,6 +8,4 @@ MODES="All:${DIR}/scripts/rofi-apps.py All,Web:${DIR}/scripts/rofi-apps.py Web B
 rofi -pid /tmp/rofi-launcher.pid \
     -modi "$MODES" \
     -show All \
-    -kb-mode-next "Shift+Right,Control+Down" \
-    -kb-mode-previous "Shift+Left,Control+Up" \
     -theme "${DIR}/launcher.rasi"
