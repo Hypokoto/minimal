@@ -43,7 +43,8 @@ The primary modifier key is **`SUPER`** (Windows key).
 | --- | --- |
 | `SUPER + Escape` | Open Power Menu (`powermenu.sh`) |
 | `SUPER + SHIFT + L` | Lock screen (`hyprlock`) |
-| `SUPER + B` | Toggle Waybar visibility (`waybar-toggle.sh`) |
+| `SUPER + B` | Toggle Waybar & Dynamic Bento Gaps (`toggle-bar.sh`) |
+| `SUPER + S` | Open Security Dashboard (`security.sh`) |
 | `SUPER + SHIFT + B` | Open Battery status menu (`battery.sh`) |
 | `SUPER + C` | Open Calendar widget (`calendar.sh`) |
 | `SUPER + E` | Open Emoji picker (`emoji.sh`) |

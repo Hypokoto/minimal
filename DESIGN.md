@@ -16,7 +16,8 @@ A restrained, gallery-airy interface with confident asymmetric layouts and fluid
 - **Banned:** `Inter` and generic system fonts for stylized UI contexts. Emojis must be cleanly rendered or avoided if jarring.
 
 ## 4. Component Stylings
-* **Waybar (Status Bar):** 28px ultra-slim height. Tactile spacing. No pill-shaped bloated containers. Clear separation of network, battery, and clock.
+* **Waybar (Status Bar):** 3-Pill Bento Grid design. Clear separation of workspace/window state (Left), clock (Center), and metrics/security (Right). No massive monolithic bars.
+* **Conditional Gaps:** Gaps and rounded window borders dynamically activate alongside Waybar (`SUPER+B`), allowing seamless toggling between a padded Bento layout and a distraction-free, zero-gap focus mode.
 * **Rofi Menus:** Asymmetric layouts based on context. Clipboard opens right-aligned, Calendar opens top-center under the clock, Launcher centered. Flat surfaces, diffused whisper shadows.
 * **Windows:** Sharp layout math (no random gaps). Blur and drop shadow apply exclusively to create Z-axis hierarchy for floating elements.
 
