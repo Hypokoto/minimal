@@ -10,9 +10,9 @@ if pgrep -x "nwg-drawer" > /dev/null; then
     exit 0
 fi
 
-# -c 5      : 5 columns of apps
-# -is 48    : icon size 48px
-# -spacing  : 16px gap between icons
-# -fm       : file manager command for directories
-# -term     : terminal emulator
-exec nwg-drawer -c 5 -is 48 -spacing 16 -term "kitty" -fm "kitty -e yazi"
+# -c 6      : 6 columns of apps for wide bento grid
+# -is 64    : Premium large 64px icon size
+# -spacing  : 32px gap between icons
+# -mt 54    : Top margin to prevent overlapping the floating Waybar pills
+# -wm       : Explicitly use hyprland dispatcher
+exec nwg-drawer -c 6 -is 64 -spacing 32 -mt 54 -wm hyprland -term "kitty" -fm "kitty -e yazi"

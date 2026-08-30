@@ -1,63 +1,70 @@
 /* ============================================================
-   MINIMAL BENTO — nwg-drawer Design System
+   MINIMAL BENTO — Premium nwg-drawer Design System
    ============================================================ */
 
+/* Base Reset & Window */
+* {
+    outline: none;
+    box-shadow: none;
+}
+
 window {
-    background-color: rgba(10, 12, 18, 0.96); /* @bg */
+    background-color: rgba(10, 12, 18, 0.85); /* @bg with transparency for Hyprland blur */
     color: #F2F6FF; /* @fg */
 }
 
-/* The search bar */
+/* The Search Bar (Massive Floating Pill) */
 entry {
-    background-color: #1C2230; /* @overlay */
+    background-color: #11141D; /* @surface */
     color: #F2F6FF;
-    border: 1px solid rgba(0, 217, 255, 0.3); /* @primary */
-    border-radius: 8px;
-    box-shadow: none;
-    padding: 10px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 16px 24px;
+    margin: 10px 24px 30px 24px;
     font-family: "AdwaitaMono Nerd Font", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 entry:focus {
-    border: 1px solid #00D9FF;
+    border: 1px solid rgba(0, 217, 255, 0.4); /* @primary subtle glow */
+    background-color: #1C2230; /* @overlay */
 }
 
-/* Buttons (Apps & Categories) */
+/* App & Category Buttons */
 button {
     background-color: transparent;
     color: #8D95B3; /* @muted */
-    border: none;
-    border-radius: 8px;
-    box-shadow: none;
-    padding: 8px;
+    border: 1px solid transparent;
+    border-radius: 16px;
+    padding: 12px;
     font-family: "AdwaitaMono Nerd Font", sans-serif;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-    background-color: #1C2230; /* @overlay */
+    background-color: rgba(28, 34, 48, 0.7); /* @overlay */
     color: #F2F6FF;
+    border: 1px solid rgba(255, 255, 255, 0.03);
 }
 
 button:focus {
-    background-color: rgba(0, 217, 255, 0.15); /* @primary trans */
+    background-color: rgba(0, 217, 255, 0.1);
     color: #00D9FF;
-    box-shadow: none;
 }
 
-/* Category Sidebar specifics if any */
+/* Category Sidebar Tab Design */
 button.category-button {
-    margin: 2px 10px;
+    margin: 4px 16px;
+    padding: 14px 20px;
+    font-weight: bold;
+    border-radius: 14px;
 }
 
-/* When a category is active */
-button:checked {
-    background-color: #1C2230;
-    color: #00D9FF;
-}
-
-/* Remove weird GTK outlines */
-* {
-    outline: none;
+/* Active Category */
+button.category-button:checked, button.category-button-active {
+    background-color: #11141D; /* @surface */
+    color: #00D9FF; /* @primary */
+    border: 1px solid rgba(0, 217, 255, 0.2);
 }
