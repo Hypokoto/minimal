@@ -59,7 +59,8 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       cliphist wl-clipboard grim slurp brightnessctl rofimoji
       starship git-delta duf dust atuin bottom yq trash-cli chafa eza zoxide bat zstd unrar bc
       gping trippy bind nmap iperf3 bandwhich speedtest-cli iftop nethogs doggo man-db man-pages \
-      rustscan sniffnet netscanner hexyl cargo-audit
+      rustscan sniffnet netscanner hexyl cargo-audit \
+      nwg-drawer
     )
 
     AUR_PKGS=(

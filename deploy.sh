@@ -99,6 +99,7 @@ deploy_link "$DOTFILES_DIR/zsh/sec.zsh"             "$HOME/.config/zsh/sec.zsh"
 deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
+deploy_link "$DOTFILES_DIR/nwg-drawer"              "$HOME/.config/nwg-drawer"
 
 mkdir -p "$HOME/.local/bin"
 ln -sfn "$DOTFILES_DIR/hypr/scripts/toggle-bar.sh"   "$HOME/.local/bin/toggle-bar.sh"

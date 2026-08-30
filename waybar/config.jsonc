@@ -35,7 +35,7 @@
     "custom/logo": {
         "format": "",
         "tooltip": false,
-        "on-click": "~/.config/rofi/scripts/launcher.sh",
+        "on-click": "~/.config/nwg-drawer/launch.sh",
         "on-click-right": "~/.config/hypr/wallpaper/picker.sh"
     },
 
