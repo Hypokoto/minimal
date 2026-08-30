@@ -33,9 +33,9 @@
     },
 
     "custom/logo": {
-        "format": "Apps",
+        "format": "󰣇",
         "tooltip": false,
-        "on-click": "~/.config/app-launcher/target/release/app-launcher",
+        "on-click": "~/.config/rofi/scripts/launcher.sh",
         "on-click-right": "~/.config/hypr/wallpaper/picker.sh"
     },
 

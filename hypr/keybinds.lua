@@ -79,7 +79,7 @@ hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(rofiScripts .. "/powermenu.sh"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"))
 
 -- Applications
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/app-launcher/target/release/app-launcher"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(rofiScripts .. "/launcher.sh"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/security-dashboard/target/release/security-dashboard"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(rofiScripts .. "/battery.sh"))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(rofiScripts .. "/calendar.sh"))

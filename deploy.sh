@@ -16,7 +16,7 @@ log "=== STARTING MINIMAL DEPLOYMENT PIPELINE ==="
 
 # --- 1. Binary Presence Verification ---
 log "--- Phase 1: Binary Presence Verification ---"
-REQUIRED_BINARIES=(hyprland waybar rofi yazi starship mako cliphist atuin zoxide eza bat fd rg man app-launcher)
+REQUIRED_BINARIES=(hyprland waybar rofi yazi starship mako cliphist atuin zoxide eza bat fd rg man)
 MISSING_COUNT=0
 
 for bin in "${REQUIRED_BINARIES[@]}"; do
@@ -99,7 +99,6 @@ deploy_link "$DOTFILES_DIR/zsh/sec.zsh"             "$HOME/.config/zsh/sec.zsh"
 deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
-deploy_link "$DOTFILES_DIR/app-launcher"            "$HOME/.config/app-launcher"
 deploy_link "$DOTFILES_DIR/security-dashboard"      "$HOME/.config/security-dashboard"
 
 mkdir -p "$HOME/.local/bin"

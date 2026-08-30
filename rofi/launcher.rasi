@@ -9,12 +9,13 @@ configuration {
 }
 
 window {
-    width: 580px;
-    width: 580px;
+    width: 25%;
+    height: 100%;
     location: north west;
     anchor: north west;
-    y-offset: 40px;
-    x-offset: 12px;
+    y-offset: 0px;
+    x-offset: 0px;
+    border-radius: 0px;
 }
 
 mainbox {
