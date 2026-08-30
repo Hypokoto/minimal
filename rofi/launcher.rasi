@@ -3,8 +3,8 @@
 configuration {
     show-icons: true;
     icon-theme: "Papirus-Dark";
-    display-drun: "Launch";
-    drun-display-format: "{name}  [<span size='9pt' fgcolor='#8D95B3'>{generic}</span>]";
+    display-drun: "LAUNCH";
+    drun-display-format: "{name} [<span size='9pt' fgcolor='#8D95B3'>{generic}</span>]";
     drun-match-fields: "name,generic,exec,categories";
 }
 
@@ -16,90 +16,116 @@ window {
     y-offset: 0px;
     x-offset: 0px;
     border-radius: 0px;
+    border: 0px 2px 0px 0px;
+    border-color: @primary;
+    background-color: @bg;
 }
 
 mainbox {
     orientation: horizontal;
     children: [ mode-switcher, rightbox ];
     spacing: 0px;
+    background-color: transparent;
 }
 
 mode-switcher {
     orientation: vertical;
-    width: 160px;
-    spacing: 6px;
-    padding: 20px 10px;
+    width: 140px;
+    spacing: 0px;
+    padding: 24px 0px;
     background-color: @surface-trans;
+    border: 0px 1px 0px 0px;
+    border-color: @overlay;
 }
 
 button {
-    padding: 10px 14px;
-    border-radius: 8px;
+    padding: 14px 16px;
+    border-radius: 0px;
     text-color: @muted;
     background-color: transparent;
     cursor: pointer;
+    font: "AdwaitaMono Nerd Font 10 Bold";
+    border: 0px;
 }
 
 button selected {
     text-color: @primary;
     background-color: @overlay;
+    border: 0px 2px 0px 0px;
+    border-color: @primary;
 }
 
 rightbox {
     orientation: vertical;
     children: [ inputbar, listview ];
     expand: true;
-    padding: 20px 24px;
-    spacing: 12px;
+    padding: 24px;
+    spacing: 24px;
+    background-color: transparent;
 }
 
 inputbar {
     children: [ prompt, entry ];
-    background-color: @overlay;
-    border-radius: 8px;
-    padding: 10px 14px;
+    background-color: @surface;
+    border-radius: 0px;
+    border: 2px;
+    border-color: @primary;
+    padding: 16px;
 }
 
 prompt {
-    text-color:  @primary;
-    font:        "AdwaitaMono Nerd Font 10.5 Bold";
-    padding:     0px 8px 0px 0px;
+    text-color: @primary;
+    font: "AdwaitaMono Nerd Font 11 Bold";
+    padding: 0px 12px 0px 0px;
+    background-color: inherit;
 }
 
 entry {
-    text-color:        @fg;
-    placeholder:        "Search applications...";
-    placeholder-color:  @muted;
+    text-color: @fg;
+    placeholder: "SEARCH //";
+    placeholder-color: @muted;
+    font: "AdwaitaMono Nerd Font 11";
+    background-color: inherit;
 }
 
 listview {
-    columns:      2;
-    lines:        8;
-    spacing:      6px;
+    columns: 2;
+    lines: 10;
+    spacing: 12px;
     fixed-height: true;
-    markup-rows:  true;
+    markup-rows: true;
+    background-color: transparent;
+    border: 0px;
 }
 
 element {
-    orientation:    horizontal;
-    padding:        8px 12px;
-    border-radius:  8px;
+    orientation: horizontal;
+    padding: 12px 14px;
+    border-radius: 0px;
     background-color: transparent;
+    border: 1px;
+    border-color: transparent;
 }
 
 element selected {
     background-color: @overlay;
-    border:           1px;
-    border-color:     rgba(0, 217, 255, 0.4);
+    text-color: @fg;
+    border-color: @primary;
+}
+
+element normal {
+    text-color: @fg;
 }
 
 element-icon {
-    size:   24px;
-    margin: 0px 10px 0px 0px;
+    size: 24px;
+    margin: 0px 14px 0px 0px;
+    background-color: inherit;
 }
 
 element-text {
     text-color: inherit;
+    background-color: inherit;
     vertical-align: 0.5;
+    font: "AdwaitaMono Nerd Font 10 Bold";
 }
-

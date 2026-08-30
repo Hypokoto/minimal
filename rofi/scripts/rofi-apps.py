@@ -35,7 +35,8 @@ def launch_app(desktop_file):
             exec_cmd = f"kitty -- {exec_cmd}"
             
         log_debug(f"Executing command: {exec_cmd}")
-        subprocess.Popen(["hyprctl", "dispatch", "exec", "--", exec_cmd], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["sh", "-c", exec_cmd], start_new_session=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        subprocess.Popen(["pkill", "-x", "rofi"])
 
 log_debug(f"Invoked with argv: {sys.argv} | ROFI_RETV: {os.environ.get('ROFI_RETV')} | ROFI_INFO: {os.environ.get('ROFI_INFO')}")
 
@@ -149,6 +150,7 @@ if os.environ.get("ROFI_RETV") in ["1", "2"] and len(sys.argv) > 2:
         if app["display"] == selected_text or app["name"] == selected_text:
             log_debug(f"Matched app: {app['name']}")
             launch_app(app["file"])
+            subprocess.Popen(["pkill", "-x", "rofi"])
             sys.exit(0)
 
 # Otherwise print list
