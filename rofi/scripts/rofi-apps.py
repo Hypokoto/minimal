@@ -34,8 +34,6 @@ if "ROFI_INFO" in os.environ:
     launch_app(os.environ["ROFI_INFO"])
     sys.exit(0)
 
-target_category = sys.argv[1] if len(sys.argv) > 1 else "All"
-
 directories = [
     "/usr/share/applications",
     os.path.expanduser("~/.local/share/applications")
@@ -73,21 +71,30 @@ def parse_desktop_file(filepath):
         return app
     return None
 
-def map_category(cats):
-    cat_str = " ".join(cats).lower()
-    if "webbrowser" in cat_str or "network" in cat_str: return "Web Browsers"
-    if "development" in cat_str: return "Development"
-    if "chat" in cat_str or "email" in cat_str or "instantmessaging" in cat_str: return "Communication"
-    if "graphics" in cat_str: return "Graphics"
-    if "office" in cat_str: return "Office"
-    if "audiovideo" in cat_str or "audio" in cat_str or "video" in cat_str or "multimedia" in cat_str: return "Multimedia"
-    if "system" in cat_str or "settings" in cat_str: return "System"
-    if "utility" in cat_str: return "Utilities"
-    if "game" in cat_str: return "Games"
+MAIN_CATEGORIES = {
+    "AudioVideo": "Multimedia",
+    "Audio": "Multimedia",
+    "Video": "Multimedia",
+    "Development": "Development",
+    "Education": "Education",
+    "Game": "Games",
+    "Graphics": "Graphics",
+    "Network": "Network",
+    "Office": "Office",
+    "Science": "Science",
+    "Settings": "System",
+    "System": "System",
+    "Utility": "Utilities"
+}
+
+def get_category(cats):
+    for c in cats:
+        if c in MAIN_CATEGORIES:
+            return MAIN_CATEGORIES[c]
     return "Other"
 
-seen_names = set()
 apps = []
+seen_names = set()
 
 for d in directories:
     if not os.path.isdir(d):
@@ -97,18 +104,33 @@ for d in directories:
             continue
         app = parse_desktop_file(os.path.join(d, filename))
         if app:
-            cat = map_category(app["categories"])
-            if target_category == "All" or target_category == cat:
-                if app["name"] not in seen_names:
-                    seen_names.add(app["name"])
-                    apps.append(app)
+            if app["name"] not in seen_names:
+                seen_names.add(app["name"])
+                app["main_category"] = get_category(app["categories"])
+                apps.append(app)
 
+if len(sys.argv) > 1 and sys.argv[1] == "get_modes":
+    # Auto-generate modes based on present categories
+    present_categories = set(app["main_category"] for app in apps)
+    sorted_cats = sorted(list(present_categories))
+    if "Other" in sorted_cats:
+        sorted_cats.remove("Other")
+        sorted_cats.append("Other")
+    
+    script_path = os.path.abspath(__file__)
+    modes = [f"All:{script_path} All"]
+    for cat in sorted_cats:
+        modes.append(f"{cat}:{script_path} {cat}")
+    print(",".join(modes))
+    sys.exit(0)
+
+target_category = sys.argv[1] if len(sys.argv) > 1 else "All"
 apps.sort(key=lambda x: x["name"].lower())
 
 for app in apps:
+    if target_category != "All" and app["main_category"] != target_category:
+        continue
     generic = f"  <span size='9pt' fgcolor='#8D95B3'>{app['generic']}</span>" if app['generic'] else ""
     display = f"{app['name']}{generic}"
     meta = f"{app['name']} {app['generic']}"
-    
-    # Rofi syntax: string\0icon\x1f<icon>\x1fmeta\x1f<search>\x1finfo\x1f<data>
     print(f"{display}\0icon\x1f{app['icon']}\x1fmeta\x1f{meta}\x1finfo\x1f{app['file']}")
