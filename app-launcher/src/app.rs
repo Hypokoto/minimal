@@ -114,11 +114,23 @@ impl LauncherApp {
             .trim()
             .to_string();
             
-        let _ = Command::new("hyprctl")
-            .arg("dispatch")
-            .arg("exec")
+        use std::os::unix::process::CommandExt;
+        
+        let mut cmd = Command::new("sh");
+        cmd.arg("-c")
             .arg(&exec)
-            .spawn();
+            .stdin(std::process::Stdio::null())
+            .stdout(std::process::Stdio::null())
+            .stderr(std::process::Stdio::null());
+            
+        unsafe {
+            cmd.pre_exec(|| {
+                libc::setsid();
+                Ok(())
+            });
+        }
+            
+        let _ = cmd.spawn();
             
         std::process::exit(0);
     }
