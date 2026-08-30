@@ -103,18 +103,37 @@ CMD="${CMDS["${CHOICE}"]:-}"
 
 TERM="${TERMINAL:-kitty}"
 
+rofi_popup() {
+    local output="$1"
+    # Strip ANSI escape codes
+    local clean_output
+    clean_output="$(echo -e "$output" | sed 's/\x1b\[[0-9;]*[a-zA-Z]//g')"
+    rofi -e "$clean_output" -theme-str 'window { width: 800px; }' -theme "${THEME_PATH}"
+}
+
 if [[ "$CMD" == gui:* ]]; then
     # Run directly (no terminal needed)
     eval "${CMD#gui:}" &
-elif [[ "$CMD" == "rustscan -a" || "$CMD" == "nmap"* || "$CMD" == "feroxbuster"* || "$CMD" == "iperf3"* ]]; then
-    # Prompt for target
-    TARGET="$(rofi -dmenu -p "Target" -theme "${THEME_PATH}" <<< "")"
-    [[ -z "$TARGET" ]] && exit 0
-    "${TERM}" -- bash -c "${CMD} ${TARGET}; echo; echo '--- Press Enter to close ---'; read -r" &
-elif [[ "$CMD" == "hexyl" ]]; then
-    FILE="$(rofi -dmenu -p "File path" -theme "${THEME_PATH}" <<< "")"
-    [[ -z "$FILE" ]] && exit 0
-    "${TERM}" -- bash -c "hexyl ${FILE} | less -R; echo; read -r" &
+elif [[ "$CMD" == "sudo bandwhich" || "$CMD" == "sudo trip" || "$CMD" == "sudo netscanner" || "$CMD" == "hexyl" ]]; then
+    # Interactive TUIs MUST use a terminal
+    if [[ "$CMD" == "hexyl" ]]; then
+        TARGET="$(rofi -dmenu -p "File path" -theme "${THEME_PATH}" <<< "")"
+        [[ -z "$TARGET" ]] && exit 0
+        "${TERM}" -- bash -c "${CMD} ${TARGET} | less -R; echo; read -r" &
+    else
+        "${TERM}" -- bash -c "${CMD}; echo; echo '--- Press Enter to close ---'; read -r" &
+    fi
 else
-    "${TERM}" -- bash -c "${CMD}; echo; echo '--- Press Enter to close ---'; read -r" &
+    # Text-based tools -> capture output and show in Rofi
+    if [[ "$CMD" == "rustscan -a" || "$CMD" == "nmap"* || "$CMD" == "feroxbuster"* || "$CMD" == "iperf3"* || "$CMD" == "xh" ]]; then
+        TARGET="$(rofi -dmenu -p "Target" -theme "${THEME_PATH}" <<< "")"
+        [[ -z "$TARGET" ]] && exit 0
+        notify-send -u low "Security" "Running ${CMD%% *}..."
+        OUTPUT=$(eval "${CMD} ${TARGET}" 2>&1 || true)
+        rofi_popup "$OUTPUT" &
+    else
+        notify-send -u low "Security" "Running ${CMD%% *}..."
+        OUTPUT=$(eval "${CMD}" 2>&1 || true)
+        rofi_popup "$OUTPUT" &
+    fi
 fi

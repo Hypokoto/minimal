@@ -54,5 +54,5 @@ element selected {
 }
 
 element selected element-text {
-    text-color:       @text;
+    text-color:       @fg;
 }
