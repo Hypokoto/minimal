@@ -208,6 +208,13 @@ elif [[ -f "${HOME}/minimal/zsh/aliases.zsh" ]]; then
     source "${HOME}/minimal/zsh/aliases.zsh"
 fi
 
+# Load security & networking aliases module
+if [[ -f "${HOME}/.config/zsh/sec.zsh" ]]; then
+    source "${HOME}/.config/zsh/sec.zsh"
+elif [[ -f "${HOME}/minimal/zsh/sec.zsh" ]]; then
+    source "${HOME}/minimal/zsh/sec.zsh"
+fi
+
 # ---------------------------------------------------------------------------
 #  §8  UTILITY FUNCTIONS
 # ---------------------------------------------------------------------------

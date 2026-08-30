@@ -6,7 +6,7 @@ set -euo pipefail
 pactl set-card-profile alsa_card.pci-0000_03_00.1 pro-audio 2>/dev/null || true
 pactl set-card-profile alsa_card.pci-0000_08_00.1 pro-audio 2>/dev/null || true
 
-SINKS=($(pactl list sinks short | awk '{print $2}'))
+mapfile -t SINKS < <(pactl list sinks short | awk '{print $2}')
 CURRENT="$(pactl info | grep "Default Sink" | awk '{print $2}')"
 
 if [[ ${#SINKS[@]} -eq 0 ]]; then

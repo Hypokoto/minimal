@@ -1,5 +1,5 @@
 /* ============================================================
-   MINIMAL — Variable Definitions
+   MINIMAL BENTO — 3-Pill Waybar Design System
    ============================================================ */
 @define-color background #0A0C12;
 @define-color surface    #11141D;
@@ -15,13 +15,13 @@
 @define-color info       #61E6FF;
 
 /* ============================================================
-   BASE RESET
+   BASE RESET & TYPOGRAPHY
    ============================================================ */
 * {
-    font-family: "AdwaitaMono Nerd Font", "JetBrainsMono NF", sans-serif;
-    font-size: 13px;
+    font-family: "AdwaitaMono Nerd Font", "JetBrainsMono NF", monospace;
+    font-size: 12px;
     font-weight: 600;
-    letter-spacing: -0.01em; /* Optical negative tracking for display text */
+    letter-spacing: -0.01em;
     min-height: 0;
     margin: 0;
     padding: 0;
@@ -36,40 +36,37 @@ window#waybar {
 }
 
 /* ============================================================
-   PILL CONTAINERS
-   Waybar assigns group/left  → box#left
-                   group/center → box#center
-                   group/right  → box#right
-   Verified from GTK widget tree debug output.
+   THREE BENTO PILL CONTAINERS
    ============================================================ */
 box#left {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 12px;
-    padding: 0 12px;
+    border-radius: 10px;
+    padding: 2px 10px;
     margin: 0;
 }
 
 box#center {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 12px;
-    padding: 0 16px;
+    border-radius: 10px;
+    padding: 2px 14px;
     margin: 0;
 }
 
 box#right {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 12px;
-    padding: 0 12px;
+    border-radius: 10px;
+    padding: 2px 10px;
     margin: 0;
 }
 
 /* ============================================================
-   INNER MODULE SPACING
+   MODULE BASE LAYOUT & FEEDBACK
    ============================================================ */
 #custom-logo,
+#custom-security,
 #workspaces,
 #submap,
 #window,
@@ -81,196 +78,182 @@ box#right {
 #memory,
 #battery,
 #tray {
-    padding: 2px 8px;
-    margin: 2px 2px;
-    border-radius: 8px;
-    /* Apple fluid spring equivalent */
-    transition: all 0.3s cubic-bezier(0.05, 0.9, 0.1, 1.0);
+    padding: 2px 6px;
+    margin: 1px 2px;
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
 }
 
 #custom-logo:active,
+#custom-security:active,
 #workspaces button:active,
 #clock:active,
 #network:active,
 #battery:active,
 #pulseaudio:active {
-    transition: none; /* Instant tactile feedback */
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Dividers between right-pill modules removed for cleaner look */
-
 /* ============================================================
-   LEFT PILL — Workspaces / State
+   LEFT PILL — Logo, Workspaces, Window
    ============================================================ */
+#custom-logo {
+    color: @primary;
+    font-size: 14px;
+    padding: 2px 8px;
+    margin-right: 4px;
+}
+
+#custom-logo:hover {
+    color: @text;
+    background-color: rgba(0, 217, 255, 0.12);
+}
+
 #workspaces button {
-    padding: 2px 6px;
-    margin: 2px 2px;
+    padding: 2px 8px;
+    margin: 1px 2px;
     color: @muted;
     background: transparent;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.05, 0.9, 0.1, 1.0);
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
 }
 
 #workspaces button.active {
     color: @text;
-    background-color: rgba(255, 255, 255, 0.05);
-    border-bottom: 2px solid @primary;
+    background-color: @overlay;
+    border-color: rgba(0, 217, 255, 0.35);
 }
 
 #workspaces button.urgent {
     color: @danger;
-    background-color: rgba(141, 149, 179, 0.15);
+    background-color: rgba(255, 84, 112, 0.15);
+    border-color: rgba(255, 84, 112, 0.4);
 }
 
-#workspaces button:hover {
-    background-color: @overlay;
+#workspaces button:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.05);
     color: @text;
-}
-
-#workspaces button.focused {
-    color: @primary;
 }
 
 #submap {
     color: @highlight;
-    background-color: rgba(0, 217, 255, 0.12);
-    border-radius: 8px;
+    background-color: rgba(160, 92, 255, 0.12);
+    border-radius: 6px;
+    border: 1px solid rgba(160, 92, 255, 0.3);
+    margin-left: 6px;
 }
 
 #window {
     color: @muted;
     font-weight: 500;
-}
-
-#custom-logo {
-    color: @primary;
-    font-size: 15px;
+    border-left: 1px solid @overlay;
+    margin-left: 6px;
     padding-left: 10px;
-    padding-right: 10px;
-}
-
-#custom-logo:hover {
-    color: @text;
-    background-color: rgba(0, 217, 255, 0.15);
-}
-
-#backlight {
-    color: @text;
 }
 
 /* ============================================================
-   CENTER PILL — Clock
+   CENTER PILL — Clock Anchor
    ============================================================ */
 #clock {
     color: @text;
     font-weight: 600;
-    padding: 2px 10px;
-    margin: 2px 0;
-    border-radius: 8px;
+    padding: 2px 6px;
+}
+
+#clock:hover {
+    color: @primary;
 }
 
 /* ============================================================
-   RIGHT PILL — System Metrics
+   RIGHT PILL — Metrics & Controls
    ============================================================ */
+#custom-security {
+    color: @highlight;
+    font-size: 14px;
+    padding: 2px 8px;
+    margin-right: 4px;
+}
+
+#custom-security:hover {
+    color: @text;
+    background-color: rgba(160, 92, 255, 0.12);
+}
+
 #pulseaudio {
     color: @muted;
     font-weight: 500;
 }
+
 #pulseaudio.muted {
     color: @muted;
+    opacity: 0.6;
 }
 
 #network {
     color: @muted;
     font-weight: 500;
 }
+
 #network.disconnected {
     color: @danger;
-    background-color: @overlay;
-    border-radius: 8px;
-}
-#network.linked {
-    color: @warning;
-}
-
-#cpu {
-    color: @muted;
-    font-weight: 500;
-}
-
-#cpu.warning {
-    color: @warning;
-}
-#cpu.critical {
-    color: @danger;
-    background-color: @overlay;
-    border-radius: 8px;
-}
-
-#memory {
-    color: @muted;
-    font-weight: 500;
-}
-#memory.warning {
-    color: @warning;
-}
-#memory.critical {
-    color: @danger;
-    background-color: @overlay;
-    border-radius: 8px;
+    background-color: rgba(255, 84, 112, 0.12);
+    border-radius: 6px;
 }
 
 #battery {
     color: @muted;
     font-weight: 500;
 }
+
 #battery.charging {
     color: @success;
 }
+
 #battery.warning:not(.charging) {
     color: @warning;
 }
+
 #battery.critical:not(.charging) {
     color: @danger;
-    background-color: @overlay;
-    border-radius: 8px;
+    background-color: rgba(255, 84, 112, 0.15);
+    border-radius: 6px;
     animation: blink-danger 1.5s ease-in-out infinite;
 }
 
 @keyframes blink-danger {
-    0% {
-        background-color: rgba(255, 84, 112, 0.08);
-    }
-    50% {
-        background-color: rgba(255, 84, 112, 0.28);
-    }
-    100% {
-        background-color: rgba(255, 84, 112, 0.08);
-    }
+    0% { background-color: rgba(255, 84, 112, 0.10); }
+    50% { background-color: rgba(255, 84, 112, 0.30); }
+    100% { background-color: rgba(255, 84, 112, 0.10); }
 }
 
 #tray {
-    padding-right: 6px;
+    padding-left: 6px;
+    padding-right: 4px;
 }
+
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
+
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: rgba(255, 84, 112, 0.2);
-    border-radius: 8px;
+    border-radius: 6px;
 }
 
 /* ============================================================
-   TOOLTIPS
+   TOOLTIPS — Bento Module Cards
    ============================================================ */
 tooltip {
     background-color: @surface;
     border: 1px solid @overlay;
-    border-radius: 10px;
-    padding: 6px;
+    border-radius: 8px;
+    padding: 8px 12px;
 }
+
 tooltip label {
     color: @text;
+    font-size: 11.5px;
 }
+

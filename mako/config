@@ -1,4 +1,4 @@
-# Minimal mako config
+# Minimal Mako Config — Bento Pill Notifications & OSD
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
@@ -7,11 +7,11 @@ background-color=#11141D
 text-color=#F2F6FF
 border-color=#1C2230
 border-size=1
-border-radius=12
-padding=16
-margin=8
+border-radius=10
+padding=14 16
+margin=10
 width=320
-height=100
+height=110
 default-timeout=4000
 progress-color=source #00D9FF
 
@@ -25,7 +25,7 @@ border-color=#1C2230
 border-color=#FF5470
 default-timeout=0
 
-# OSD notifications (volume/brightness) — replace in place, no stacking
+# OSD notifications (volume: 91110 / brightness: 91111) — replace in place, zero latency
 [app-name="minimal-osd"]
 group-by=category
 default-timeout=1500

@@ -1,5 +1,4 @@
-# btop tty theme
-# Name: Minimal
+# btop tty theme — Minimal Bento
 # Generated from palette.md — DO NOT edit directly.
 
 # Main UI Element Colors
@@ -21,9 +20,9 @@ theme[proc_box]="#1C2230"
 theme[div_line]="#1C2230"
 
 # CPU Graph Colors
-theme[cpu_start]="#4DFF91"
-theme[cpu_mid]="#FFCC66"
-theme[cpu_end]="#FF5470"
+theme[cpu_start]="#00D9FF"
+theme[cpu_mid]="#5B8CFF"
+theme[cpu_end]="#A05CFF"
 
 # Temperature Colors
 theme[temp_start]="#4DFF91"
@@ -31,27 +30,27 @@ theme[temp_mid]="#FFCC66"
 theme[temp_end]="#FF5470"
 
 # Mem/Disk free meter
-theme[free_start]="#4DFF91"
-theme[free_mid]="#FFCC66"
-theme[free_end]="#FF5470"
+theme[free_start]="#00D9FF"
+theme[free_mid]="#5B8CFF"
+theme[free_end]="#61E6FF"
 
 # Mem/Disk cached meter
-theme[cached_start]="#4DFF91"
-theme[cached_mid]="#FFCC66"
-theme[cached_end]="#FF5470"
+theme[cached_start]="#5B8CFF"
+theme[cached_mid]="#A05CFF"
+theme[cached_end]="#61E6FF"
 
 # Mem/Disk available meter
-theme[available_start]="#4DFF91"
-theme[available_mid]="#FFCC66"
-theme[available_end]="#FF5470"
+theme[available_start]="#00D9FF"
+theme[available_mid]="#5B8CFF"
+theme[available_end]="#61E6FF"
 
 # Mem/Disk used meter
-theme[used_start]="#4DFF91"
+theme[used_start]="#A05CFF"
 theme[used_mid]="#FFCC66"
 theme[used_end]="#FF5470"
 
 # Download graph colors
-theme[download_start]="#A05CFF"
+theme[download_start]="#00D9FF"
 theme[download_mid]="#5B8CFF"
 theme[download_end]="#61E6FF"
 

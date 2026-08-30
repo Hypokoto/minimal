@@ -36,9 +36,15 @@ fi
 
 echo "$(date '+%H:%M:%S') daemon started, pid=$(get_waybar_pid)" > "$LOG_FILE"
 
-# Initial state: hidden
+# Initial state: hidden (clean desktop — no gaps, no rounding)
 pid=$(get_waybar_pid)
 [ -n "$pid" ] && kill -SIGUSR1 "$pid" 2>/dev/null
+# Ensure bento grid is OFF at boot
+hyprctl keyword general:gaps_in 0 2>/dev/null || true
+hyprctl keyword general:gaps_out 0 2>/dev/null || true
+hyprctl keyword general:border_size 0 2>/dev/null || true
+hyprctl keyword decoration:rounding 0 2>/dev/null || true
+rm -f /tmp/bar-visible
 
 was_low_battery=false
 
@@ -76,10 +82,8 @@ while true; do
     if [ "$is_low" = true ]; then
         if [ "$was_low_battery" = false ]; then
             echo "$(date '+%H:%M:%S') Low battery triggered: ${current_cap}% (${current_stat}). Revealing Waybar." >> "$LOG_FILE"
-            pid=$(get_waybar_pid)
-            if [ -n "$pid" ]; then
-                kill -SIGUSR2 "$pid" 2>/dev/null
-            fi
+            # Reveal bar AND apply bento grid together
+            "$(dirname "${BASH_SOURCE[0]}")/toggle-bar.sh" --show 2>/dev/null || true
             notify-send -u critical -i battery-caution "Low Battery (${current_cap}%)" "Waybar revealed due to low battery." 2>/dev/null || true
             was_low_battery=true
         fi

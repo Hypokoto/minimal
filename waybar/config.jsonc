@@ -29,7 +29,7 @@
 
     "group/right": {
         "orientation": "horizontal",
-        "modules": ["pulseaudio", "network", "battery", "tray"]
+        "modules": ["custom/security", "pulseaudio", "network", "battery", "tray"]
     },
 
     "custom/logo": {
@@ -149,5 +149,11 @@
     "tray": {
         "icon-size": 15,
         "spacing": 10
+    },
+
+    "custom/security": {
+        "format": "󰒔",
+        "tooltip": false,
+        "on-click": "~/.config/rofi/scripts/security.sh"
     }
 }

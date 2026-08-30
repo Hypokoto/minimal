@@ -58,7 +58,8 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       zsh-syntax-highlighting zsh-autosuggestions
       cliphist wl-clipboard grim slurp brightnessctl rofimoji
       starship git-delta duf dust atuin bottom yq trash-cli chafa eza zoxide bat zstd unrar bc
-      gping trippy bind nmap iperf3 bandwhich speedtest-cli iftop nethogs doggo man-db man-pages
+      gping trippy bind nmap iperf3 bandwhich speedtest-cli iftop nethogs doggo man-db man-pages \
+      rustscan sniffnet netscanner hexyl cargo-audit
     )
 
     AUR_PKGS=(
@@ -67,7 +68,7 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       swayosd-git
       scdoc
       ripdrag
-      shell-gpt
+      feroxbuster
     )
 
     log "Installing pacman package set (${#PACMAN_PKGS[@]} packages)."

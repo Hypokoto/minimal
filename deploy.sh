@@ -73,7 +73,8 @@ deploy_link() {
     fi
 
     if [[ -e "$dest" || -L "$dest" ]]; then
-        local backup="${dest}.bak.$(date +%s%N)"
+        local backup
+        backup="${dest}.bak.$(date +%s%N)"
         log "Rotating existing config: $dest -> $backup"
         mv "$dest" "$backup"
     fi
@@ -94,14 +95,13 @@ deploy_link "$DOTFILES_DIR/tmux"                    "$HOME/.config/tmux"
 deploy_link "$DOTFILES_DIR/fastfetch"               "$HOME/.config/fastfetch"
 deploy_link "$DOTFILES_DIR/zsh/.zshrc"              "$HOME/.zshrc"
 deploy_link "$DOTFILES_DIR/zsh/aliases.zsh"         "$HOME/.config/zsh/aliases.zsh"
+deploy_link "$DOTFILES_DIR/zsh/sec.zsh"             "$HOME/.config/zsh/sec.zsh"
 deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
 
-# Symlink mount-phone.sh into PATH so yazi keymap binding resolves
-# regardless of dotfile repo location.
 mkdir -p "$HOME/.local/bin"
-ln -sfn "$DOTFILES_DIR/hypr/scripts/mount-phone.sh" "$HOME/.local/bin/mount-phone.sh"
+ln -sfn "$DOTFILES_DIR/hypr/scripts/toggle-bar.sh"   "$HOME/.local/bin/toggle-bar.sh"
 
 mkdir -p "$HOME/Pictures/Wallpapers"
 

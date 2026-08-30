@@ -1,18 +1,6 @@
 # ~/.config/yazi/keymap.toml
-# This is drag-OUT only — Yazi is a TUI in a terminal, there is no Wayland
-# DnD-drop target inside a terminal window, so drag-INTO-Yazi does not exist
-# as a buildable feature. This binds a key to hand the hovered/selected
-# file(s) to ripdrag, which then lets you drag them into any GUI app
-# (browser upload, Discord, etc.).
 
 [mgr]
 prepend_keymap = [
   { on = "D", run = "shell 'ripdrag %s &' --confirm", desc = "Drag hovered/selected file(s) out via ripdrag" },
-  # UNVERIFIED: chaining shell mount + cd in one run string against 26.5.6's actual
-  # multi-command syntax. If this doesn't navigate automatically, run
-  # hypr/scripts/mount-phone.sh separately first, then just open ~/mnt/phone in Yazi
-  # normally — that path is guaranteed to work regardless of keymap chaining support.
-  # Mount phone (MTP) — deploy.sh symlinks mount-phone.sh to ~/.local/bin
-  # so this binding works regardless of where the dotfiles repo lives on disk.
-  { on = "M", run = "shell 'mount-phone.sh' --confirm; cd ~/mnt/phone", desc = "Mount phone (MTP) and navigate to it" },
 ]

@@ -60,6 +60,9 @@ hl.config({
 hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" }) -- VERIFY
 
 -- --- Core Compositor Look & Feel ---
+-- Default state: clean desktop (no gaps, no borders, no rounding).
+-- When the bar is toggled on via SUPER+B, toggle-bar.sh applies
+-- bento grid values (gaps_in=6, gaps_out=10, rounding=10, border_size=1).
 hl.config({
     general = {
         gaps_in = 0,
@@ -72,18 +75,18 @@ hl.config({
     decoration = {
         rounding = 0,
         active_opacity = 1.0,
-        inactive_opacity = 0.95,
+        inactive_opacity = 0.96,
         blur = {
             enabled = true,
-            size = 3,
-            passes = 1,
-            vibrancy = 0.1696,
+            size = 4,
+            passes = 2,
+            vibrancy = 0.17,
             new_optimizations = true,
         },
         shadow = {
             enabled = true,
-            range = 4,
-            color = "rgba(1a1a1aee)",
+            range = 8,
+            color = "rgba(0A0C1280)",
         },
     },
     misc = {

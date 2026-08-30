@@ -97,8 +97,10 @@ local function write_file(filepath, content)
         f:write(content)
         f:close()
         print("[Minimal] Palette compiled target: " .. filepath)
+        io.flush()
     else
         print("[Minimal] WARN: Could not write target: " .. filepath)
+        io.flush()
     end
 end
 
@@ -107,7 +109,7 @@ local function generate_targets(base_dir)
 
     -- 1. rofi/theme.rasi
     local theme_rasi = string.format([[/**
- * theme.rasi — Emperor's Mirror centralized token palette
+ * theme.rasi — Bento Minimal Centralized Token Palette
  * Generated from palette.md — DO NOT edit directly.
  */
 
@@ -125,11 +127,12 @@ local function generate_targets(base_dir)
     danger:    %s;
     info:      %s;
 
-    /* transparent variants for hover/alpha layering */
-    bg-trans:      %sCC;
+    /* transparent & overlay layering */
+    bg-trans:      %sEE;
+    surface-trans: %sF2;
     overlay-trans: %sAA;
 
-    font: "AdwaitaMono Nerd Font 11";
+    font: "AdwaitaMono Nerd Font 10.5";
 
     background-color: transparent;
     text-color:        @fg;
@@ -139,37 +142,44 @@ local function generate_targets(base_dir)
 }
 
 window {
-    background-color: @bg-trans;
+    background-color: @surface-trans;
     border:           1px;
     border-color:     @overlay;
     border-radius:    12px;
 }
 
 mainbox {
-    background-color: @bg;
-    padding:          24px;
+    background-color: transparent;
+    padding:          20px;
+    spacing:          14px;
 }
 
 inputbar {
-    background-color: @surface;
+    background-color: @overlay;
     border-radius:    8px;
-    padding:          12px 14px;
-    margin:           0px 0px 16px 0px;
+    padding:          10px 14px;
+    spacing:          10px;
+    border:           1px;
+    border-color:     %s33;
 }
 
 listview {
-    spacing:          8px;
+    spacing:          6px;
     background-color: transparent;
+    border:           0px;
 }
 
 element {
-    padding:          10px 12px;
+    padding:          9px 12px;
     border-radius:    8px;
     background-color: transparent;
+    border:           1px;
+    border-color:     transparent;
 }
 
 element selected {
     background-color: @overlay;
+    border-color:     %s66;
     text-color:       @primary;
 }
 
@@ -182,13 +192,13 @@ element normal {
         hex_colors.text, hex_colors.muted, hex_colors.primary,
         hex_colors.secondary, hex_colors.highlight, hex_colors.success,
         hex_colors.warning, hex_colors.danger, hex_colors.info,
-        hex_colors.background, hex_colors.overlay
+        hex_colors.background, hex_colors.surface, hex_colors.overlay,
+        hex_colors.primary, hex_colors.primary
     )
     write_file(base_dir .. "/rofi/theme.rasi", theme_rasi)
 
     -- 2. btop/btop.theme
-    local btop_theme = string.format([[# btop tty theme
-# Name: Minimal
+    local btop_theme = string.format([[# btop tty theme — Minimal Bento
 # Generated from palette.md — DO NOT edit directly.
 
 # Main UI Element Colors
@@ -252,19 +262,19 @@ theme[upload_end]="%s"
         hex_colors.background, hex_colors.text, hex_colors.primary, hex_colors.primary,
         hex_colors.overlay, hex_colors.text, hex_colors.muted, hex_colors.muted, hex_colors.secondary,
         hex_colors.overlay, hex_colors.overlay, hex_colors.overlay, hex_colors.overlay, hex_colors.overlay,
+        hex_colors.primary, hex_colors.secondary, hex_colors.highlight,
         hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.success, hex_colors.warning, hex_colors.danger,
-        hex_colors.highlight, hex_colors.secondary, hex_colors.info,
+        hex_colors.primary, hex_colors.secondary, hex_colors.info,
+        hex_colors.secondary, hex_colors.highlight, hex_colors.info,
+        hex_colors.primary, hex_colors.secondary, hex_colors.info,
+        hex_colors.highlight, hex_colors.warning, hex_colors.danger,
+        hex_colors.primary, hex_colors.secondary, hex_colors.info,
         hex_colors.highlight, hex_colors.secondary, hex_colors.info
     )
     write_file(base_dir .. "/btop/btop.theme", btop_theme)
 
     -- 3. kitty/kitty.conf
-    local kitty_conf = string.format([[# Minimal Kitty config
+    local kitty_conf = string.format([[# Minimal Kitty Config — Bento Aesthetics
 # Generated from palette.md — DO NOT edit directly.
 font_family      AdwaitaMono Nerd Font
 bold_font        auto
@@ -272,7 +282,7 @@ italic_font      auto
 font_size        11.0
 
 background_opacity 1.0
-window_padding_width 10
+window_padding_width 12
 confirm_os_window_close 0
 
 cursor_shape beam
@@ -316,6 +326,8 @@ color15 %s
 
 active_border_color   %s
 inactive_border_color %s
+tab_bar_style         fade
+tab_fade              0.5 1
 tab_bar_background    %s
 active_tab_background %s
 active_tab_foreground %s
@@ -335,13 +347,13 @@ enabled_layouts tall,fat,grid,stack
         hex_colors.highlight, hex_colors.highlight,
         hex_colors.info, hex_colors.primary,
         hex_colors.text, hex_colors.text,
-        hex_colors.primary, hex_colors.muted, hex_colors.surface,
-        hex_colors.overlay, hex_colors.text, hex_colors.background, hex_colors.muted
+        hex_colors.primary, hex_colors.overlay, hex_colors.background,
+        hex_colors.overlay, hex_colors.primary, hex_colors.surface, hex_colors.muted
     )
     write_file(base_dir .. "/kitty/kitty.conf", kitty_conf)
 
     -- 4. mako/config
-    local mako_config = string.format([[# Minimal mako config
+    local mako_config = string.format([[# Minimal Mako Config — Bento Pill Notifications & OSD
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
@@ -350,11 +362,11 @@ background-color=%s
 text-color=%s
 border-color=%s
 border-size=1
-border-radius=12
-padding=16
-margin=8
+border-radius=10
+padding=14 16
+margin=10
 width=320
-height=100
+height=110
 default-timeout=4000
 progress-color=source %s
 
@@ -368,7 +380,7 @@ border-color=%s
 border-color=%s
 default-timeout=0
 
-# OSD notifications (volume/brightness) — replace in place, no stacking
+# OSD notifications (volume: 91110 / brightness: 91111) — replace in place, zero latency
 [app-name="minimal-osd"]
 group-by=category
 default-timeout=1500
