@@ -16,7 +16,16 @@ mainbox {
 }
 
 inputbar {
-    children: [ entry ];
+    children: [ prompt, entry ];
+    background-color: @overlay;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+prompt {
+    text-color:  @primary;
+    font:        "AdwaitaMono Nerd Font 10.5 Bold";
+    padding:     0px 8px 0px 0px;
 }
 
 entry {

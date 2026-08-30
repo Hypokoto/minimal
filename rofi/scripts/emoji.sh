@@ -7,7 +7,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # via wl-copy (Wayland) or xclip (X11). We just confirm what landed there.
 rofimoji \
     --action copy \
-    --selector-args="-pid /tmp/rofi-emoji.pid -theme ${DIR}/emoji.rasi"
+    --selector-args="-pid /tmp/rofi-emoji.pid -p '󰞅  Emoji' -theme ${DIR}/emoji.rasi"
 
 # Give the clipboard a beat to settle before reading it back.
 sleep 0.05

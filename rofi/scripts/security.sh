@@ -15,7 +15,7 @@
 # ==============================================================================
 set -euo pipefail
 
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}") /.." && pwd)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 THEME_PATH="${DIR}/security.rasi"
 
 # ── Live status header (shown as rofi message) ──────────────────────────────

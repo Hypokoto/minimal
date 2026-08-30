@@ -4,13 +4,16 @@ configuration {
     show-icons: true;
     icon-theme: "Papirus-Dark";
     display-drun: "Launch";
-    drun-display-format: "{name}";
+    drun-display-format: "{name} <span foreground='@muted' size='small'>- {generic}</span>";
 }
 
 window {
     width: 580px;
-    location: center;
-    anchor: center;
+    width: 580px;
+    location: north west;
+    anchor: north west;
+    y-offset: 40px;
+    x-offset: 12px;
 }
 
 mainbox {
