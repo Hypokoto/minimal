@@ -1,0 +1,9 @@
+/home/hypokoto/minimal/app-launcher/target/debug/deps/freedesktop_entry_parser-1ad2ec68ca553d24.d: /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/lib.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/debug.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/errors.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/internal.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/parser.rs
+
+/home/hypokoto/minimal/app-launcher/target/debug/deps/libfreedesktop_entry_parser-1ad2ec68ca553d24.rmeta: /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/lib.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/debug.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/errors.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/internal.rs /home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/parser.rs
+
+/home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/lib.rs:
+/home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/debug.rs:
+/home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/errors.rs:
+/home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/internal.rs:
+/home/hypokoto/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/freedesktop_entry_parser-1.3.0/src/parser.rs:

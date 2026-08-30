@@ -33,9 +33,9 @@
     },
 
     "custom/logo": {
-        "format": "",
+        "format": "Apps",
         "tooltip": false,
-        "on-click": "~/.config/nwg-drawer/launch.sh",
+        "on-click": "~/.config/app-launcher/target/release/app-launcher",
         "on-click-right": "~/.config/hypr/wallpaper/picker.sh"
     },
 

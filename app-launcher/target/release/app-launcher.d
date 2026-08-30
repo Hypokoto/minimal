@@ -1,0 +1,1 @@
+/home/hypokoto/minimal/app-launcher/target/release/app-launcher: /home/hypokoto/minimal/app-launcher/src/app.rs /home/hypokoto/minimal/app-launcher/src/desktop.rs /home/hypokoto/minimal/app-launcher/src/icon.rs /home/hypokoto/minimal/app-launcher/src/main.rs /home/hypokoto/minimal/app-launcher/src/state.rs
