@@ -1,6 +1,6 @@
 use eframe::egui;
 use eframe::egui::{Color32, RichText, ScrollArea};
-use crossbeam_channel::{unbounded, Receiver};
+use std::sync::mpsc::{channel as unbounded, Receiver};
 use crate::process::{ProcessEvent, ProcessManager};
 use crate::network::{NetworkStatus, spawn_network_monitor};
 use crate::tools::{get_tools, ToolDefinition, ArgType};
@@ -62,7 +62,20 @@ impl SecurityApp {
         while let Ok(event) = self.process_rx.try_recv() {
             match event {
                 ProcessEvent::Stdout(line) => {
-                    self.output_buffer.push((line, Color32::from_rgb(242, 246, 255))); // @fg
+                    let mut color = Color32::from_rgb(242, 246, 255); // Default fg
+                    let lower = line.to_lowercase();
+                    
+                    if lower.contains("open") {
+                        color = Color32::from_rgb(77, 255, 145); // Green for open ports
+                    } else if lower.contains("filtered") || lower.contains("closed") {
+                        color = Color32::from_rgb(255, 184, 108); // Orange for filtered/closed
+                    } else if lower.contains("vulnerable") || lower.contains("warning") || lower.contains("error") {
+                        color = Color32::from_rgb(255, 84, 112); // Red for vulnerabilities/errors
+                    } else if lower.contains("nmap scan report") || lower.contains("starting") {
+                        color = Color32::from_rgb(0, 217, 255); // Cyan for headers
+                    }
+                    
+                    self.output_buffer.push((line, color));
                 }
                 ProcessEvent::Stderr(line) => {
                     self.output_buffer.push((line, Color32::from_rgb(255, 84, 112))); // @danger
@@ -116,14 +129,24 @@ impl eframe::App for SecurityApp {
                     for (i, tool) in self.tools.iter().enumerate() {
                         let is_selected = self.selected_tool_idx == Some(i);
                         let fill = if is_selected { Color32::from_rgb(28, 34, 48) } else { Color32::TRANSPARENT };
-                        let text_color = if is_selected { Color32::from_rgb(0, 217, 255) } else { Color32::from_rgb(242, 246, 255) };
+                        let text_color = if is_selected { 
+                            Color32::from_rgb(0, 217, 255) 
+                        } else if !tool.is_available {
+                            Color32::from_rgb(100, 100, 100)
+                        } else { 
+                            Color32::from_rgb(242, 246, 255) 
+                        };
 
                         let btn = egui::Button::new(RichText::new(&tool.name).color(text_color))
                             .fill(fill)
                             .min_size(egui::vec2(ui.available_width(), 36.0));
                             
-                        if ui.add(btn).clicked() {
+                        let response = ui.add(btn);
+                        if response.clicked() && tool.is_available {
                             new_selection = Some(i);
+                        }
+                        if response.hovered() && !tool.is_available {
+                            response.on_hover_text(format!("{} is not installed.", tool.program));
                         }
                         ui.add_space(4.0);
                     }
@@ -147,18 +170,32 @@ impl eframe::App for SecurityApp {
             .show(ctx, |ui| {
                 
                 if let Some(tool_idx) = self.selected_tool_idx {
-                    let tool = self.tools[tool_idx].clone();
+                    let tool_name = self.tools[tool_idx].name.clone();
+                    let tool_program = self.tools[tool_idx].program.clone();
+                    let required_args_len = self.tools[tool_idx].required_args.len();
                     
                     ui.group(|ui| {
-                        ui.heading(RichText::new(format!("Configure: {}", tool.name)).color(Color32::from_rgb(0, 217, 255)));
+                        ui.heading(RichText::new(format!("Configure: {}", tool_name)).color(Color32::from_rgb(0, 217, 255)));
                         ui.add_space(8.0);
                         
-                        for (i, arg) in tool.required_args.iter().enumerate() {
+                        let mut all_valid = true;
+                        
+                        for i in 0..required_args_len {
+                            let arg = &self.tools[tool_idx].required_args[i];
                             match arg {
                                 ArgType::String { label, .. } => {
                                     ui.horizontal(|ui| {
                                         ui.label(format!("{}: ", label));
                                         ui.text_edit_singleline(&mut self.arg_inputs[i]);
+                                        
+                                        if label == "Target" || label == "URL" || label == "Server" {
+                                            let val = &self.arg_inputs[i];
+                                            let is_valid = !val.is_empty() && val.chars().all(|c| c.is_ascii_alphanumeric() || c == '.' || c == '-' || c == ':' || c == '/' || c == '?' || c == ',');
+                                            if !is_valid {
+                                                ui.label(RichText::new("Invalid characters").color(Color32::from_rgb(255, 84, 112)));
+                                                all_valid = false;
+                                            }
+                                        }
                                     });
                                 }
                                 ArgType::Select { label, options, .. } => {
@@ -184,17 +221,29 @@ impl eframe::App for SecurityApp {
                                     self.process_manager.stop();
                                 }
                             } else {
-                                if ui.button(RichText::new("RUN").color(Color32::from_rgb(77, 255, 145))).clicked() {
+                                let run_btn = ui.add_enabled(all_valid, egui::Button::new(RichText::new("RUN").color(Color32::from_rgb(77, 255, 145))));
+                                if run_btn.clicked() {
                                     self.output_buffer.clear();
-                                    self.output_buffer.push((format!("$ {} ...", tool.program), Color32::from_rgb(141, 149, 179)));
+                                    self.output_buffer.push((format!("$ {} ...", tool_program), Color32::from_rgb(141, 149, 179)));
                                     
-                                    let args = (tool.build_args)(&self.arg_inputs);
+                                    let args = (self.tools[tool_idx].build_args)(&self.arg_inputs);
                                     self.is_running = true;
-                                    self.process_manager.spawn(tool.program, args);
+                                    self.process_manager.spawn(tool_program, args);
                                 }
                             }
                             if ui.button("CLEAR").clicked() {
                                 self.output_buffer.clear();
+                            }
+                            if ui.button("SAVE").clicked() {
+                                let dir = std::path::PathBuf::from(std::env::var("HOME").unwrap_or_default())
+                                    .join(".local/share/security-dashboard/logs");
+                                let _ = std::fs::create_dir_all(&dir);
+                                let ts = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_secs();
+                                let file = dir.join(format!("scan_{}.log", ts));
+                                let content = self.output_buffer.iter().map(|(l, _)| l.as_str()).collect::<Vec<_>>().join("\n");
+                                if std::fs::write(&file, content).is_ok() {
+                                    self.output_buffer.push((format!("Saved to {}", file.display()), Color32::from_rgb(77, 255, 145)));
+                                }
                             }
                             ui.checkbox(&mut self.auto_scroll, "Auto-scroll");
                         });

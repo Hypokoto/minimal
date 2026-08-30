@@ -1,9 +1,9 @@
-use std::process::Stdio;
-use tokio::io::{AsyncBufReadExt, BufReader};
-use tokio::process::Command;
-// removed
-use crossbeam_channel::Sender;
+use std::process::{Command, Stdio};
+use std::io::{BufRead, BufReader};
+use std::sync::mpsc::Sender;
 use eframe::egui::Context;
+use std::thread;
+use std::time::Duration;
 
 #[derive(Clone, Debug)]
 pub enum ProcessEvent {
@@ -16,7 +16,7 @@ pub enum ProcessEvent {
 pub struct ProcessManager {
     pub tx: Sender<ProcessEvent>,
     pub ctx: Context,
-    abort_tx: Option<tokio::sync::oneshot::Sender<()>>,
+    abort_tx: Option<Sender<()>>,
 }
 
 impl ProcessManager {
@@ -29,18 +29,20 @@ impl ProcessManager {
     }
 
     pub fn spawn(&mut self, program: String, args: Vec<String>) {
-        let (abort_tx, mut abort_rx) = tokio::sync::oneshot::channel();
+        let (abort_tx, abort_rx) = std::sync::mpsc::channel();
         self.abort_tx = Some(abort_tx);
         
         let tx = self.tx.clone();
         let ctx = self.ctx.clone();
 
-        tokio::spawn(async move {
+        thread::spawn(move || {
             let mut cmd = Command::new(&program);
             cmd.args(&args);
+            if let Ok(home) = std::env::var("HOME") {
+                cmd.current_dir(format!("{}/minimal/security-dashboard", home));
+            }
             cmd.stdout(Stdio::piped());
             cmd.stderr(Stdio::piped());
-            cmd.kill_on_drop(true);
 
             let mut child = match cmd.spawn() {
                 Ok(c) => c,
@@ -56,45 +58,44 @@ impl ProcessManager {
 
             let tx_out = tx.clone();
             let ctx_out = ctx.clone();
-            let out_task = tokio::spawn(async move {
-                let mut reader = BufReader::new(stdout).lines();
-                while let Ok(Some(line)) = reader.next_line().await {
-                    let _ = tx_out.send(ProcessEvent::Stdout(line));
+            thread::spawn(move || {
+                let reader = BufReader::new(stdout);
+                for l in reader.lines().map_while(Result::ok) {
+                    let _ = tx_out.send(ProcessEvent::Stdout(l));
                     ctx_out.request_repaint();
                 }
             });
 
             let tx_err = tx.clone();
             let ctx_err = ctx.clone();
-            let err_task = tokio::spawn(async move {
-                let mut reader = BufReader::new(stderr).lines();
-                while let Ok(Some(line)) = reader.next_line().await {
-                    let _ = tx_err.send(ProcessEvent::Stderr(line));
+            thread::spawn(move || {
+                let reader = BufReader::new(stderr);
+                for l in reader.lines().map_while(Result::ok) {
+                    let _ = tx_err.send(ProcessEvent::Stderr(l));
                     ctx_err.request_repaint();
                 }
             });
 
-            tokio::select! {
-                _ = &mut abort_rx => {
-                    let _ = child.kill().await;
+            loop {
+                if abort_rx.try_recv().is_ok() {
+                    let _ = child.kill();
+                    let _ = child.wait();
                     let _ = tx.send(ProcessEvent::Error("Process terminated by user".to_string()));
+                    break;
                 }
-                status = child.wait() => {
-                    match status {
-                        Ok(exit_status) => {
-                            let _ = tx.send(ProcessEvent::Exit(exit_status.code()));
-                        }
-                        Err(e) => {
-                            let _ = tx.send(ProcessEvent::Error(format!("Wait error: {}", e)));
-                        }
+
+                match child.try_wait() {
+                    Ok(Some(status)) => {
+                        let _ = tx.send(ProcessEvent::Exit(status.code()));
+                        break;
+                    }
+                    Ok(None) => thread::sleep(Duration::from_millis(50)),
+                    Err(e) => {
+                        let _ = tx.send(ProcessEvent::Error(format!("Wait error: {}", e)));
+                        break;
                     }
                 }
             }
-
-            // Wait for streams to finish
-            let _ = out_task.await;
-            let _ = err_task.await;
-            
             ctx.request_repaint();
         });
     }

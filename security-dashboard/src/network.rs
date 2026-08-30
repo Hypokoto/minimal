@@ -1,5 +1,5 @@
 use std::time::Duration;
-use crossbeam_channel::Sender;
+use std::sync::mpsc::Sender;
 use eframe::egui::Context;
 
 #[derive(Clone, Default, Debug)]
@@ -12,6 +12,9 @@ pub struct NetworkStatus {
 
 pub fn spawn_network_monitor(tx: Sender<NetworkStatus>, ctx: Context) {
     std::thread::spawn(move || {
+        let mut loop_count = 0;
+        let mut cached_pub_ip = "--".to_string();
+
         loop {
             let iface = get_cmd_output("sh", &["-c", "ip route show default 2>/dev/null | awk '/default/ {print $5; exit}'"]);
             let iface = if iface.is_empty() { "?".to_string() } else { iface };
@@ -23,15 +26,12 @@ pub fn spawn_network_monitor(tx: Sender<NetworkStatus>, ctx: Context) {
                 "?".to_string()
             };
 
-            let pub_ip = match reqwest::blocking::Client::builder().timeout(Duration::from_secs(2)).build() {
-                Ok(client) => {
-                    match client.get("https://icanhazip.com").send() {
-                        Ok(res) => res.text().unwrap_or_default().trim().to_string(),
-                        Err(_) => "--".to_string(),
-                    }
+            if loop_count % 12 == 0 || cached_pub_ip == "--" {
+                let out = get_cmd_output("curl", &["-s", "--max-time", "2", "https://icanhazip.com"]);
+                if !out.is_empty() {
+                    cached_pub_ip = out;
                 }
-                Err(_) => "--".to_string(),
-            };
+            }
 
             let estab = get_cmd_output("sh", &["-c", "ss -tp state established 2>/dev/null | grep -c ESTAB"]);
             let estab = if estab.is_empty() { "0".to_string() } else { estab };
@@ -39,13 +39,14 @@ pub fn spawn_network_monitor(tx: Sender<NetworkStatus>, ctx: Context) {
             let status = NetworkStatus {
                 iface,
                 local_ip,
-                pub_ip,
+                pub_ip: cached_pub_ip.clone(),
                 estab,
             };
 
             let _ = tx.send(status);
             ctx.request_repaint();
 
+            loop_count += 1;
             std::thread::sleep(Duration::from_secs(5));
         }
     });
