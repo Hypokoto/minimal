@@ -84,7 +84,7 @@ deploy_link() {
 }
 
 # Symlink top-level modules and shell integrations:
-# hypr, rofi, waybar, nvim, kitty, mako, yazi, zsh, starship, tmux, btop, fastfetch
+# hypr, rofi, waybar, nvim, kitty, mako, yazi, zsh, starship, tmux, btop, fastfetch, security-dashboard
 deploy_link "$DOTFILES_DIR/hypr"                    "$HOME/.config/hypr"
 deploy_link "$DOTFILES_DIR/rofi"                    "$HOME/.config/rofi"
 deploy_link "$DOTFILES_DIR/waybar"                  "$HOME/.config/waybar"
