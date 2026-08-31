@@ -85,10 +85,12 @@ if command -v hexyl >/dev/null 2>&1; then
     alias hexn='hexyl --length'     # hexyl --length N <file>
 fi
 
-# --- Cargo Security Audit ---
+# --- Cargo Security Audit & System Hardening ---
 if command -v cargo-audit >/dev/null 2>&1; then
     alias audit='cargo audit'
 fi
+
+alias harden='bash ~/minimal/security/apply-hardening.sh'
 
 # --- Port & Socket Inspection ---
 alias listening='ss -tlnp'                  # TCP listening ports
