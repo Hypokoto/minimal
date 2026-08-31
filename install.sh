@@ -34,6 +34,29 @@ fi
 # --- Arch-only: AUR helper + system packages ---
 if [[ "$PKG_MGR" == "pacman" ]]; then
 
+    # --- Optional Extra Repositories ---
+    echo ""
+    read -t 10 -p "Would you like to configure Chaotic-AUR and Athena OS repositories? (Recommended) [Y/n] " prompt_repos || true
+    echo ""
+    if [[ "${prompt_repos:-y}" =~ ^[Yy]$ ]]; then
+        log "Configuring Chaotic-AUR and Athena OS repositories..."
+        # Chaotic AUR Setup
+        if ! grep -q "\\[chaotic-aur\\]" /etc/pacman.conf; then
+            sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com || true
+            sudo pacman-key --lsign-key 3056513887B78AEB || true
+            sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst' || true
+            echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
+        fi
+
+        # Athena OS Setup
+        if ! grep -q "\\[athena\\]" /etc/pacman.conf; then
+            echo -e "\n[athena]\nSigLevel = Optional TrustAll\nServer = https://athena-os.github.io/\$repo/\$arch" | sudo tee -a /etc/pacman.conf
+        fi
+        sudo pacman -Sy
+    else
+        log "Skipping extra repositories configuration."
+    fi
+
     # --- AUR helper bootstrap (yay) ---
     if ! command -v yay >/dev/null 2>&1; then
       log "yay not found. Building from AUR."
