@@ -18,13 +18,17 @@ else
     echo "[-] WARN: Arch Linux package manager not found. Skipping pacman updates."
 fi
 
-# 2. Sysctl Deployment
-echo "[*] Deploying sysctl security hardening rules..."
+# 2. Sysctl & Kernel Modules Deployment
+echo "[*] Deploying security hardening rules..."
 if [[ -d /etc/sysctl.d ]]; then
     sudo cp "$DIR/99-security-hardening.conf" /etc/sysctl.d/
     sudo sysctl --system
 else
     echo "[-] WARN: /etc/sysctl.d/ not found. Are you on a supported Linux?"
+fi
+
+if [[ -d /etc/modprobe.d ]]; then
+    sudo cp "$DIR/99-security-blacklist.conf" /etc/modprobe.d/
 fi
 
 echo "=== Hardening Complete ==="
