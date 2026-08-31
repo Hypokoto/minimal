@@ -89,7 +89,6 @@ hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(rofiScripts .. "/network.sh"))
 hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(rofiScripts .. "/clipboard.sh"))
 hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/wallpaper/picker.sh"))
 hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(hyprScripts .. "/audio-toggle.sh"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(rofiScripts .. "/display.sh"))
 
 -- --- Window Drag/Resize with Mouse (confirmed shape) ---
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
