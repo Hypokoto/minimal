@@ -1,9 +1,9 @@
 /* ============================================================
    MINIMAL BENTO — 3-Pill Waybar Design System
    ============================================================ */
-@define-color background #0A0C12;
-@define-color surface    #11141D;
-@define-color overlay    #1C2230;
+@define-color background #000000;
+@define-color surface    #0A0A0A;
+@define-color overlay    #141414;
 @define-color text       #F2F6FF;
 @define-color muted      #8D95B3;
 @define-color primary    #00D9FF;

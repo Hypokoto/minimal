@@ -4,9 +4,9 @@
  */
 
 * {
-    bg:        #0A0C12;
-    surface:   #11141D;
-    overlay:   #1C2230;
+    bg:        #000000;
+    surface:   #0A0A0A;
+    overlay:   #141414;
     fg:        #F2F6FF;
     muted:     #8D95B3;
     primary:   #00D9FF;
@@ -18,9 +18,9 @@
     info:      #61E6FF;
 
     /* transparent & overlay layering */
-    bg-trans:      #0A0C12EE;
-    surface-trans: #11141DF2;
-    overlay-trans: #1C2230AA;
+    bg-trans:      #000000EE;
+    surface-trans: #0A0A0AF2;
+    overlay-trans: #141414AA;
 
     font: "AdwaitaMono Nerd Font 10.5";
 
