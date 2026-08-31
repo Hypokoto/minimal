@@ -154,6 +154,5 @@
     "custom/security": {
         "format": "󰒔",
         "tooltip": false,
-        "on-click": "~/.config/security-dashboard/target/release/security-dashboard"
     }
 }

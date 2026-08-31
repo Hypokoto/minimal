@@ -10,7 +10,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OPTIONS=$'Shutdown\nReboot\nSuspend\nLock\nLog Out'
 
 THEME_PATH="${DIR}/powermenu.rasi"
-ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-powermenu.pid -p "Power" -u "0" -a "1")
+ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-powermenu.pid -p "Power" -u "0" -a "1" -me-select-entry '' -me-accept-entry MousePrimary)
 
 if [[ -f "${THEME_PATH}" ]]; then
     ROFI_CMD+=(-theme "${THEME_PATH}")
@@ -25,26 +25,26 @@ set -e
 
 case "${CHOICE}" in
     "Shutdown")
-        notify-send -u critical "Power" "Shutting down..."
+        notify-send -u critical "Power" "Shutting down..." || true
         systemctl poweroff
         ;;
     "Reboot")
-        notify-send -u critical "Power" "Rebooting system..."
+        notify-send -u critical "Power" "Rebooting system..." || true
         systemctl reboot
         ;;
     "Suspend")
-        notify-send "Power" "Suspending session..."
+        notify-send "Power" "Suspending session..." || true
         systemctl suspend
         ;;
     "Lock")
         if command -v hyprlock >/dev/null 2>&1; then
             hyprlock
         else
-            notify-send -u warning "Power" "hyprlock binary not found"
+            notify-send -u warning "Power" "hyprlock binary not found" || true
         fi
         ;;
     "Log Out")
-        notify-send "Power" "Exiting Hyprland session..."
+        notify-send "Power" "Exiting Hyprland session..." || true
         # We use loginctl because hyprctl dispatch exit might be intercepted
         # by a Lua wrapper on this system and fail to parse.
         if [[ -n "${XDG_SESSION_ID:-}" ]]; then

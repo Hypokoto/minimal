@@ -139,7 +139,7 @@ apps.sort(key=lambda x: x["name"].lower())
 
 # Build the display list
 for app in apps:
-    generic = f"  <span size='9pt' fgcolor='#8D95B3'>{app['generic']}</span>" if app['generic'] else ""
+    generic = f" [{app['generic']}]" if app['generic'] else ""
     app["display"] = f"{app['name']}{generic}"
 
 # Fallback launch method if ROFI_INFO fails but ROFI_RETV indicates a selection

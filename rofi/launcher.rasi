@@ -9,68 +9,82 @@ configuration {
 }
 
 window {
-    width: 35%;
-    height: 100%;
+    width: 750px;
     location: north west;
     anchor: north west;
-    y-offset: 0px;
-    x-offset: 0px;
-    border-radius: 0px;
-    border: 0px 2px 0px 0px;
-    border-color: @primary;
+    y-offset: 36px;
+    x-offset: 6px;
+    border-radius: 4px;
+    border: 2px;
+    border-color: @overlay;
     background-color: @bg;
 }
 
 mainbox {
     orientation: horizontal;
-    children: [ mode-switcher, rightbox ];
+    children: [ leftbox, rightbox ];
     spacing: 0px;
+    background-color: transparent;
+}
+
+leftbox {
+    orientation: vertical;
+    expand: false;
+    width: 160px;
+    background-color: @surface-trans;
+    border: 0px 1px 0px 0px;
+    border-color: @overlay;
+    children: [ mode-switcher, dummy ];
+}
+
+dummy {
+    expand: true;
     background-color: transparent;
 }
 
 mode-switcher {
     orientation: vertical;
-    width: 150px;
     spacing: 0px;
-    padding: 24px 0px;
-    background-color: @surface-trans;
-    border: 0px 1px 0px 0px;
-    border-color: @muted;
+    padding: 12px 0px;
+    background-color: transparent;
+    border: 0px;
+    expand: false;
 }
 
 button {
-    padding: 14px 16px;
+    padding: 10px 16px;
     border-radius: 0px;
     text-color: @muted;
     background-color: transparent;
     cursor: pointer;
-    font: "AdwaitaMono Nerd Font 10 Bold";
+    font: "AdwaitaMono Nerd Font 10";
     border: 0px;
+    horizontal-align: 0.0;
 }
 
 button selected {
-    text-color: @bg;
-    background-color: @primary;
-    border: 0px 3px 0px 0px;
-    border-color: @fg;
+    text-color: @primary;
+    background-color: @surface;
+    border: 0px 0px 0px 3px;
+    border-color: @primary;
 }
 
 rightbox {
     orientation: vertical;
     children: [ inputbar, listview ];
     expand: true;
-    padding: 24px;
-    spacing: 24px;
+    padding: 12px;
+    spacing: 12px;
     background-color: transparent;
 }
 
 inputbar {
     children: [ prompt, entry ];
-    background-color: @surface;
-    border-radius: 0px;
+    background-color: @bg;
+    border-radius: 4px;
     border: 1px;
     border-color: @overlay;
-    padding: 16px;
+    padding: 12px;
 }
 
 prompt {
@@ -89,10 +103,10 @@ entry {
 }
 
 listview {
-    columns: 2;
+    columns: 1;
     lines: 10;
-    spacing: 12px;
-    fixed-height: true;
+    spacing: 6px;
+    fixed-height: false;
     markup-rows: true;
     background-color: transparent;
     border: 0px;
@@ -100,11 +114,10 @@ listview {
 
 element {
     orientation: horizontal;
-    padding: 12px 14px;
-    border-radius: 0px;
+    padding: 8px 12px;
+    border-radius: 4px;
     background-color: transparent;
-    border: 1px;
-    border-color: transparent;
+    border: 0px;
 }
 
 element selected {
@@ -118,7 +131,7 @@ element normal {
 }
 
 element-icon {
-    size: 24px;
+    size: 32px;
     margin: 0px 14px 0px 0px;
     background-color: inherit;
 }
@@ -127,5 +140,5 @@ element-text {
     text-color: inherit;
     background-color: inherit;
     vertical-align: 0.5;
-    font: "AdwaitaMono Nerd Font 10 Bold";
+    font: "AdwaitaMono Nerd Font 10";
 }
