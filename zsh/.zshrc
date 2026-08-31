@@ -34,6 +34,9 @@ setopt NO_BEEP               # Silence the terminal bell globally.
 setopt INTERACTIVE_COMMENTS  # Allow # comments in interactive shell.
 setopt PROMPT_SUBST          # Enable parameter expansion in prompts.
 
+# Shell Security: Terminate idle interactive sessions after 15 minutes.
+readonly TMOUT=900
+
 # Agent Safety: Bracketed paste protection.
 # Multi-line commands pasted by external AI coding agents (Aider, Claude Code, OpenCode)
 # drop into the active buffer as editable text without auto-executing.
