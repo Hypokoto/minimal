@@ -11,9 +11,9 @@ echo "=== System Hardening ==="
 # 1. System Package Updates (Kernel patching)
 echo "[*] Updating system packages to patch recent vulnerabilities (Copy Fail / IPv6)..."
 if command -v yay >/dev/null 2>&1; then
-    yay -Syu --noconfirm
+    yay -Syu --noconfirm || echo "[-] WARN: System update failed (AUR timeout?). Continuing with local hardening..."
 elif command -v pacman >/dev/null 2>&1; then
-    sudo pacman -Syu --noconfirm
+    sudo pacman -Syu --noconfirm || echo "[-] WARN: System update failed. Continuing with local hardening..."
 else
     echo "[-] WARN: Arch Linux package manager not found. Skipping pacman updates."
 fi
