@@ -1,1 +1,0 @@
-/home/hypokoto/minimal/security-dashboard/target/release/security-dashboard: /home/hypokoto/minimal/security-dashboard/src/app.rs /home/hypokoto/minimal/security-dashboard/src/main.rs /home/hypokoto/minimal/security-dashboard/src/network.rs /home/hypokoto/minimal/security-dashboard/src/process.rs /home/hypokoto/minimal/security-dashboard/src/tools.rs
