@@ -170,11 +170,11 @@ listview {
 }
 
 element {
-    padding:          9px 12px;
-    border-radius:    8px;
-    background-color: transparent;
+    padding:          16px 20px;
+    border-radius:    12px;
+    background-color: @surface;
     border:           1px;
-    border-color:     transparent;
+    border-color:     @overlay;
 }
 
 element selected {
