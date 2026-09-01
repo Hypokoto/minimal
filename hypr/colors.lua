@@ -178,9 +178,9 @@ element {
 }
 
 element selected {
-    background-color: @primary;
+    background-color: @overlay;
     border-color:     @primary;
-    text-color:       @bg;
+    text-color:       @fg;
 }
 
 element normal {
@@ -361,8 +361,8 @@ background-color=%s
 text-color=%s
 border-color=%s
 border-size=1
-border-radius=10
-padding=14 16
+border-radius=12
+padding=14,16
 margin=10
 width=320
 height=110

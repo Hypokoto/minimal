@@ -35,8 +35,8 @@ done
 
 echo ""
 echo "[*] Battery Monitor (Event-Driven) CPU Usage:"
-BAT_PID=$(pgrep -f "battery-monitor.sh" || true)
-if [ -n "$BAT_PID" ]; then
+BAT_PID=$(pgrep -f "battery-monitor.sh" | head -n1 || true)
+if [[ -n "${BAT_PID:-}" ]]; then
     ps -p "$BAT_PID" -o %cpu,%mem,cmd --no-headers
 else
     echo " - battery-monitor.service is not currently running."

@@ -19,7 +19,7 @@ apply_bento() {
     hyprctl keyword general:gaps_in      6
     hyprctl keyword general:gaps_out     10
     hyprctl keyword general:border_size  1
-    hyprctl keyword decoration:rounding  10
+    hyprctl keyword decoration:rounding  12
     hyprctl keyword "general:col.active_border"   "rgba(00D9FFFF)"
     hyprctl keyword "general:col.inactive_border" "rgba(1C2230FF)"
 }

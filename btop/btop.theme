@@ -2,22 +2,22 @@
 # Generated from palette.md — DO NOT edit directly.
 
 # Main UI Element Colors
-theme[main_bg]="#000000"
+theme[main_bg]="#0A0C12"
 theme[main_fg]="#F2F6FF"
 theme[title]="#00D9FF"
 theme[hi_fg]="#00D9FF"
-theme[selected_bg]="#141414"
+theme[selected_bg]="#1C2230"
 theme[selected_fg]="#F2F6FF"
 theme[inactive_fg]="#8D95B3"
 theme[graph_text]="#8D95B3"
 theme[proc_misc]="#5B8CFF"
 
 # Box Outlines
-theme[cpu_box]="#141414"
-theme[mem_box]="#141414"
-theme[net_box]="#141414"
-theme[proc_box]="#141414"
-theme[div_line]="#141414"
+theme[cpu_box]="#1C2230"
+theme[mem_box]="#1C2230"
+theme[net_box]="#1C2230"
+theme[proc_box]="#1C2230"
+theme[div_line]="#1C2230"
 
 # CPU Graph Colors
 theme[cpu_start]="#00D9FF"

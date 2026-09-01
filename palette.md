@@ -4,9 +4,9 @@ Single source of truth. Every tool config derives from this table. Do not hardco
 
 | Token      | Hex       | RGB               | RGBA (Kitty/Hypr `rgba()`) | XRDB/Xresources     |
 |------------|-----------|--------------------|------------------------------|----------------------|
-| Background | `#000000` | `0, 0, 0`          | `000000ff`                   | `#000000`            |
-| Surface    | `#0A0A0A` | `10, 10, 10`       | `0a0a0aff`                   | `#0A0A0A`            |
-| Overlay    | `#141414` | `20, 20, 20`       | `141414ff`                   | `#141414`            |
+| Background | `#0A0C12` | `10, 12, 18`       | `0a0c12ff`                   | `#0A0C12`            |
+| Surface    | `#11141D` | `17, 20, 29`       | `11141dff`                   | `#11141D`            |
+| Overlay    | `#1C2230` | `28, 34, 48`       | `1c2230ff`                   | `#1C2230`            |
 | Text       | `#F2F6FF` | `242, 246, 255`    | `f2f6ffff`                   | `#F2F6FF`            |
 | Muted      | `#8D95B3` | `141, 149, 179`    | `8d95b3ff`                   | `#8D95B3`            |
 | Primary    | `#00D9FF` | `0, 217, 255`      | `00d9ffff`                   | `#00D9FF`            |
@@ -25,9 +25,9 @@ Single source of truth. Every tool config derives from this table. Do not hardco
 
 ## Hyprland variable block (source of truth for hyprland.conf)
 ```
-$background = rgba(000000FF)
-$surface    = rgba(0A0A0AFF)
-$overlay    = rgba(141414FF)
+$background = rgba(0A0C12FF)
+$surface    = rgba(11141DFF)
+$overlay    = rgba(1C2230FF)
 $text       = rgba(F2F6FFFF)
 $muted      = rgba(8D95B3FF)
 $primary    = rgba(00D9FFFF)
