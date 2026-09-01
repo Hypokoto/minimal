@@ -1,0 +1,7 @@
+base-devel
+rustup
+clang
+jdk-openjdk
+maven
+cargo-audit
+arch-audit

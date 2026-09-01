@@ -1,0 +1,16 @@
+git-delta
+duf
+dust
+atuin
+bottom
+yq
+trash-cli
+chafa
+eza
+zoxide
+bat
+zstd
+unrar
+xh
+tealdeer
+procs

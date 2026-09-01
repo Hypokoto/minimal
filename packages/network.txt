@@ -1,0 +1,10 @@
+bind
+iperf3
+bandwhich
+speedtest-cli
+iftop
+nethogs
+sniffnet
+doggo
+gping
+trippy

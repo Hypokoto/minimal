@@ -1,0 +1,16 @@
+zsh
+starship
+neovim
+git
+fzf
+ripgrep
+fd
+yazi
+btop
+fastfetch
+zsh-syntax-highlighting
+zsh-autosuggestions
+man-db
+man-pages
+bc
+jq

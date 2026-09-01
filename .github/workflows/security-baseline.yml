@@ -1,0 +1,44 @@
+name: Security & Architecture Baseline
+
+on:
+  push:
+    branches: [ "main", "feat/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  validate-shell:
+    name: Shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: '.'
+          ignore_names: '.*'
+          
+  validate-symlinks:
+    name: Broken Symlink Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find broken symlinks
+        run: |
+          broken=$(find . -xtype l)
+          if [ -n "$broken" ]; then
+            echo "Found broken symlinks:"
+            echo "$broken"
+            exit 1
+          fi
+
+  # Dependency scanning natively supported by GitHub (Dependabot)
+  # Secret scanning is automatically active on public repos.
+  validate-format:
+    name: Shell format (shfmt)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run shfmt
+        uses: mfinelli/setup-shfmt@v3
+      - run: shfmt -d .
