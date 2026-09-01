@@ -21,7 +21,7 @@ OPTIONS="󰖩  Network (${WIFI_SSID})
 󰍹  Displays
 󰐥  Power Menu"
 
-THEME_PATH="${DIR}/powermenu.rasi"
+THEME_PATH="${DIR}/control-center.rasi"
 ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-control.pid -p "Control Center" -me-select-entry '' -me-accept-entry MousePrimary)
 
 if [[ -f "${THEME_PATH}" ]]; then

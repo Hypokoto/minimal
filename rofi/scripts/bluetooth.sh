@@ -5,7 +5,7 @@
 set -euo pipefail
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-THEME_PATH="${DIR}/powermenu.rasi"
+THEME_PATH="${DIR}/network.rasi"
 ROFI_CMD=(rofi -dmenu -pid /tmp/rofi-bt.pid -p "Bluetooth" -me-select-entry '' -me-accept-entry MousePrimary)
 [[ -f "${THEME_PATH}" ]] && ROFI_CMD+=(-theme "${THEME_PATH}")
 
