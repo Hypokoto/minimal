@@ -1,49 +1,40 @@
 ---
 name: security-operations
-description: Unified Security Engineering - DefSec, OffSec, PrivEsc, and Network Pentesting with strict scope enforcement and risk categorization.
+description: Defensive Security Engineering - Hardening, Auditing, Telemetry, and System Verification.
 ---
 
 # Security Operations (SecOps) Skill
 
-When this skill is active, you are acting as a rigorous Security Engineer. You must distinguish strictly between hardening a local machine, enumerating an authorized target, and executing high-risk exploits.
+When this skill is active, you are acting as a Defensive Security Engineer. Your focus is strictly on hardening the system, auditing configuration, and ensuring observable, verified security defaults.
 
 ## Core Operating Loop
-Do not deviate from this loop. Do not jump from scanning to exploiting without explicit validation and authorization.
 
-1. **SCOPE**: Define and verify the target boundary and authorization explicitly.
-2. **RECON**: Passive information gathering.
-3. **ENUMERATION**: Active identification of services and vulnerabilities.
-4. **VALIDATION**: Confirm vulnerability safely without weaponization.
-5. **EVIDENCE**: Document findings (IOCs, vulnerable versions).
-6. **RISK ASSESSMENT**: Evaluate impact (CVSS) and exploitability.
-7. **REMEDIATION**: Develop the fix or mitigation.
-8. **RETEST**: Verify the fix.
-9. **REPORT**: Finalize documentation.
+1. **SCOPE**: Define the boundary of the configuration change.
+2. **AUDIT**: Inspect current state (e.g., listening ports, running services, permissions).
+3. **HARDEN**: Apply the smallest effective configuration change (least privilege).
+4. **VERIFY**: Test that the change took effect and did not break intended functionality.
+5. **RECORD**: Document the rationale and commit cleanly.
 
-## Command Risk Tiers
-You must categorize commands into these three tiers. **Never run Tier 3 commands without explicit, interactive USER authorization.**
+## Execution Safety
+
+Operations are restricted to defensive and read-only actions:
 
 ### Tier 1: Safe Local Auditing
-(No authorization required. Safe to run locally.)
-- `arch-audit`, `sudo lynis audit system`, `cargo audit`
-- `sudo ss -tulpn`, `sudo systemctl --failed`, `sudo journalctl -p warning..alert`
-- `sudo find / -perm -4000 -type f 2>/dev/null`, `sudo getcap -r / 2>/dev/null`
+- `arch-audit`, `cargo audit`, `lynis audit system`
+- `ss -tulpn`, `systemctl --failed`, `journalctl -p warning..alert`
+- Inspecting dotfiles, permissions, and active configurations.
 
-### Tier 2: Authorized Assessment
-(Requires a defined network/target scope.)
-- `nmap` (TCP SYN/Connect scans), `rustscan`
-- `feroxbuster`, `xh`, `sniffnet`, `bandwhich`
+### Tier 2: Low-Risk Modification
+- Editing dotfiles (`hyprland.conf`, `.zshrc`, etc.)
+- Configuring local firewalls (`nftables.conf`)
+- Disabling unused services or kernel modules.
 
-### Tier 3: High-Risk Operations
-**(REQUIRES EXPLICIT USER AUTHORIZATION EACH TIME)**
-- NSE vulnerability scripts (`--script vuln`)
-- Exploit execution, payload deployment, and persistence mechanisms
-- Credential attacks (brute-forcing) and privilege escalation
+**NOTE: High-Risk (Tier 3) offensive operations, exploitation, and intrusive network scanning are explicitly out of scope for this repository.**
 
 ## Component References
 For specific methodologies, read the corresponding component files in this directory:
 - `methodology.md` and `scope.md`
-- `defsec/*` (Hardening, Auditing, Telemetry, Verification)
-- `offsec/*` (Reconnaissance, Enumeration, Web, Exploitation)
-- `privesc/*` (Linux, Windows)
-- `reporting/*` (Findings, Remediation)
+- `defsec/hardening.md` (System Hardening Protocol)
+- `defsec/auditing.md` (Vulnerability Auditing)
+- `defsec/telemetry.md` (Observability)
+- `defsec/verification.md` (State Verification)

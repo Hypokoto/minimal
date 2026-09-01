@@ -36,9 +36,9 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
 
     # --- Optional Extra Repositories ---
     echo ""
-    read -t 10 -p "Would you like to configure the Chaotic-AUR repository? (Recommended) [Y/n] " prompt_repos || true
+    read -t 10 -p "Would you like to configure the Chaotic-AUR repository? (Recommended) [y/N] " prompt_repos || true
     echo ""
-    if [[ "${prompt_repos:-y}" =~ ^[Yy]$ ]]; then
+    if [[ "${prompt_repos:-n}" =~ ^[Yy]$ ]]; then
         log "Configuring Chaotic-AUR repository..."
         # Chaotic AUR Setup
         if ! grep -q "\\[chaotic-aur\\]" /etc/pacman.conf; then
@@ -76,8 +76,8 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       zsh-syntax-highlighting zsh-autosuggestions
       cliphist wl-clipboard grim slurp brightnessctl rofimoji
       starship git-delta duf dust atuin bottom yq trash-cli chafa eza zoxide bat zstd unrar bc
-      gping trippy bind nmap iperf3 bandwhich speedtest-cli iftop nethogs doggo man-db man-pages \
-      rustscan sniffnet netscanner hexyl cargo-audit arch-audit \
+      gping trippy bind iperf3 bandwhich speedtest-cli iftop nethogs doggo man-db man-pages \
+      sniffnet cargo-audit arch-audit \
       nwg-drawer xh jq tealdeer procs
     )
 
@@ -87,7 +87,6 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       swayosd-git
       scdoc
       ripdrag
-      feroxbuster
     )
 
     log "Installing pacman package set (${#PACMAN_PKGS[@]} packages)."
