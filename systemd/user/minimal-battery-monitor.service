@@ -1,0 +1,13 @@
+[Unit]
+Description=Minimal Event-Driven Battery Monitor
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.config/hypr/scripts/battery-monitor.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
