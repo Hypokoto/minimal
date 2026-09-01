@@ -28,5 +28,13 @@ if ! awww img "${wallpaper_path}"; then
 fi
 
 write_current_wallpaper "${wallpaper_path}"
+
+# Optional: Generate Material You palette dynamically using Matugen
+if command -v matugen >/dev/null 2>&1; then
+    matugen image "${wallpaper_path}" -m dark -t hex || true
+    # If we had a matugen template, we could overwrite palette.md here.
+    # For now, we will just rely on the fallback manual palette if they don't set it up.
+fi
+
 notify normal "Wallpaper applied" "$(basename -- "${wallpaper_path}")"
 

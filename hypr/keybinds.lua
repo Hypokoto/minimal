@@ -48,32 +48,21 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
 
 local hyprScripts = os.getenv("HOME") .. "/.config/hypr/scripts"
 
-hl.bind("XF86AudioRaiseVolume",
-    hl.dsp.exec_cmd("wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+ && " .. hyprScripts .. "/osd-volume.sh"),
-    { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume",
-    hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && " .. hyprScripts .. "/osd-volume.sh"),
-    { locked = true, repeating = true })
-hl.bind("XF86AudioMute",
-    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && " .. hyprScripts .. "/osd-volume.sh"),
-    { locked = true })
-hl.bind("XF86AudioMicMute",
-    hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_SOURCE@ toggle"),
-    { locked = true })
-hl.bind("XF86MonBrightnessUp",
-    hl.dsp.exec_cmd("brightnessctl set +5% && " .. hyprScripts .. "/osd-brightness.sh"),
-    { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown",
-    hl.dsp.exec_cmd("brightnessctl set 5%- && " .. hyprScripts .. "/osd-brightness.sh"),
-    { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true })
+
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"), { locked = true, repeating = true })
 
 -- --- Custom Rofi Script Bindings ---
 local rofiScripts = os.getenv("HOME") .. "/.config/rofi/scripts"
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock")) -- Lock screen (SHIFT disambiguates from movefocus L)
-                                                          -- movefocus,r above — that's a real conflict
-                                                          -- in the source .conf, not introduced here.
-                                                          -- Hyprland would have taken the later bind
-                                                          -- (this one). Consider remapping one.
+
+hl.bind(mainMod .. " + Grave", hl.dsp.exec_cmd(rofiScripts .. "/control-center.sh"))
+hl.bind("ALT", "Tab", hl.dsp.exec_cmd("rofi -show window -theme " .. os.getenv("HOME") .. "/.config/rofi/theme.rasi"))
+
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock")) 
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(rofiScripts .. "/powermenu.sh"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"))
 -- Applications
