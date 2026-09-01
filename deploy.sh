@@ -102,6 +102,15 @@ deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
 mkdir -p "$HOME/.local/bin"
 ln -sfn "$DOTFILES_DIR/hypr/scripts/toggle-bar.sh"   "$HOME/.local/bin/toggle-bar.sh"
 
+if command -v cargo >/dev/null 2>&1 && [[ -f "$DOTFILES_DIR/Cargo.toml" ]]; then
+    log "Compiling native Rust control plane (minimalctl)..."
+    (cd "$DOTFILES_DIR" && cargo build --release >/dev/null 2>&1 || true)
+    if [[ -f "$DOTFILES_DIR/target/release/minimalctl" ]]; then
+        ln -sfn "$DOTFILES_DIR/target/release/minimalctl" "$HOME/.local/bin/minimalctl"
+        log "[OK] Installed minimalctl to ~/.local/bin/minimalctl"
+    fi
+fi
+
 mkdir -p "$HOME/Pictures/Wallpapers"
 
 # --- 4. Neovim / NvChad Environment Overlay ---

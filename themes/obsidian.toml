@@ -1,0 +1,18 @@
+[meta]
+name = "obsidian"
+author = "Hypokoto"
+description = "Cold graphite and sky cyan minimal palette"
+
+[tokens]
+background = "#0B0E14"
+surface    = "#11161F"
+overlay    = "#19212D"
+text       = "#E8EDF5"
+muted      = "#7F899B"
+primary    = "#7DD3FC"
+secondary  = "#8BA4FF"
+highlight  = "#B4A7FF"
+success    = "#8BE28B"
+warning    = "#E8C77B"
+danger     = "#F08080"
+info       = "#7DD3FC"
