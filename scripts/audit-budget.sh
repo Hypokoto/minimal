@@ -42,12 +42,14 @@ for proc in "${!AUTH_PROCS[@]}"; do
 done
 
 echo ""
-echo "[*] Uncategorized Daemons (Warning):"
-# A naive check to see if common un-allowlisted daemons are running under this user
-# For a real system, we'd compare `ps` output against the allowlist.
-# Since user systems vary wildly, we just check known bad overlaps.
-if pgrep -x "dunst" >/dev/null; then echo " - VIOLATION: dunst (duplicate notification)"; VIOLATION=1; fi
-if pgrep -x "swaybg" >/dev/null; then echo " - VIOLATION: swaybg (duplicate wallpaper)"; VIOLATION=1; fi
+echo "[*] Uncategorized Processes Check:"
+UNCATEGORIZED_FOUND=0
+if pgrep -x "dunst" >/dev/null; then echo " - VIOLATION: dunst (duplicate notification daemon)"; VIOLATION=1; UNCATEGORIZED_FOUND=1; fi
+if pgrep -x "swaybg" >/dev/null; then echo " - VIOLATION: swaybg (duplicate wallpaper daemon)"; VIOLATION=1; UNCATEGORIZED_FOUND=1; fi
+
+if [ $UNCATEGORIZED_FOUND -eq 0 ]; then
+    echo "  none"
+fi
 
 if [ $VIOLATION -eq 1 ]; then
     echo "Process budget violated!"
