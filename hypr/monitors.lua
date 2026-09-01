@@ -46,13 +46,12 @@ hl.monitor({
 -- ================================================================
 -- Workspace rules
 -- ================================================================
--- Workspaces 1-5 default to internal laptop display (eDP-1)
--- Workspaces 6-10 default to connected external display (HDMI-A-1)
+-- Workspaces 1-5 default to the primary monitor (or first available)
+-- Workspaces 6-10 can be customized for secondary monitors.
 -- ================================================================
 for i = 1, 5 do
     hl.workspace_rule({
         workspace = tostring(i),
-        monitor   = "eDP-1",
         default   = (i == 1),
     })
 end
@@ -60,7 +59,6 @@ end
 for i = 6, 10 do
     hl.workspace_rule({
         workspace = tostring(i),
-        monitor   = "HDMI-A-1",
         default   = (i == 6),
     })
 end

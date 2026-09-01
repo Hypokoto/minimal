@@ -32,14 +32,15 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("sleep 2 && " .. os.getenv("HOME") .. "/minimal/conky/toggle_hud.sh")
 end)
 
--- --- GPU Environment & Optimization (AMD iGPU Cezanne + RX 6500M dGPU) ---
-hl.env("LIBVA_DRIVER_NAME", "radeonsi")
--- Multi-GPU: Card2 is iGPU (eDP-1), Card1 is dGPU (HDMI-A-1). Passing both allows Hyprland to output to HDMI.
-hl.env("WLR_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
+-- --- GPU Environment & Optimization ---
+-- UNCOMMENT AND ADJUST FOR YOUR SPECIFIC HARDWARE IF NEEDED:
+-- hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+-- hl.env("WLR_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
+-- hl.env("VDPAU_DRIVER", "radeonsi")
+
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
-hl.env("VDPAU_DRIVER", "radeonsi")
 
 -- --- Input Handling & Touchpad ---
 hl.config({
