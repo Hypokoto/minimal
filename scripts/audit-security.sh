@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "=== Security Invariants Audit ==="
+VIOLATION=0
+
+# Find all shell scripts, excluding .agents (which contain raw documentation/prompts) and .git
+SCRIPTS=$(find . -type d -name ".agents" -prune -o -type d -name ".git" -prune -o -type f -name "*.sh" -print -o -name "*.bash" -print -o -name "*.zsh" -print)
+
+for script in $SCRIPTS; do
+    # Skip this audit script itself so it doesn't match its own regex strings
+    if [[ "$script" == *"audit-security.sh"* ]]; then continue; fi
+    
+    if grep -n -E "eval\s+" "$script" | grep -v "Ignore/Safe" >/dev/null; then
+        echo "[!] Unsafe 'eval' found in $script"
+        VIOLATION=1
+    fi
+    if grep -n -E "(curl|wget).*\|\s*bash" "$script" >/dev/null; then
+        echo "[!] Remote execution pattern (curl | bash) found in $script"
+        VIOLATION=1
+    fi
+    if grep -n -E "/tmp/.*\.\\$\\$" "$script" >/dev/null; then
+        echo "[!] Predictable temp file with PID (\$\$) found in $script"
+        VIOLATION=1
+    fi
+done
+
+if [ $VIOLATION -eq 1 ]; then
+    echo "Security audit failed!"
+    exit 1
+fi
+
+echo "Security patterns passed."
+exit 0

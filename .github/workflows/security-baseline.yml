@@ -42,3 +42,30 @@ jobs:
       - name: Run shfmt
         uses: mfinelli/setup-shfmt@v3
       - run: shfmt -d .
+  validate-packages:
+    name: Package Tier Invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run package validation
+        run: ./scripts/validate-packages.sh
+
+  validate-security:
+    name: Security Invariants
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run security script audit
+        run: ./scripts/audit-security.sh
+
+  secret-scanning:
+    name: Secret Scanning (Gitleaks)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

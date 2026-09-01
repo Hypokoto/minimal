@@ -1,0 +1,11 @@
+# FORMAT: <process_regex>:<classification>
+# Classifications: persistent, event-driven
+Hyprland:persistent
+waybar:persistent
+mako:persistent
+hypridle:persistent
+awww-daemon:persistent
+polkit-gnome-authentication-agent-1:persistent
+wl-paste:event-driven
+swayosd-server:event-driven
+battery-monitor.sh:event-driven
