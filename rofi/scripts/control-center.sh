@@ -19,6 +19,7 @@ OPTIONS="󰖩  Network (${WIFI_SSID})
 󰤄  Do Not Disturb
 󰏘  Wallpapers
 󰍹  Displays
+󱐋  Battery (${BATTERY}%)
 󰐥  Power Menu"
 
 THEME_PATH="${DIR}/control-center.rasi"
@@ -43,5 +44,6 @@ case "${CHOICE}" in
     *"Do Not Disturb"*) makoctl mode -t dnd && notify-send "DND" "Toggled Do Not Disturb" ;;
     *"Wallpapers"*)  bash "$HOME/.config/hypr/wallpaper/picker.sh" ;;
     *"Displays"*)    hyprctl dispatch exec wdisplays || notify-send "Displays" "wdisplays not installed" ;;
+    *"Battery"*)     bash "${SCRIPTS}/battery.sh" ;;
     *"Power Menu"*)  bash "${SCRIPTS}/powermenu.sh" ;;
 esac

@@ -16,8 +16,8 @@ build_menu() {
 
     [[ "${RADIO_STATE}" != "enabled" ]] && return 0
 
-    # Force a fresh scan so signal strengths aren't stale.
-    nmcli device wifi rescan >/dev/null 2>&1 || true
+    # Removed `nmcli device wifi rescan` to prevent the UI from hanging for 5-10 seconds
+    # on certain hardware. NetworkManager automatically scans periodically in the background.
 
     # -t: terse/machine output, -f: fields. Dedup by SSID keeping strongest.
     nmcli -t -f IN-USE,SSID,SIGNAL,SECURITY device wifi list \

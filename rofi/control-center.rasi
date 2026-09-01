@@ -1,7 +1,7 @@
 @import "theme.rasi"
 
 window {
-    width: 640px;
+    width: 900px;
     location: center;
     anchor: center;
     border: 2px;
@@ -29,8 +29,8 @@ prompt {
 }
 
 listview {
-    columns:      2;
-    lines:        4;
+    columns:      3;
+    lines:        3;
     spacing:      16px;
     fixed-height: true;
 }
