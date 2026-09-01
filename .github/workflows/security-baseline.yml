@@ -74,7 +74,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-      - name: Build minimalctl and verify theme drift
+      - name: Build minimalctl and verify theme drift & git reproducibility
         run: |
           cargo build --release
+          ./target/release/minimalctl theme build
           ./target/release/minimalctl theme verify
+          git diff --exit-code
