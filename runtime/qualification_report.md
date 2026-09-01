@@ -40,4 +40,4 @@ This document records the empirical results of the **Runtime Qualification Phase
 ---
 
 ## Verification Statement
-The Minimal OS Shell architecture is empirically qualified. All background processes adhere to `PROCESS_BUDGET.md`, supply-chain boundaries are machine-enforced, and all systemd user units operate in a healthy, zero-failure state.
+The Minimal OS Shell architecture has successfully passed all defined security and runtime qualification invariants. All background processes adhere to `PROCESS_BUDGET.md`, supply-chain boundaries are machine-enforced, generated configuration syntaxes are validated, and all systemd user units operate in a healthy, zero-failure state.

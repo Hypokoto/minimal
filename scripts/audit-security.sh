@@ -28,6 +28,14 @@ done < <(
         -print0
 )
 
+# Check generated mako configuration syntax
+if [ -f "mako/config" ]; then
+    if grep -E "padding\s*=\s*[0-9]+\s+[0-9]+" mako/config >/dev/null; then
+        echo "[!] Invalid space-separated padding in mako/config (must be comma-separated)"
+        VIOLATION=1
+    fi
+fi
+
 if [ $VIOLATION -eq 1 ]; then
     echo "Security audit failed!"
     exit 1

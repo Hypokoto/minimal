@@ -7,7 +7,7 @@ Every listening socket on the host must be accounted for with an explicit owner,
 | `127.0.0.1` / `[::1]` | 631 | `cupsd` | Loopback Only | Local print scheduler. Isolated to localhost; zero external exposure. |
 | `0.0.0.0` / `[::1]` | 22 | `sshd` | All Interfaces | Remote SSH administration. Protected by `nftables` firewall drop policy. |
 | `127.0.0.1` | 35335, 35799 | `agy` | Loopback Only | Agent IPC control socket. Isolated to localhost. |
-| `127.0.0.1` | 11434 | `ollama` | Loopback Only | Local AI LLM API server. Isolated to localhost. |
+| `127.0.0.1` | 11434 | `ollama` | Loopback Only | Local AI LLM API server. Bound strictly to `127.0.0.1`; zero network exposure. |
 | `127.0.0.1` | 36023 | `python` | Loopback Only | Transient local development server. Isolated to localhost. |
 
 ## Socket Rule
