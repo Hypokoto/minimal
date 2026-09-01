@@ -257,3 +257,9 @@ tooltip label {
     font-size: 11.5px;
 }
 
+
+/* SEC-002 unrelated user change */
+
+#custom-security.secure { color: @success; }
+#custom-security.warning { color: @warning; }
+#custom-security.degraded { color: @danger; }

@@ -81,13 +81,15 @@ fi
 IS_SECURED=false
 grep -q '🔒' <<< "${CHOICE}" && IS_SECURED=true
 
+TMP_LOG=$(mktemp /tmp/nmcli-connect.XXXXXX)
+
 if [[ "${IS_SECURED}" == false ]]; then
-    if nmcli device wifi connect "${SSID}" >/tmp/nmcli-connect.$$ 2>&1; then
+    if nmcli device wifi connect "${SSID}" >"$TMP_LOG" 2>&1; then
         notify-send "Network" "Connected to ${SSID}"
     else
         notify-send -u critical "Network" "Failed to connect to ${SSID}"
     fi
-    rm -f /tmp/nmcli-connect.$$
+    rm -f "$TMP_LOG"
     exit 0
 fi
 
@@ -97,6 +99,7 @@ PW_STATUS=$?
 set -e
 
 if [[ ${PW_STATUS} -ne 0 || -z "${PASSWORD}" ]]; then
+    rm -f "$TMP_LOG"
     exit 0
 fi
 
@@ -105,12 +108,12 @@ fi
 # the plaintext password in argv, visible to any user on the box via
 # `ps aux` for the process's lifetime. --ask makes nmcli prompt for the
 # secret and read it from stdin instead.
-if printf '%s\n' "${PASSWORD}" | nmcli --ask device wifi connect "${SSID}" >/tmp/nmcli-connect.$$ 2>&1; then
+if printf '%s\n' "${PASSWORD}" | nmcli --ask device wifi connect "${SSID}" >"$TMP_LOG" 2>&1; then
     notify-send "Network" "Connected to ${SSID}"
 else
     notify-send -u critical "Network" "Failed to connect to ${SSID} — check password"
 fi
 
 # Best-effort scrub of the transient log and the shell variable.
-rm -f /tmp/nmcli-connect.$$
+rm -f "$TMP_LOG"
 unset PASSWORD

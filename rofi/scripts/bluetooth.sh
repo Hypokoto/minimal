@@ -32,6 +32,13 @@ if [[ "${CHOICE}" == *"[Toggle Power"* ]]; then
     fi
 else
     MAC=$(echo "$CHOICE" | awk '{print $1}')
+    
+    # Strict validation: Only allow valid MAC addresses (e.g. 00:11:22:33:44:55)
+    if [[ ! "$MAC" =~ ^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$ ]]; then
+        notify-send -u critical "Bluetooth" "Invalid device address selected."
+        exit 1
+    fi
+
     notify-send "Bluetooth" "Connecting to $MAC..."
     if bluetoothctl connect "$MAC"; then
         notify-send "Bluetooth" "Connected to $MAC"

@@ -70,7 +70,7 @@ if [[ "$PKG_MGR" == "pacman" ]]; then
       waybar mako kitty tmux zsh fzf ripgrep fd yazi btop
       neovim base-devel git rustup clang jdk-openjdk maven
       ttf-firacode-nerd ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji fastfetch
-      networkmanager network-manager-applet power-profiles-daemon
+      networkmanager  power-profiles-daemon
       pipewire pipewire-pulse wireplumber playerctl
       polkit-gnome qt5-wayland qt6-wayland
       zsh-syntax-highlighting zsh-autosuggestions

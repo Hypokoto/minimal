@@ -152,7 +152,10 @@
     },
 
     "custom/security": {
-        "format": "󰒔",
-        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/security-status.sh",
+        "interval": 60,
+        "tooltip": true
     }
 }
