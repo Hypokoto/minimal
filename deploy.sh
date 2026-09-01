@@ -138,14 +138,19 @@ cp -f "$DOTFILES_DIR/nvim/ftplugin/"*.lua             "$HOME/.config/nvim/ftplug
 
 log "NvChad overlay applied successfully."
 
-# --- 5. Font Cache Verification ---
-log "--- Phase 5: Font Cache Verification ---"
+log "--- Phase 5: Font Cache & Binary Verification ---"
 if command -v fc-cache >/dev/null 2>&1; then
     log "Refreshing system font cache (fc-cache -fv)..."
     fc-cache -fv >/dev/null 2>&1 || warn "fc-cache returned non-zero status."
     log "[OK] Font cache updated."
 else
     warn "fc-cache binary not found. Skipping font cache refresh."
+fi
+
+if [[ -x "$HOME/.local/bin/minimalctl" ]]; then
+    log "[OK] minimalctl verified at ~/.local/bin/minimalctl"
+else
+    warn "minimalctl binary not found or not executable in ~/.local/bin."
 fi
 
 log "=== MINIMAL DEPLOYMENT COMPLETE ==="
