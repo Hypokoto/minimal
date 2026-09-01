@@ -21,7 +21,6 @@ require("keybinds")
 -- boot, not on every config reload (Hyprland re-parses hyprland.lua on save).
 hl.on("hyprland.start", function()
     hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/waybar-start.sh")
-    hl.exec_cmd("mako")
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("sleep 0.5 && " .. os.getenv("HOME") .. "/.config/hypr/wallpaper/restore.sh")
     hl.exec_cmd("hypridle")

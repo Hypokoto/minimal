@@ -1,0 +1,40 @@
+Sep 01 21:17:22 arch dbus-broker-launch[1044]: Service file '/usr/share//dbus-1/services/fr.emersion.mako.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Sep 01 21:17:22 arch dbus-broker-launch[1044]: Service file '/usr/share//dbus-1/services/nemo.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Sep 01 21:17:22 arch dbus-broker-launch[1044]: Service file '/usr/share//dbus-1/services/nemo.service' is not named after the D-Bus name 'org.Nemo'.
+Sep 01 21:17:22 arch dbus-broker-launch[1044]: Service file '/usr/share//dbus-1/services/org.knopwob.dunst.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Sep 01 21:17:22 arch dbus-broker-launch[1044]: Ignoring duplicate name 'org.freedesktop.Notifications' in service file '/usr/share//dbus-1/services/org.knopwob.dunst.service'
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire[1048]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch pipewire-pulse[1050]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit does not give us MaxRealtimePriority, using 1
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit does not give us MinNiceLevel, using 0
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit error: org.freedesktop.DBus.Error.ServiceUnknown
+Sep 01 21:17:22 arch wireplumber[1049]: mod.rt: RTKit does not give us RTTimeUSecMax, using -1
+Sep 01 21:17:23 arch wireplumber[1049]: s-monitors: Failed to create 'api.alsa.acp.device' device
+Sep 01 21:17:23 arch wireplumber[1049]: default: Failed to get percentage from UPower: org.freedesktop.DBus.Error.NameHasNoOwner
+Sep 01 21:17:24 arch /usr/lib/xdg-desktop-portal[1193]: Failed to load RealtimeKit property: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable
+Sep 01 21:17:24 arch /usr/lib/xdg-desktop-portal[1193]: Failed to load RealtimeKit property: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable
+Sep 01 21:17:24 arch /usr/lib/xdg-desktop-portal[1193]: Failed to load RealtimeKit property: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name is not activatable
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'exit-code'.
+Sep 01 21:17:25 arch systemd[1029]: Failed to start Lightweight Wayland notification daemon.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'exit-code'.
+Sep 01 21:17:25 arch systemd[1029]: Failed to start Lightweight Wayland notification daemon.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'exit-code'.
+Sep 01 21:17:25 arch systemd[1029]: Failed to start Lightweight Wayland notification daemon.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'exit-code'.
+Sep 01 21:17:25 arch systemd[1029]: Failed to start Lightweight Wayland notification daemon.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'exit-code'.
+Sep 01 21:17:25 arch systemd[1029]: Failed to start Lightweight Wayland notification daemon.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Start request repeated too quickly.
+Sep 01 21:17:25 arch systemd[1029]: mako.service: Failed with result 'start-limit-hit'.

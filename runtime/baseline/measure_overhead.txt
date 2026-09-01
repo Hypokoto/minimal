@@ -1,0 +1,29 @@
+=== Runtime Verification ===
+
+[*] Total Memory Usage:
+               total        used        free      shared  buff/cache   available
+Mem:           7.1Gi       5.4Gi       277Mi       172Mi       1.5Gi       1.7Gi
+
+[*] Persistent User Processes (excluding kernel/system):
+Total processes for hypokoto: 102
+
+[*] Authorized Persistent Desktop Processes running:
+ - Hyprland: Running (1)
+ - waybar: Running (1)
+ - mako: Not running
+ - hypridle: Running (1)
+ - awww-daemon: Running (1)
+ - polkit-gnome: Not running
+ - wl-paste: Running (3)
+ - swayosd-server: Running (1)
+
+[*] Banned/Duplicate Processes Check:
+ - conky: Clean
+ - nm-applet: Clean
+ - nwg-drawer: Clean
+ - hyprlauncher: Clean
+
+[*] Battery Monitor (Event-Driven) CPU Usage:
+ - battery-monitor.service is not currently running.
+
+=== End Verification ===

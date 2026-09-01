@@ -1,0 +1,16 @@
+=== Process Budget Audit ===
+
+[*] Authorized Process Status:
+ - wl-paste (event-driven): Running (3)
+ - mako (persistent): Not running
+ - Hyprland (persistent): Running (1)
+ - swayosd-server (event-driven): Running (1)
+ - hypridle (persistent): Running (1)
+ - awww-daemon (persistent): Running (1)
+ - waybar (persistent): Running (1)
+ - battery-monitor.sh (event-driven): Not running
+ - polkit-gnome-authentication-agent-1 (persistent): Running (1)
+
+[*] Uncategorized Processes Check:
+  none
+Process budget intact.

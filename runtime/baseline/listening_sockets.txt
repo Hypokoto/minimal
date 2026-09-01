@@ -1,0 +1,20 @@
+Netid State  Recv-Q Send-Q  Local Address:Port  Peer Address:PortProcess
+udp   UNCONN 0      0             0.0.0.0:37991      0.0.0.0:*    users:(("electron",pid=12304,fd=30))
+udp   UNCONN 0      0         224.0.0.251:5353       0.0.0.0:*    users:(("electron",pid=12304,fd=40))
+udp   UNCONN 0      0       192.168.0.107:42605      0.0.0.0:*    users:(("electron",pid=12304,fd=42))
+udp   UNCONN 0      0             0.0.0.0:46921      0.0.0.0:*    users:(("firefox",pid=20437,fd=174))
+udp   UNCONN 0      0       192.168.0.107:60208      0.0.0.0:*    users:(("electron",pid=12304,fd=43))
+udp   UNCONN 0      0             0.0.0.0:39997      0.0.0.0:*    users:(("firefox",pid=20437,fd=50))
+udp   UNCONN 0      0      10.252.147.149:40069      0.0.0.0:*    users:(("electron",pid=12304,fd=28))
+udp   UNCONN 0      0       192.168.122.1:53         0.0.0.0:*   
+udp   UNCONN 0      0      0.0.0.0%virbr0:67         0.0.0.0:*   
+udp   UNCONN 0      0                   *:44254            *:*    users:(("electron",pid=12304,fd=37))
+tcp   LISTEN 0      128           0.0.0.0:22         0.0.0.0:*   
+tcp   LISTEN 0      4096        127.0.0.1:631        0.0.0.0:*   
+tcp   LISTEN 0      4096        127.0.0.1:35335      0.0.0.0:*    users:(("agy",pid=10979,fd=12))
+tcp   LISTEN 0      4096        127.0.0.1:35799      0.0.0.0:*    users:(("agy",pid=10979,fd=14))
+tcp   LISTEN 0      5           127.0.0.1:36023      0.0.0.0:*    users:(("python",pid=12215,fd=3))
+tcp   LISTEN 0      4096        127.0.0.1:11434      0.0.0.0:*   
+tcp   LISTEN 0      32      192.168.122.1:53         0.0.0.0:*   
+tcp   LISTEN 0      128              [::]:22            [::]:*   
+tcp   LISTEN 0      4096            [::1]:631           [::]:*   

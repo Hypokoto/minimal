@@ -1,0 +1,30 @@
+    PID    PPID COMMAND         %CPU %MEM
+  10979   10630 agy             81.4  5.1
+  12613   12243 electron        16.5  4.1
+  20437       1 firefox          9.1  7.2
+  12298   12240 electron         6.9  1.1
+   1105    1068 Hyprland         5.6  1.1
+  53596   53300 claude-desktop   4.6  4.3
+  20851   20562 WebExtensions    4.4  4.1
+  21978   20562 Isolated Web Co  2.3  7.6
+  53348   53297 claude-desktop   2.1  1.8
+  12219   12209 electron         1.9  2.2
+  53283       1 claude-desktop   1.6  3.1
+   1577    1158 waybar           1.6  0.5
+   6267    1105 kitty            1.6  0.9
+  21728   20562 Isolated Web Co  0.9  5.7
+  20715   20562 Privileged Cont  0.8  3.7
+  54116   20562 Isolated Web Co  0.7  4.7
+  21910   20562 Isolated Web Co  0.7  5.3
+  13801   12243 electron         0.6  2.1
+  60484   20562 Web Content      0.6  1.0
+  60295   20562 Isolated Web Co  0.6  1.5
+    118       2 kswapd0          0.5  0.0
+  60434   20562 Web Content      0.4  1.0
+  50502       2 kworker/u48:4-e  0.4  0.0
+  53063       2 kworker/u48:1-e  0.4  0.0
+  53773   53283 npm exec @upsta  0.4  1.1
+  10629       1 tmux: server     0.3  0.2
+  60390   20562 Web Content      0.3  1.0
+  21326   20562 Isolated Web Co  0.3  2.3
+  12402   12219 codex            0.3  5.2
