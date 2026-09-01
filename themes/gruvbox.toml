@@ -1,0 +1,19 @@
+[meta]
+name = "gruvbox"
+author = "Hypokoto"
+description = "Retro warm dark palette with earthy Gruvbox tones"
+
+[tokens]
+background = "#1D2021"
+surface    = "#282828"
+overlay    = "#3C3836"
+text       = "#EBDBB2"
+muted      = "#928374"
+primary    = "#83A598"
+secondary  = "#D3869B"
+highlight  = "#D79921"
+success    = "#B8BB26"
+warning    = "#FABD2F"
+danger     = "#FB4934"
+info       = "#83A598"
+

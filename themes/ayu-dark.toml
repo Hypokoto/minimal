@@ -1,0 +1,19 @@
+[meta]
+name = "ayu-dark"
+author = "Hypokoto"
+description = "Warm charcoal, amber, and muted ocean tones"
+
+[tokens]
+background = "#0B0E14"
+surface    = "#11151C"
+overlay    = "#1A1F29"
+text       = "#E6E1CF"
+muted      = "#737D87"
+primary    = "#E6B450"
+secondary  = "#59C2FF"
+highlight  = "#D2A6FF"
+success    = "#AAD94C"
+warning    = "#FFB454"
+danger     = "#F07178"
+info       = "#59C2FF"
+

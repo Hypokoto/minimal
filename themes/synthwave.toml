@@ -1,0 +1,19 @@
+[meta]
+name = "synthwave"
+author = "Hypokoto"
+description = "Dark violet synthwave with neon teal, coral, and electric cyan accents"
+
+[tokens]
+background = "#0E091D"
+surface    = "#160F29"
+overlay    = "#241638"
+text       = "#14B9B5"
+muted      = "#A60234"
+primary    = "#BE3F50"
+secondary  = "#FF7F41"
+highlight  = "#04C5F0"
+success    = "#7CD699"
+warning    = "#FFBE74"
+danger     = "#E20342"
+info       = "#04C5F0"
+

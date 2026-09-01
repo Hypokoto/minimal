@@ -1,0 +1,19 @@
+[meta]
+name = "catppuccin"
+author = "Hypokoto"
+description = "Soft pastel accents over a soothing Mocha-inspired dark palette"
+
+[tokens]
+background = "#11111B"
+surface    = "#181825"
+overlay    = "#313244"
+text       = "#CDD6F4"
+muted      = "#7F849C"
+primary    = "#89B4FA"
+secondary  = "#CBA6F7"
+highlight  = "#F5C2E7"
+success    = "#A6E3A1"
+warning    = "#F9E2AF"
+danger     = "#F38BA8"
+info       = "#89DCEB"
+
