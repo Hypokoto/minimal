@@ -33,10 +33,13 @@ hl.on("hyprland.start", function()
 end)
 
 -- --- GPU Environment & Optimization ---
--- UNCOMMENT AND ADJUST FOR YOUR SPECIFIC HARDWARE IF NEEDED:
--- hl.env("LIBVA_DRIVER_NAME", "radeonsi")
--- hl.env("WLR_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
--- hl.env("VDPAU_DRIVER", "radeonsi")
+-- Dynamic Hardware Detection: If an AMD multi-GPU setup is detected (card1 + card2),
+-- pass both DRM devices to allow Hyprland to output to the HDMI port wired to the dGPU.
+if os.rename("/dev/dri/card1", "/dev/dri/card1") and os.rename("/dev/dri/card2", "/dev/dri/card2") then
+    hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+    hl.env("VDPAU_DRIVER", "radeonsi")
+    hl.env("WLR_DRM_DEVICES", "/dev/dri/card2:/dev/dri/card1")
+end
 
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "24")
