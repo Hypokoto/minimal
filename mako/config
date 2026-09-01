@@ -3,9 +3,9 @@
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
 font=AdwaitaMono Nerd Font 10
-background-color=#11141D
-text-color=#F2F6FF
-border-color=#1C2230
+background-color=#11161F
+text-color=#E8EDF5
+border-color=#19212D
 border-size=1
 border-radius=12
 padding=14,16
@@ -13,21 +13,21 @@ margin=10
 width=320
 height=110
 default-timeout=4000
-progress-color=source #00D9FF
+progress-color=source #7DD3FC
 
 [urgency=low]
-border-color=#1C2230
+border-color=#19212D
 
 [urgency=normal]
-border-color=#1C2230
+border-color=#19212D
 
 [urgency=critical]
-border-color=#FF5470
+border-color=#F08080
 default-timeout=0
 
 # OSD notifications (volume: 91110 / brightness: 91111) — replace in place, zero latency
 [app-name="minimal-osd"]
 group-by=category
 default-timeout=1500
-border-color=#1C2230
-progress-color=source #00D9FF
+border-color=#19212D
+progress-color=source #7DD3FC

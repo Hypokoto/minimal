@@ -2,18 +2,18 @@
    MINIMAL BENTO — 3-Pill Waybar Design System
    Generated from palette.md tokens — DO NOT introduce raw hex
    ============================================================ */
-@define-color background #0A0C12;
-@define-color surface    #11141D;
-@define-color overlay    #1C2230;
-@define-color text       #F2F6FF;
-@define-color muted      #8D95B3;
-@define-color primary    #00D9FF;
-@define-color secondary  #5B8CFF;
-@define-color highlight  #A05CFF;
-@define-color success    #4DFF91;
-@define-color warning    #FFCC66;
-@define-color danger     #FF5470;
-@define-color info       #61E6FF;
+@define-color background #0B0E14;
+@define-color surface    #11161F;
+@define-color overlay    #19212D;
+@define-color text       #E8EDF5;
+@define-color muted      #7F899B;
+@define-color primary    #7DD3FC;
+@define-color secondary  #8BA4FF;
+@define-color highlight  #B4A7FF;
+@define-color success    #8BE28B;
+@define-color warning    #E8C77B;
+@define-color danger     #F08080;
+@define-color info       #7DD3FC;
 
 /* ============================================================
    BASE RESET & TYPOGRAPHY
@@ -40,24 +40,24 @@ window#waybar {
    THREE BENTO PILL CONTAINERS
    ============================================================ */
 box#left {
-    background-color: rgba(17, 20, 29, 0.92);
-    border: 1px solid rgba(28, 34, 48, 0.85);
+    background-color: rgba(17, 22, 31, 0.92);
+    border: 1px solid rgba(25, 33, 45, 0.85);
     border-radius: 12px;
     padding: 2px 10px;
     margin: 0;
 }
 
 box#center {
-    background-color: rgba(17, 20, 29, 0.92);
-    border: 1px solid rgba(28, 34, 48, 0.85);
+    background-color: rgba(17, 22, 31, 0.92);
+    border: 1px solid rgba(25, 33, 45, 0.85);
     border-radius: 12px;
     padding: 2px 14px;
     margin: 0;
 }
 
 box#right {
-    background-color: rgba(17, 20, 29, 0.92);
-    border: 1px solid rgba(28, 34, 48, 0.85);
+    background-color: rgba(17, 22, 31, 0.92);
+    border: 1px solid rgba(25, 33, 45, 0.85);
     border-radius: 12px;
     padding: 2px 10px;
     margin: 0;
@@ -92,7 +92,7 @@ box#right {
 #network:active,
 #battery:active,
 #pulseaudio:active {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(232, 237, 245, 0.08);
 }
 
 /* ============================================================
@@ -107,7 +107,7 @@ box#right {
 
 #custom-logo:hover {
     color: @text;
-    background-color: rgba(0, 217, 255, 0.12);
+    background-color: rgba(125, 211, 252, 0.12);
 }
 
 #workspaces button {
@@ -123,25 +123,25 @@ box#right {
 #workspaces button.active {
     color: @text;
     background-color: @overlay;
-    border-color: rgba(0, 217, 255, 0.4);
+    border-color: rgba(125, 211, 252, 0.4);
 }
 
 #workspaces button.urgent {
     color: @danger;
-    background-color: rgba(255, 84, 112, 0.15);
-    border-color: rgba(255, 84, 112, 0.4);
+    background-color: rgba(240, 128, 128, 0.15);
+    border-color: rgba(240, 128, 128, 0.4);
 }
 
 #workspaces button:hover:not(.active) {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(232, 237, 245, 0.05);
     color: @text;
 }
 
 #submap {
     color: @highlight;
-    background-color: rgba(160, 92, 255, 0.12);
+    background-color: rgba(180, 167, 255, 0.12);
     border-radius: 6px;
-    border: 1px solid rgba(160, 92, 255, 0.3);
+    border: 1px solid rgba(180, 167, 255, 0.3);
     margin-left: 6px;
 }
 
@@ -182,16 +182,16 @@ box#right {
 
 #custom-security.warning {
     color: @warning;
-    background-color: rgba(255, 204, 102, 0.10);
+    background-color: rgba(232, 199, 123, 0.10);
 }
 
 #custom-security.degraded {
     color: @danger;
-    background-color: rgba(255, 84, 112, 0.15);
+    background-color: rgba(240, 128, 128, 0.15);
 }
 
 #custom-security:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+    background-color: rgba(232, 237, 245, 0.08);
 }
 
 #pulseaudio {
@@ -211,10 +211,11 @@ box#right {
 
 #network.disconnected {
     color: @danger;
-    background-color: rgba(255, 84, 112, 0.12);
+    background-color: rgba(240, 128, 128, 0.12);
     border-radius: 6px;
 }
 
+/* Discrete Battery States (No Gradients) */
 #battery {
     color: @muted;
     font-weight: 500;
@@ -230,15 +231,15 @@ box#right {
 
 #battery.critical:not(.charging) {
     color: @danger;
-    background-color: rgba(255, 84, 112, 0.15);
+    background-color: rgba(240, 128, 128, 0.15);
     border-radius: 6px;
     animation: blink-danger 1.5s ease-in-out infinite;
 }
 
 @keyframes blink-danger {
-    0% { background-color: rgba(255, 84, 112, 0.10); }
-    50% { background-color: rgba(255, 84, 112, 0.30); }
-    100% { background-color: rgba(255, 84, 112, 0.10); }
+    0% { background-color: rgba(240, 128, 128, 0.10); }
+    50% { background-color: rgba(240, 128, 128, 0.30); }
+    100% { background-color: rgba(240, 128, 128, 0.10); }
 }
 
 #tray {
@@ -252,7 +253,7 @@ box#right {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: rgba(255, 84, 112, 0.2);
+    background-color: rgba(240, 128, 128, 0.2);
     border-radius: 6px;
 }
 

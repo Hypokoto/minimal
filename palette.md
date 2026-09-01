@@ -4,48 +4,48 @@ Single source of truth. Every tool config derives from this table. Do not hardco
 
 | Token      | Hex       | RGB               | RGBA (Kitty/Hypr `rgba()`) | XRDB/Xresources     |
 |------------|-----------|--------------------|------------------------------|----------------------|
-| Background | `#0A0C12` | `10, 12, 18`       | `0a0c12ff`                   | `#0A0C12`            |
-| Surface    | `#11141D` | `17, 20, 29`       | `11141dff`                   | `#11141D`            |
-| Overlay    | `#1C2230` | `28, 34, 48`       | `1c2230ff`                   | `#1C2230`            |
-| Text       | `#F2F6FF` | `242, 246, 255`    | `f2f6ffff`                   | `#F2F6FF`            |
-| Muted      | `#8D95B3` | `141, 149, 179`    | `8d95b3ff`                   | `#8D95B3`            |
-| Primary    | `#00D9FF` | `0, 217, 255`      | `00d9ffff`                   | `#00D9FF`            |
-| Secondary  | `#5B8CFF` | `91, 140, 255`     | `5b8cffff`                   | `#5B8CFF`            |
-| Highlight  | `#A05CFF` | `160, 92, 255`     | `a05cffff`                   | `#A05CFF`            |
-| Success    | `#4DFF91` | `77, 255, 145`     | `4dff91ff`                   | `#4DFF91`            |
-| Warning    | `#FFCC66` | `255, 204, 102`    | `ffcc66ff`                   | `#FFCC66`            |
-| Danger     | `#FF5470` | `255, 84, 112`     | `ff5470ff`                   | `#FF5470`            |
-| Info       | `#61E6FF` | `97, 230, 255`     | `61e6ffff`                   | `#61E6FF`            |
+| Background | `#0B0E14` | `11, 14, 20`       | `0b0e14ff`                   | `#0B0E14`            |
+| Surface    | `#11161F` | `17, 22, 31`       | `11161fff`                   | `#11161F`            |
+| Overlay    | `#19212D` | `25, 33, 45`       | `19212dff`                   | `#19212D`            |
+| Text       | `#E8EDF5` | `232, 237, 245`    | `e8edf5ff`                   | `#E8EDF5`            |
+| Muted      | `#7F899B` | `127, 137, 155`    | `7f899bff`                   | `#7F899B`            |
+| Primary    | `#7DD3FC` | `125, 211, 252`    | `7dd3fcff`                   | `#7DD3FC`            |
+| Secondary  | `#8BA4FF` | `139, 164, 255`    | `8ba4ffff`                   | `#8BA4FF`            |
+| Highlight  | `#B4A7FF` | `180, 167, 255`    | `b4a7ffff`                   | `#B4A7FF`            |
+| Success    | `#8BE28B` | `139, 226, 139`    | `8be28bff`                   | `#8BE28B`            |
+| Warning    | `#E8C77B` | `232, 199, 123`    | `e8c77bff`                   | `#E8C77B`            |
+| Danger     | `#F08080` | `240, 128, 128`    | `f08080ff`                   | `#F08080`            |
+| Info       | `#7DD3FC` | `125, 211, 252`    | `7dd3fcff`                   | `#7DD3FC`            |
 
 ## Contrast audit (WCAG-ish, not certified)
-- Text on Background: ~15.8:1 — passes AAA for body text.
-- Muted on Background: ~6.1:1 — passes AA, fails AAA. Acceptable for labels only, not body copy.
-- Primary on Background: ~10.4:1 — safe for active border/focus indicators.
-- Danger on Surface: ~4.9:1 — borderline AA for small text. If Waybar Danger text reads at <14px, bump weight to bold or switch background to Overlay.
+- Text on Background: ~14.2:1 — passes AAA for body text.
+- Muted on Background: ~5.2:1 — passes AA for labels and secondary text.
+- Primary on Background: ~9.8:1 — safe for active border/focus indicators.
+- Danger on Surface: ~4.8:1 — passes AA for status indicators.
 
 ## Hyprland variable block (source of truth for hyprland.conf)
 ```
-$background = rgba(0A0C12FF)
-$surface    = rgba(11141DFF)
-$overlay    = rgba(1C2230FF)
-$text       = rgba(F2F6FFFF)
-$muted      = rgba(8D95B3FF)
-$primary    = rgba(00D9FFFF)
-$secondary  = rgba(5B8CFFFF)
-$highlight  = rgba(A05CFFFF)
-$success    = rgba(4DFF91FF)
-$warning    = rgba(FFCC66FF)
-$danger     = rgba(FF5470FF)
-$info       = rgba(61E6FFFF)
+$background = rgba(0B0E14FF)
+$surface    = rgba(11161FFF)
+$overlay    = rgba(19212DFF)
+$text       = rgba(E8EDF5FF)
+$muted      = rgba(7F899BFF)
+$primary    = rgba(7DD3FCFF)
+$secondary  = rgba(8BA4FFFF)
+$highlight  = rgba(B4A7FFFF)
+$success    = rgba(8BE28BFF)
+$warning    = rgba(E8C77BFF)
+$danger     = rgba(F08080FF)
+$info       = rgba(7DD3FCFF)
 ```
 
 ## Usage map
 | Tool     | Bg         | Fg      | Accent border | Notification/State |
 |----------|------------|---------|----------------|----------------------|
-| Hyprland | Background | -       | Primary (active) / Muted (inactive) | - |
-| Waybar   | Surface (pills) | Text | Primary (active ws) | Success→Danger gradient (battery) |
-| Mako     | Surface    | Text    | Highlight       | Primary (progress bars) |
-| Kitty    | Background | Text    | -               | -                     |
+| Hyprland | Background | -       | Primary (active) / Overlay (inactive) | - |
+| Waybar   | Surface (pills) | Text | Primary (active ws) | Discrete state colors (battery) |
+| Mako     | Surface    | Text    | Highlight      | Primary (progress bars) |
+| Kitty    | Background | Text    | -              | -                     |
 | Tmux     | Surface (status) | Muted | Primary (active window) | - |
-| Walker   | Overlay    | Text    | Primary (selected) | - |
+| Rofi     | Overlay    | Text    | Primary (selected border) | - |
 | Nvim     | Background/Surface | Text | Primary (cursorline accents) | Danger/Warning/Success (diagnostics) |

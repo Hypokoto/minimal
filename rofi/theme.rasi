@@ -4,23 +4,23 @@
  */
 
 * {
-    bg:        #0A0C12;
-    surface:   #11141D;
-    overlay:   #1C2230;
-    fg:        #F2F6FF;
-    muted:     #8D95B3;
-    primary:   #00D9FF;
-    secondary: #5B8CFF;
-    highlight: #A05CFF;
-    success:   #4DFF91;
-    warning:   #FFCC66;
-    danger:    #FF5470;
-    info:      #61E6FF;
+    bg:        #0B0E14;
+    surface:   #11161F;
+    overlay:   #19212D;
+    fg:        #E8EDF5;
+    muted:     #7F899B;
+    primary:   #7DD3FC;
+    secondary: #8BA4FF;
+    highlight: #B4A7FF;
+    success:   #8BE28B;
+    warning:   #E8C77B;
+    danger:    #F08080;
+    info:      #7DD3FC;
 
     /* transparent & overlay layering */
-    bg-trans:      #0A0C12EE;
-    surface-trans: #11141DF2;
-    overlay-trans: #1C2230AA;
+    bg-trans:      #0B0E14EE;
+    surface-trans: #11161FF2;
+    overlay-trans: #19212DAA;
 
     font: "AdwaitaMono Nerd Font 10.5";
 
@@ -50,7 +50,7 @@ inputbar {
     padding:          10px 14px;
     spacing:          10px;
     border:           1px;
-    border-color:     #00D9FF33;
+    border-color:     #7DD3FC33;
 }
 
 listview {
