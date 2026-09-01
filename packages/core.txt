@@ -19,8 +19,5 @@ cliphist
 grim
 slurp
 brightnessctl
-swayosd-git
 rofimoji
-jmtpfs
 scdoc
-ripdrag

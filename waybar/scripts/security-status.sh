@@ -9,7 +9,7 @@ failed_services=$(systemctl --failed --no-legend 2>/dev/null | wc -l || echo 0)
 
 # 3. Check Network Listeners (excluding loopback)
 # ss -tuln gives TCP/UDP listening ports. grep -v '127.0.0.1\|::1' excludes localhost.
-listeners=$(ss -tuln 2>/dev/null | grep -E "^(tcp|udp)" | grep -v '127\.0\.0\.1\|::1' | wc -l || echo 0)
+listeners=$(ss -tuln 2>/dev/null | grep -E "^(tcp|udp)" | grep -v -c '127\.0\.0\.1\|::1' || echo 0)
 
 status="SECURE"
 icon="󰒔"
