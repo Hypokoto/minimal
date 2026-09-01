@@ -142,3 +142,4 @@ fi
 log "=== MINIMAL DEPLOYMENT COMPLETE ==="
 log "Log file saved to: $LOG_FILE"
 deploy_link "$DOTFILES_DIR/systemd" "$HOME/.config/systemd"
+systemctl --user daemon-reload && systemctl --user enable --now minimal-battery-monitor.service
