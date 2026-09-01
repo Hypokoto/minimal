@@ -60,7 +60,7 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lo
 local rofiScripts = os.getenv("HOME") .. "/.config/rofi/scripts"
 
 hl.bind(mainMod .. " + Grave", hl.dsp.exec_cmd(rofiScripts .. "/control-center.sh"))
-hl.bind("ALT + Tab", hl.dsp.exec_cmd("rofi -show window -theme " .. os.getenv("HOME") .. "/.config/rofi/theme.rasi"))
+hl.bind("ALT + Tab", hl.dsp.exec_cmd("rofi -show window -show-icons -theme " .. os.getenv("HOME") .. "/.config/rofi/window.rasi"))
 
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock")) 
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(rofiScripts .. "/powermenu.sh"))

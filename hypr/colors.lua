@@ -178,9 +178,9 @@ element {
 }
 
 element selected {
-    background-color: @overlay;
-    border-color:     %s66;
-    text-color:       @primary;
+    background-color: @primary;
+    border-color:     @primary;
+    text-color:       @bg;
 }
 
 element normal {
@@ -193,8 +193,7 @@ element normal {
         hex_colors.secondary, hex_colors.highlight, hex_colors.success,
         hex_colors.warning, hex_colors.danger, hex_colors.info,
         hex_colors.background, hex_colors.surface, hex_colors.overlay,
-        hex_colors.primary, hex_colors.primary
-    )
+        hex_colors.primary)
     write_file(base_dir .. "/rofi/theme.rasi", theme_rasi)
 
     -- 2. btop/btop.theme

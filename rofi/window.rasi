@@ -1,0 +1,48 @@
+@import "theme.rasi"
+
+window {
+    width: 800px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    children: [ listview ];
+    padding: 24px;
+}
+
+listview {
+    columns: 1;
+    lines: 7;
+    spacing: 12px;
+    fixed-height: true;
+}
+
+element {
+    orientation: horizontal;
+    padding: 16px 20px;
+    spacing: 20px;
+    border-radius: 12px;
+    background-color: @surface;
+    border: 1px;
+    border-color: @overlay;
+}
+
+element-icon {
+    size: 32px;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: @fg;
+    font: "AdwaitaMono Nerd Font 13";
+}
+
+element selected {
+    background-color: @primary;
+    border-color: @primary;
+}
+
+element-text selected {
+    text-color: @bg;
+}

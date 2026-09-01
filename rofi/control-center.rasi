@@ -10,22 +10,9 @@ window {
 }
 
 mainbox {
-    children: [ inputbar, listview ];
+    children: [ listview ];
     padding: 24px;
     spacing: 16px;
-}
-
-inputbar {
-    children: [ prompt ];
-    padding: 12px;
-    background-color: @surface;
-    border-radius: 12px;
-}
-
-prompt {
-    font: "AdwaitaMono Nerd Font 14 Bold";
-    text-color: @primary;
-    horizontal-align: 0.5;
 }
 
 listview {
