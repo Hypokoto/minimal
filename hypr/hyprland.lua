@@ -304,14 +304,14 @@ hl.config({
         },
         hyprtasking = {
             layout = "grid",
-            gap_size = 10,
+            gap_size = 4,
             bg_color = 0xff0b0e14,
-            border_size = 2,
+            border_size = 3,
             exit_on_hovered = false,
             warp_on_move_window = 1,
             close_overview_on_reload = false,
             drag_button = 0x110,
-            select_button = 0x111,
+            select_button = 0x110,
             jump = {
                 enabled = false,
                 label_color = 0xffffffff,
@@ -330,8 +330,8 @@ hl.config({
                 rows = 3,
                 cols = 3,
                 loop = false,
-                layers = 2,
-                loop_layers = true,
+                layers = 1,
+                loop_layers = false,
                 gaps_use_aspect_ratio = true,
             },
             linear = {

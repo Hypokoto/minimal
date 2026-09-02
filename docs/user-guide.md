@@ -25,11 +25,22 @@ Welcome to **Minimal OS Shell**, an Arch Linux Hyprland desktop environment engi
 - **`SUPER + ALT + Arrow Keys`**: Snap active window to screen quarters.
 - **`SUPER + ALT + R`**: **Window Rescue** — emergency center-snaps misplaced or offscreen floating windows at 65% width/height.
 
-### 3. Workspaces & Overview
+### 3. Workspaces & Visual Task Overview (`hyprtasking`)
 - **`SUPER + 1..9`**: Switch to virtual workspace 1 through 9.
 - **`SUPER + Shift + 1..9`**: Move active window to workspace 1 through 9.
 - **`SUPER + S`**: Toggle Special Scratchpad workspace.
-- **`SUPER + T`** or **`SUPER + Grave` (`~`)**: Toggle `hyprtasking` visual task switcher overview.
+- **`SUPER + T`** or **`SUPER + ~`**: Toggle `hyprtasking` visual Mission Control grid overview.
+- **`SUPER + TAB`**: Toggle cursor-focused overview.
+- **`SUPER + SHIFT + Q`**: Kill hovered window inside overview.
+
+#### 🖱️ Mouse & Touchpad Controls in Overview:
+- **Left Click**: Select and switch focus directly to any window/workspace.
+- **Left Click + Drag**: Drag-and-drop window thumbnails between workspaces in the grid.
+- **4-Finger Swipe Up**: Open overview grid via touchpad.
+- **4-Finger Swipe Down**: Exit overview.
+- **3-Finger Swipe Left/Right**: Navigate between grid workspaces.
+- **Escape** or **Click Empty Space**: Exit overview.
+
 
 ### 4. Utilities & Power Tools
 - **`SUPER + SHIFT + N`**: **Night Light Shader Toggle** — toggles 4500K warm compositor color temperature via `hyprsunset` (0MB RAM).

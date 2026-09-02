@@ -121,11 +121,69 @@ hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }), { des
 
 -- Task Overview (hyprtasking) & Workspace Navigation
 hl.bind(mainMod .. " + Tab",        hl.dsp.focus({ workspace = "previous" }), { description = "Workspace: Focus previous active workspace" })
-hl.bind(mainMod .. " + T",       hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview" })
-hl.bind(mainMod .. " + TAB",     hl.dsp.exec_raw("hyprtasking:toggle cursor"), { description = "Tasking: Toggle cursor overview" })
-hl.bind(mainMod .. " + grave",   hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview" })
-hl.bind(mainMod .. " + code:49", hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview (keycode 49)" })
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_raw("hyprtasking:killhovered"), { description = "Tasking: Kill hovered window in overview" })
+hl.bind(mainMod .. " + T", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { description = "Tasking: Toggle grid overview" })
+hl.bind(mainMod .. " + TAB", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("cursor")
+    end
+end, { description = "Tasking: Toggle cursor overview" })
+hl.bind(mainMod .. " + grave", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { description = "Tasking: Toggle grid overview" })
+hl.bind(mainMod .. " + SHIFT + grave", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { description = "Tasking: Toggle grid overview (tilde)" })
+hl.bind(mainMod .. " + asciitilde", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { description = "Tasking: Toggle grid overview (asciitilde)" })
+hl.bind(mainMod .. " + code:49", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { description = "Tasking: Toggle grid overview (keycode 49)" })
+hl.bind(mainMod .. " + SHIFT + Q", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.killhovered then
+        hl.plugin.hyprtasking.killhovered()
+    end
+end, { description = "Tasking: Kill hovered window in overview" })
+
+-- Overview Arrow Keys Navigation & Enter Selection
+hl.bind("Up", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.move("up")
+    end
+end, { non_consuming = true, description = "Tasking: Move focus up in grid" })
+hl.bind("Down", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.move("down")
+    end
+end, { non_consuming = true, description = "Tasking: Move focus down in grid" })
+hl.bind("Left", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.move("left")
+    end
+end, { non_consuming = true, description = "Tasking: Move focus left in grid" })
+hl.bind("Right", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.move("right")
+    end
+end, { non_consuming = true, description = "Tasking: Move focus right in grid" })
+hl.bind("Return", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.move("out")
+    end
+end, { non_consuming = true, description = "Tasking: Select workspace on Enter" })
+
 hl.bind("Escape", function()
     if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
         hl.plugin.hyprtasking.toggle("all")
