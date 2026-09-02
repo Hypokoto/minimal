@@ -8,11 +8,11 @@
       "top": 2,
       "right": 2
     },
-    "color": { "1": "cyan", "2": "blue" }
+    "color": { "1": "#7DD3FC", "2": "#8BA4FF" }
   },
   "display": {
-    "separator": " → ",
-    "color": { "keys": "cyan", "title": "cyan" }
+    "separator": "  ",
+    "color": { "keys": "#7DD3FC", "title": "#E8EDF5" }
   },
   "modules": [
     "title",

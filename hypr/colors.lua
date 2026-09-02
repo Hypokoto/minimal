@@ -280,7 +280,8 @@ bold_font        auto
 italic_font      auto
 font_size        11.0
 
-background_opacity 1.0
+background_opacity 0.92
+dynamic_background_opacity yes
 window_padding_width 12
 confirm_os_window_close 0
 
@@ -356,15 +357,15 @@ enabled_layouts tall,fat,grid,stack
 # Generated from palette.md — DO NOT edit directly.
 # Requires mako >= 1.7 for progress-bar 'value' hint rendering
 
-font=AdwaitaMono Nerd Font 10
+font=Adwaita Sans 10
 background-color=%s
 text-color=%s
 border-color=%s
 border-size=1
 border-radius=12
-padding=14,16
+padding=16,18
 margin=10
-width=320
+width=340
 height=110
 default-timeout=4000
 progress-color=source %s

@@ -45,5 +45,5 @@ case "${CHOICE}" in
     *"Wallpapers"*)  bash "$HOME/.config/hypr/wallpaper/picker.sh" ;;
     *"Displays"*)    hyprctl dispatch exec wdisplays || notify-send "Displays" "wdisplays not installed" ;;
     *"Battery"*)     bash "${SCRIPTS}/battery.sh" ;;
-    *"Power Menu"*)  bash "${SCRIPTS}/powermenu.sh" ;;
+    *"Power Menu"*)  wlogout -b 2 -c 5 -r 5 ;;
 esac

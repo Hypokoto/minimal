@@ -14,3 +14,5 @@ man-db
 man-pages
 bc
 jq
+hypridle
+hyprsunset

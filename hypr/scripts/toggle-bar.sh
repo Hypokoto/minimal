@@ -1,80 +1,77 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# toggle-bar.sh — Atomic Waybar + Bento Grid Toggle
+# toggle-bar.sh — Focus / Bento Mode Toggle
 #
-# Bar hidden  → no gaps, no rounding, no borders (windows fill edge to edge)
-# Bar visible → bento gaps (in=6 out=10), rounding=10, 1px accent borders
+# SUPER+B toggles between:
+#   Focus mode  — Waybar hidden, gaps=0, border=0, rounding=0
+#   Bento mode  — Waybar visible, gaps restored, border + rounding applied
 #
-# State is tracked via /tmp/bar-visible flag file.
-# Low-battery auto-reveal also calls this script with --show.
+# State tracked via /tmp/bar-visible flag file.
 # ==============================================================================
 set -euo pipefail
 
 STATE_FILE="/tmp/bar-visible"
 
-# ---------------------------------------------------------------------------
-# Hyprland gap / rounding helpers (uses hyprctl keyword — no reload needed)
-# ---------------------------------------------------------------------------
-apply_bento() {
-    hyprctl keyword general:gaps_in      6
-    hyprctl keyword general:gaps_out     10
-    hyprctl keyword general:border_size  1
-    hyprctl keyword decoration:rounding  12
-    hyprctl keyword "general:col.active_border"   "rgba(7DD3FCFF)"
-    hyprctl keyword "general:col.inactive_border" "rgba(19212DFF)"
+BENTO_GAPS_IN=6
+BENTO_GAPS_OUT=10
+BENTO_BORDER=1
+BENTO_ROUNDING=12
+
+set_bento_mode() {
+    hyprctl keyword general:gaps_in "$BENTO_GAPS_IN" 2>/dev/null || true
+    hyprctl keyword general:gaps_out "$BENTO_GAPS_OUT" 2>/dev/null || true
+    hyprctl keyword general:border_size "$BENTO_BORDER" 2>/dev/null || true
+    hyprctl keyword decoration:rounding "$BENTO_ROUNDING" 2>/dev/null || true
 }
 
-apply_clean() {
-    hyprctl keyword general:gaps_in      0
-    hyprctl keyword general:gaps_out     0
-    hyprctl keyword general:border_size  0
-    hyprctl keyword decoration:rounding  0
+set_focus_mode() {
+    hyprctl keyword general:gaps_in 0 2>/dev/null || true
+    hyprctl keyword general:gaps_out 0 2>/dev/null || true
+    hyprctl keyword general:border_size 0 2>/dev/null || true
+    hyprctl keyword decoration:rounding 0 2>/dev/null || true
 }
 
-# ---------------------------------------------------------------------------
-# Waybar helper — toggle via SIGUSR1 (show via SIGUSR2 = guaranteed visible)
-# ---------------------------------------------------------------------------
 waybar_toggle() {
     local pid
     pid=$(pgrep -x waybar | head -n1 || true)
-    [ -n "$pid" ] && kill -SIGUSR1 "$pid" 2>/dev/null || waybar &
+    if [ -n "$pid" ]; then
+        kill -SIGUSR1 "$pid" 2>/dev/null
+    else
+        waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css &
+    fi
 }
 
 waybar_show() {
     local pid
     pid=$(pgrep -x waybar | head -n1 || true)
-    [ -n "$pid" ] && kill -SIGUSR2 "$pid" 2>/dev/null || waybar &
+    if [ -n "$pid" ]; then
+        kill -SIGUSR2 "$pid" 2>/dev/null
+    else
+        waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css &
+    fi
 }
 
-# ---------------------------------------------------------------------------
-# Main logic
-# ---------------------------------------------------------------------------
 case "${1:-}" in
     --show)
-        # Called by low-battery auto-reveal; force bar on + bento grid
         waybar_show
-        apply_bento
+        set_bento_mode
         touch "$STATE_FILE"
         ;;
     --hide)
-        # Programmatic hide; remove bento grid
-        waybar_show   # SIGUSR2 = show; we then SIGUSR1 to hide (toggle off)
+        waybar_show
         sleep 0.05
         waybar_toggle
-        apply_clean
+        set_focus_mode
         rm -f "$STATE_FILE"
         ;;
     *)
-        # SUPER+B interactive toggle
         if [ -f "$STATE_FILE" ]; then
-            # Currently visible → hide and remove bento grid
             waybar_toggle
-            apply_clean
+            set_focus_mode
             rm -f "$STATE_FILE"
         else
-            # Currently hidden → show and apply bento grid
             waybar_toggle
-            apply_bento
+            set_bento_mode
             touch "$STATE_FILE"
         fi
         ;;

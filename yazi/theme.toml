@@ -1,104 +1,87 @@
 # ~/.config/yazi/theme.toml — Minimal Bento Yazi Theme
-# Single source of truth: palette.md exact tokens.
+# Strictly derived from palette.md tokens. Do not hardcode other hex values.
+#
+# Token map (palette.md):
+#   background = #0B0E14   surface   = #11161F   overlay  = #19212D
+#   text       = #E8EDF5   muted     = #7F899B
+#   primary    = #7DD3FC   secondary = #8BA4FF   highlight = #B4A7FF
+#   success    = #8BE28B   warning   = #E8C77B   danger    = #F08080
 
 [manager]
-cwd = { fg = "#00D9FF", bold = true }
+cwd = { fg = "#7DD3FC", bold = true }
 
 # Hovered / Selected items
-hovered  = { fg = "#F2F6FF", bg = "#1C2230", bold = true }
-selected = { fg = "#00D9FF", bg = "#1C2230", bold = true }
+hovered  = { fg = "#E8EDF5", bg = "#19212D", bold = true }
+selected = { fg = "#7DD3FC", bg = "#19212D" }
 
 # Find item
-find_keyword  = { fg = "#FFCC66", bold = true }
-find_position = { fg = "#A05CFF", bg = "transparent" }
+find_keyword  = { fg = "#E8C77B", bold = true }
+find_position = { fg = "#B4A7FF", bg = "reset" }
 
 # Marker
-marker_copied   = { fg = "#4DFF91", bg = "#4DFF91" }
-marker_cut      = { fg = "#FF5470", bg = "#FF5470" }
-marker_marked   = { fg = "#00D9FF", bg = "#00D9FF" }
-marker_selected = { fg = "#5B8CFF", bg = "#5B8CFF" }
+marker_copied   = { fg = "#8BE28B", bg = "#8BE28B" }
+marker_cut      = { fg = "#F08080", bg = "#F08080" }
+marker_marked   = { fg = "#7DD3FC", bg = "#7DD3FC" }
+marker_selected = { fg = "#8BA4FF", bg = "#8BA4FF" }
 
 # Tab
-tab_active   = { fg = "#00D9FF", bg = "#1C2230", bold = true }
-tab_inactive = { fg = "#8D95B3", bg = "#11141D" }
+tab_active   = { fg = "#7DD3FC", bg = "#19212D", bold = true }
+tab_inactive = { fg = "#7F899B", bg = "#11161F" }
 tab_width    = 1
 
 # Border
 border_symbol = "│"
-border_style  = { fg = "#1C2230" }
+border_style  = { fg = "#19212D" }
 
 [status]
 separator_open  = ""
 separator_close = ""
-separator_style = { fg = "#1C2230", bg = "#1C2230" }
+separator_style = { fg = "#19212D", bg = "#19212D" }
 
-# Mode indicator
-mode_normal = { fg = "#0A0C12", bg = "#00D9FF", bold = true }
-mode_select = { fg = "#0A0C12", bg = "#A05CFF", bold = true }
-mode_unset  = { fg = "#0A0C12", bg = "#8D95B3", bold = true }
+# Mode indicator — fg must be background for legibility over colored bg
+mode_normal = { fg = "#0B0E14", bg = "#7DD3FC", bold = true }
+mode_select = { fg = "#0B0E14", bg = "#B4A7FF", bold = true }
+mode_unset  = { fg = "#0B0E14", bg = "#7F899B", bold = true }
 
 # Progress
-progress_label  = { fg = "#F2F6FF", bold = true }
-progress_normal = { fg = "#00D9FF", bg = "#1C2230" }
-progress_error  = { fg = "#FF5470", bg = "#1C2230" }
+progress_label  = { fg = "#E8EDF5", bold = true }
+progress_normal = { fg = "#7DD3FC", bg = "#19212D" }
+progress_error  = { fg = "#F08080", bg = "#19212D" }
 
 # Permissions
-permissions_t = { fg = "#5B8CFF" }
-permissions_r = { fg = "#FFCC66" }
-permissions_w = { fg = "#FF5470" }
-permissions_x = { fg = "#4DFF91" }
-permissions_s = { fg = "#8D95B3" }
+permissions_t = { fg = "#8BA4FF" }
+permissions_r = { fg = "#E8C77B" }
+permissions_w = { fg = "#F08080" }
+permissions_x = { fg = "#8BE28B" }
+permissions_s = { fg = "#7F899B" }
 
 [input]
-border   = { fg = "#00D9FF" }
-title    = { fg = "#F2F6FF" }
-value    = { fg = "#F2F6FF" }
-selected = { bg = "#1C2230" }
+border   = { fg = "#7DD3FC" }
+title    = { fg = "#E8EDF5" }
+value    = { fg = "#E8EDF5" }
+selected = { bg = "#19212D" }
 
 [select]
-border   = { fg = "#00D9FF" }
-active   = { fg = "#00D9FF", bold = true }
-inactive = { fg = "#8D95B3" }
+border   = { fg = "#7DD3FC" }
+active   = { fg = "#7DD3FC", bold = true }
+inactive = { fg = "#7F899B" }
 
 [tasks]
-border  = { fg = "#1C2230" }
-title   = { fg = "#00D9FF" }
-hovered = { fg = "#F2F6FF", bg = "#1C2230" }
+border  = { fg = "#19212D" }
+title   = { fg = "#7DD3FC" }
+hovered = { fg = "#E8EDF5", bg = "#19212D" }
 
 [which]
-mask            = { bg = "#0A0C12" }
-cand            = { fg = "#00D9FF" }
-rest            = { fg = "#8D95B3" }
-desc            = { fg = "#F2F6FF" }
-separator       = " ── "
-separator_style = { fg = "#1C2230" }
+mask            = { bg = "#0B0E14" }
+cand            = { fg = "#7DD3FC" }
+rest            = { fg = "#7F899B" }
+desc            = { fg = "#E8EDF5" }
+separator       = "  "
+separator_style = { fg = "#19212D" }
 
 [help]
-on      = { fg = "#00D9FF" }
-exec    = { fg = "#5B8CFF" }
-desc    = { fg = "#8D95B3" }
-hovered = { fg = "#F2F6FF", bg = "#1C2230" }
-footer  = { fg = "#F2F6FF", bg = "#11141D" }
-
-[filetree]
-folder_offset = [1, 0]
-
-[filetype]
-rules = [
-	# Images
-	{ mime = "image/*", fg = "#61E6FF" },
-	# Media
-	{ mime = "video/*", fg = "#A05CFF" },
-	{ mime = "audio/*", fg = "#A05CFF" },
-	# Archives
-	{ mime = "application/zip",             fg = "#FFCC66" },
-	{ mime = "application/x-tar",           fg = "#FFCC66" },
-	{ mime = "application/x-bzip2",         fg = "#FFCC66" },
-	{ mime = "application/x-7z-compressed", fg = "#FFCC66" },
-	{ mime = "application/x-rar",           fg = "#FFCC66" },
-	# Code
-	{ mime = "application/json", fg = "#00D9FF" },
-	{ mime = "text/*",             fg = "#F2F6FF" },
-	# Directories
-	{ is = "dir", fg = "#5B8CFF", bold = true },
-]
+on      = { fg = "#7DD3FC" }
+exec    = { fg = "#8BA4FF" }
+desc    = { fg = "#7F899B" }
+hovered = { fg = "#E8EDF5", bg = "#19212D" }
+footer  = { fg = "#7F899B", bg = "#0B0E14" }

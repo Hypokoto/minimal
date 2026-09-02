@@ -1,3 +1,5 @@
 swayosd-git
 jmtpfs
 ripdrag
+awww
+wlogout

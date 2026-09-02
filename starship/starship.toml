@@ -5,6 +5,7 @@ add_newline = false
 command_timeout = 500
 
 format = """
+$username\
 $directory\
 $git_branch\
 $git_status\
@@ -19,6 +20,12 @@ $rust\
 $cmd_duration\
 $line_break\
 $character"""
+
+# --- Username ---
+[username]
+show_always = false
+style_user = "bold #7DD3FC"
+format = "[$user]($style) "
 
 # --- Directory ---
 [directory]

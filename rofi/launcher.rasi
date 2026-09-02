@@ -9,13 +9,11 @@ configuration {
 }
 
 window {
-    width: 750px;
-    location: north west;
-    anchor: north west;
-    y-offset: 36px;
-    x-offset: 6px;
-    border-radius: 4px;
-    border: 2px;
+    width: 720px;
+    location: center;
+    anchor: center;
+    border-radius: 14px;
+    border: 1px;
     border-color: @overlay;
     background-color: @bg;
 }
@@ -30,7 +28,7 @@ mainbox {
 leftbox {
     orientation: vertical;
     expand: false;
-    width: 160px;
+    width: 180px;
     background-color: @surface-trans;
     border: 0px 1px 0px 0px;
     border-color: @overlay;
@@ -57,7 +55,7 @@ button {
     text-color: @muted;
     background-color: transparent;
     cursor: pointer;
-    font: "AdwaitaMono Nerd Font 10";
+    font: "Adwaita Sans 10";
     border: 0px;
     horizontal-align: 0.0;
 }
@@ -73,7 +71,7 @@ rightbox {
     orientation: vertical;
     children: [ inputbar, listview ];
     expand: true;
-    padding: 12px;
+    padding: 16px;
     spacing: 12px;
     background-color: transparent;
 }
@@ -89,16 +87,16 @@ inputbar {
 
 prompt {
     text-color: @primary;
-    font: "AdwaitaMono Nerd Font 11 Bold";
+    font: "Adwaita Sans 11 Bold";
     padding: 0px 12px 0px 0px;
     background-color: inherit;
 }
 
 entry {
     text-color: @fg;
-    placeholder: "SEARCH //";
+    placeholder: "Search...";
     placeholder-color: @muted;
-    font: "AdwaitaMono Nerd Font 11";
+    font: "Adwaita Sans 13";
     background-color: inherit;
 }
 
@@ -140,5 +138,5 @@ element-text {
     text-color: inherit;
     background-color: inherit;
     vertical-align: 0.5;
-    font: "AdwaitaMono Nerd Font 10";
+    font: "Adwaita Sans 10";
 }

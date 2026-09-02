@@ -1,25 +1,16 @@
 -- ==============================================================================
--- Minimal — Core Configuration (Lua, Hyprland 0.55+)
+-- Minimal — Core Compositor Configuration (Lua, Hyprland 0.55+)
+-- Single source of truth for compositor rules, inputs, decoration, and window placement.
 -- ==============================================================================
--- Ported 1:1 from your hyprland.conf. Split into files like the original's
--- `source =` lines, using require() (each file gets its own Lua scope, so an
--- error in one doesn't take down the rest — see wiki.hypr.land/Configuring/Start).
---
--- hypridle.conf and hyprlock.conf are UNCHANGED — those are separate binaries
--- (hypridle, hyprlock) that still use the old hyprlang syntax and are not
--- affected by this migration. Leave them exactly as they are.
 
 -- --- Core System Sourcing ---
--- colors.lua replaces colors.conf (see that file's note — it wasn't actually
--- referenced by general{}/decoration{} in your original, just sourced+unused)
 local colors = require("colors")
 require("monitors")
 require("keybinds")
 
 -- --- Autostart Applications ---
--- exec-once → wrapped in the hyprland.start event so it only fires once at
--- boot, not on every config reload (Hyprland re-parses hyprland.lua on save).
 hl.on("hyprland.start", function()
+    hl.exec_cmd("hyprpm reload -n")
     hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/waybar-start.sh")
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("sleep 0.5 && " .. os.getenv("HOME") .. "/.config/hypr/wallpaper/restore.sh")
@@ -31,8 +22,6 @@ hl.on("hyprland.start", function()
 end)
 
 -- --- GPU Environment & Optimization ---
--- Dynamic Hardware Detection: If an AMD multi-GPU setup is detected (card1 + card2),
--- pass both DRM devices to allow Hyprland to output to the HDMI port wired to the dGPU.
 if os.rename("/dev/dri/card1", "/dev/dri/card1") and os.rename("/dev/dri/card2", "/dev/dri/card2") then
     hl.env("LIBVA_DRIVER_NAME", "radeonsi")
     hl.env("VDPAU_DRIVER", "radeonsi")
@@ -43,52 +32,92 @@ hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
 
--- --- Input Handling & Touchpad ---
+-- --- Input Handling & Touchpad Gestures ---
 hl.config({
     input = {
         kb_layout = "us",
+        numlock_by_default = true,
+        repeat_delay = 250,
+        repeat_rate = 35,
         follow_mouse = 1,
+        mouse_refocus = false,
+        off_window_axis_events = 2,
         sensitivity = 0,
         touchpad = {
             natural_scroll = true,
-            tap_to_click = true, -- NOTE: hyphenated tap-to-click became underscored; verify key name
+            tap_to_click = true,
+            disable_while_typing = true,
+            clickfinger_behavior = true,
+            scroll_factor = 0.7,
         },
+    },
+    gestures = {
+        workspace_swipe_distance = 700,
+        workspace_swipe_cancel_ratio = 0.2,
+        workspace_swipe_min_speed_to_force = 5,
+        workspace_swipe_direction_lock = true,
+        workspace_swipe_direction_lock_threshold = 10,
+        workspace_swipe_create_new = true,
+    },
+    binds = {
+        scroll_event_delay = 0,
+        hide_special_on_workspace_change = true,
+    },
+    xwayland = {
+        force_zero_scaling = true,
     },
 })
 
--- --- Touchpad Workspace Swipe Gestures (Hyprland 0.51+) ---
--- VERIFY: `gesture = 3, horizontal, workspace` is fairly new hyprlang syntax; the Lua
--- equivalent wasn't confirmed in current docs. Best-guess call below — check
--- wiki.hypr.land/Configuring/Variables (Gestures) or your LSP stubs for the real name.
-hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" }) -- VERIFY
+-- Multi-touch Input Gestures
+hl.gesture({ fingers = 3, direction = "swipe", action = "move" })
+hl.gesture({ fingers = 3, direction = "pinch", action = "fullscreen" })
+hl.gesture({ fingers = 4, direction = "horizontal", action = "workspace" })
 
 -- --- Core Compositor Look & Feel ---
--- Default state: clean desktop (no gaps, no borders, no rounding).
--- When the bar is toggled on via SUPER+B, toggle-bar.sh applies
--- bento grid values (gaps_in=6, gaps_out=10, rounding=10, border_size=1).
+-- Bento layout with 12px rounding, subtle 1px borders, balanced gaps & edge snapping.
 hl.config({
     general = {
-        gaps_in = 0,
-        gaps_out = 0,
-        border_size = 0,
+        gaps_in = 6,
+        gaps_out = 10,
+        gaps_workspaces = 50,
+        border_size = 1,
         layout = "dwindle",
-        allow_tearing = false,
+        allow_tearing = true, -- Enables `immediate` tearing window rules for gaming
         resize_on_border = true,
+        hover_icon_on_border = true,
+        ["col.active_border"] = "rgba(7DD3FCFF)",
+        ["col.inactive_border"] = "rgba(19212DFF)",
+        snap = {
+            enabled = true,
+            window_gap = 4,
+            monitor_gap = 5,
+            respect_gaps = true,
+        },
     },
     decoration = {
-        rounding = 0,
+        rounding = 12,
         active_opacity = 1.0,
         inactive_opacity = 0.96,
+        dim_inactive = true,
+        dim_strength = 0.05,
+        dim_special = 0.2,
         blur = {
             enabled = true,
-            size = 4,
-            passes = 2,
-            vibrancy = 0.17,
+            size = 6,
+            passes = 3,
+            vibrancy = 0.2,
+            vibrancy_darkness = 0.5,
             new_optimizations = true,
+            xray = true,
+            special = false,
+            popups = false,
+            popups_ignorealpha = 0.6,
         },
         shadow = {
             enabled = true,
-            range = 8,
+            range = 12,
+            offset = { 0, 2 },
+            render_power = 4,
             color = "rgba(0A0C1280)",
         },
     },
@@ -96,73 +125,221 @@ hl.config({
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         force_default_wallpaper = 0,
+        focus_on_activate = true,
+        mouse_move_enables_dpms = true,
+        key_press_enables_dpms = true,
+        animate_manual_resizes = false,
+        animate_mouse_windowdragging = false,
+        allow_session_lock_restore = true,
+        session_lock_xray = true,
+        initial_workspace_tracking = false,
     },
-})
-
--- --- Layout-Specific Behaviors ---
--- CRITICAL v0.55 FIX (carried over): pseudotile isn't a dwindle key anymore.
-hl.config({
     dwindle = {
         preserve_split = true,
+        smart_split = false,
+        smart_resizing = false,
     },
 })
 
-hl.config({
-    master = {
-        new_status = "master",
-        mfact = 0.55,
-    },
-})
+-- ==============================================================================
+-- Motion System (Bezier Motion System & Animation Curves)
+-- ==============================================================================
+hl.curve("expressiveFastSpatial",    { type = "bezier", points = { { 0.42, 1.67 }, { 0.21, 0.90 } } })
+hl.curve("expressiveSlowSpatial",    { type = "bezier", points = { { 0.39, 1.29 }, { 0.35, 0.98 } } })
+hl.curve("expressiveDefaultSpatial", { type = "bezier", points = { { 0.38, 1.21 }, { 0.22, 1.00 } } })
+hl.curve("emphasizedDecel",          { type = "bezier", points = { { 0.05, 0.70 }, { 0.10, 1.00 } } })
+hl.curve("emphasizedAccel",          { type = "bezier", points = { { 0.30, 0.00 }, { 0.80, 0.15 } } })
+hl.curve("standardDecel",            { type = "bezier", points = { { 0.00, 0.00 }, { 0.00, 1.00 } } })
+hl.curve("menu_decel",               { type = "bezier", points = { { 0.10, 1.00 }, { 0.00, 1.00 } } })
+hl.curve("menu_accel",               { type = "bezier", points = { { 0.52, 0.03 }, { 0.72, 0.08 } } })
+hl.curve("stall",                    { type = "bezier", points = { { 1.00, -0.1 }, { 0.70, 0.85 } } })
+hl.curve("apple_fluid",              { type = "bezier", points = { { 0.05, 0.90 }, { 0.10, 1.00 } } })
 
--- --- Animations (Apple-Design Fluid Interface) ---
--- Replaced default bezier with a critically damped, Apple-inspired spring approximation.
--- This curve (0.05, 0.9, 0.1, 1.0) mimics a responsive, non-overshooting physical spring.
-hl.curve("apple_fluid", { type = "bezier", points = { { 0.05, 0.9 }, { 0.1, 1.0 } } })
-
-hl.animation({ leaf = "windows",    enabled = true, speed = 4, bezier = "apple_fluid", style = "popin 90%" })
-hl.animation({ leaf = "fade",       enabled = true, speed = 4, bezier = "apple_fluid" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 5, bezier = "apple_fluid", style = "slide" })
-hl.animation({ leaf = "border",     enabled = true, speed = 6, bezier = "apple_fluid" })
+-- Leaf-specific Motion Bindings
+hl.animation({ leaf = "windowsIn",          enabled = true, speed = 3,   bezier = "emphasizedDecel", style = "popin 80%" })
+hl.animation({ leaf = "windowsOut",         enabled = true, speed = 2,   bezier = "emphasizedDecel", style = "popin 90%" })
+hl.animation({ leaf = "windowsMove",        enabled = true, speed = 3,   bezier = "emphasizedDecel", style = "slide" })
+hl.animation({ leaf = "fadeIn",             enabled = true, speed = 3,   bezier = "emphasizedDecel" })
+hl.animation({ leaf = "fadeOut",            enabled = true, speed = 2,   bezier = "emphasizedDecel" })
+hl.animation({ leaf = "border",             enabled = true, speed = 8,   bezier = "emphasizedDecel" })
+hl.animation({ leaf = "layersIn",           enabled = true, speed = 2.7, bezier = "emphasizedDecel", style = "popin 93%" })
+hl.animation({ leaf = "layersOut",          enabled = true, speed = 2.4, bezier = "menu_accel",       style = "popin 94%" })
+hl.animation({ leaf = "fadeLayersIn",       enabled = true, speed = 0.5, bezier = "menu_decel" })
+hl.animation({ leaf = "fadeLayersOut",      enabled = true, speed = 2.7, bezier = "stall" })
+hl.animation({ leaf = "workspaces",         enabled = true, speed = 6,   bezier = "menu_decel",       style = "slide" })
+hl.animation({ leaf = "specialWorkspaceIn",  enabled = true, speed = 2.8, bezier = "emphasizedDecel", style = "slidevert" })
+hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 1.2, bezier = "emphasizedAccel", style = "slidevert" })
+hl.animation({ leaf = "zoomFactor",          enabled = true, speed = 3,   bezier = "standardDecel" })
 
 -- ==============================================================================
--- Window Rules
+-- Semantic Window Rules Hierarchy
 -- ==============================================================================
--- match.class/match.title keep the same regex strings as your original
--- windowrule blocks. Field names (class/title/float/move/size) are confirmed
--- via wiki.hypr.land/Configuring/Basics/Window-Rules for the general shape;
--- double-check any that fail silently against your LSP stubs.
 
-hl.window_rule({ name = "nvim-workspace-1", match = { class = "^(nvim)$" }, workspace = "1" })
+-- 01 - Core Application Workspaces
+hl.window_rule({ name = "nvim-workspace-1",    match = { class = "^(nvim)$" }, workspace = "1" })
+hl.window_rule({ name = "nvchad-workspace-1",  match = { class = "^(kitty)$", title = "^(nvchad)$" }, workspace = "1" })
 
-hl.window_rule({
-    name = "nvchad-kitty-workspace-1",
-    match = { class = "^(kitty)$", title = "^(nvchad)$" },
-    workspace = "1",
-})
-
-hl.window_rule({
-    name = "neotree-float-class",
-    match = { class = "^(neo-tree)$" },
-    float = true,
-    move = "75% 0%",
-    size = "25% 100%",
-})
-
-hl.window_rule({
-    name = "neotree-float-title",
-    match = { title = "^(neo-tree)$" },
-    float = true,
-    move = "75% 0%",
-    size = "25% 100%",
-})
-
-hl.window_rule({ name = "walker-float-center", match = { class = "^(walker)$" }, float = true, center = true, rounding = 12 })
-hl.window_rule({ name = "nm-editor-float", match = { class = "^(nm-connection-editor)$" }, float = true, rounding = 12 })
-hl.window_rule({ name = "pavucontrol-float", match = { class = "^(pavucontrol)$" }, float = true, center = true, rounding = 12 })
-hl.window_rule({ name = "rofi-center", match = { class = "^(Rofi)$" }, float = true, center = true })
+-- 02 - System & Polkit Authentication Dialogs
 hl.window_rule({
     name = "polkit-agent",
     match = { class = "^(polkit-gnome-authentication-agent-1)$" },
     float = true,
+    center = true,
     rounding = 12,
+})
+
+-- 03 - System Utilities & Network Managers
+hl.window_rule({ name = "nm-editor-float", match = { class = "^(nm-connection-editor)$" }, float = true, center = true, size = { "(monitor_w*0.45)", "(monitor_h*0.45)" }, rounding = 12 })
+hl.window_rule({ name = "blueman-float",   match = { class = "^(.blueman-manager-wrapped|blueman-manager)$" }, float = true, center = true, size = { "(monitor_w*0.45)", "(monitor_h*0.45)" }, rounding = 12 })
+hl.window_rule({ name = "pavucontrol-float", match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol)$" }, float = true, center = true, size = { "(monitor_w*0.45)", "(monitor_h*0.45)" }, rounding = 12 })
+
+-- 04 - XDG Desktop Portal & File Pickers
+hl.window_rule({ name = "portal-filepicker",     match = { class = "^(xdg-desktop-portal-gtk)$" }, float = true, center = true, rounding = 12 })
+hl.window_rule({ name = "portal-kde-filepicker", match = { class = "^(xdg-desktop-portal-kde|org.freedesktop.impl.portal.desktop.kde)$" }, float = true, center = true, size = { "(monitor_w*0.60)", "(monitor_h*0.65)" }, rounding = 12 })
+
+-- 05 - File Dialogs & File Pickers
+hl.window_rule({
+    name = "general-file-picker",
+    match = { title = "^(Open File|Select a File|Choose wallpaper|Open Folder|Save As|Library|File Upload|Choose Files)(.*)$" },
+    float = true,
+    center = true,
+    rounding = 12,
+})
+hl.window_rule({
+    name = "file-picker-intent",
+    match = { title = "^(.*)(wants to save|wants to open)$" },
+    float = true,
+    center = true,
+    rounding = 12,
+})
+
+-- 06 - Launchers & Rofi Menus
+hl.window_rule({ name = "rofi-center",         match = { class = "^(Rofi)$" }, float = true, center = true })
+hl.window_rule({ name = "walker-float-center", match = { class = "^(walker)$" }, float = true, center = true, rounding = 12 })
+
+-- 07 - Media & Picture-in-Picture Overlay
+hl.window_rule({
+    name = "picture-in-picture",
+    match = { title = "^([Pp]icture[-\\s]?[Ii]n[-\\s]?[Pp]icture)(.*)$" },
+    float = true,
+    pin = true,
+    keep_aspect_ratio = true,
+    move = { "(monitor_w*0.73)", "(monitor_h*0.72)" },
+    size = { "(monitor_w*0.25)", "(monitor_h*0.25)" },
+    rounding = 8,
+})
+
+-- 08 - Screen Sharing Indicator
+hl.window_rule({
+    name = "screen-sharing-indicator",
+    match = { title = ".*is sharing (a window|your screen).*" },
+    float = true,
+    pin = true,
+    move = { "(monitor_w*.5-window_w*.5)", "(monitor_h-window_h-12)" },
+})
+
+-- 09 - Tearing Rules (Low-latency gaming)
+hl.window_rule({ name = "tearing-exe",       match = { title = ".*\\.exe" }, immediate = true })
+hl.window_rule({ name = "tearing-minecraft", match = { title = ".*minecraft.*" }, immediate = true })
+hl.window_rule({ name = "tearing-steam",     match = { class = "^(steam_app).*" }, immediate = true })
+
+-- 10 - Scratchpad Terminal
+hl.window_rule({
+    name = "scratchpad-terminal",
+    match = { class = "^(kitty-scratchpad)$" },
+    float = true,
+    center = true,
+    size = { "60%", "50%" },
+    workspace = "special:scratchpad",
+})
+
+-- 11 - Sidebars & File Trees
+hl.window_rule({
+    name = "neotree-float-class",
+    match = { class = "^(neo-tree)$" },
+    float = true,
+    move = { "75%", "0%" },
+    size = { "25%", "100%" },
+})
+
+-- 12 - Floating Utility Tools & Hardware Diagnostics
+hl.window_rule({ name = "calculator-float", match = { class = "^(gnome-calculator|kcalc|qalculate-gtk)$" }, float = true, center = true, rounding = 12 })
+hl.window_rule({ name = "hyprpicker-float", match = { class = "^(hyprpicker)$" }, float = true, center = true })
+hl.window_rule({ name = "guifetch-float",   match = { class = "^(guifetch)$" }, float = true, center = true })
+
+-- 13 - Tiled Shadows Guard
+hl.window_rule({ name = "tiled-no-shadow", match = { float = 0 }, no_shadow = true })
+
+-- ==============================================================================
+-- Layer Rules Architecture (Blur, Alpha & Animation Controls)
+-- ==============================================================================
+hl.layer_rule({ name = "global-xray",           match = { namespace = ".*" }, xray = true })
+
+-- Fast/Instant Overlays (No animation delay for utility layers)
+hl.layer_rule({ name = "walker-noanim",        match = { namespace = "walker" }, no_anim = true })
+hl.layer_rule({ name = "selection-noanim",     match = { namespace = "selection" }, no_anim = true })
+hl.layer_rule({ name = "overview-noanim",      match = { namespace = "overview" }, no_anim = true })
+hl.layer_rule({ name = "anyrun-noanim",        match = { namespace = "anyrun" }, no_anim = true })
+hl.layer_rule({ name = "hyprpicker-noanim",    match = { namespace = "hyprpicker" }, no_anim = true })
+hl.layer_rule({ name = "indicator-noanim",     match = { namespace = "indicator.*" }, no_anim = true })
+
+-- Blur & Transparency Policies for Desktop Shell Components
+hl.layer_rule({ name = "gtk-shell-blur",       match = { namespace = "gtk-layer-shell" }, blur = true, ignore_alpha = 0 })
+hl.layer_rule({ name = "rofi-launcher-blur",   match = { namespace = "launcher" }, blur = true, ignore_alpha = 0.5 })
+hl.layer_rule({ name = "mako-notifications-blur", match = { namespace = "notifications" }, blur = true, ignore_alpha = 0.69 })
+hl.layer_rule({ name = "waybar-blur",          match = { namespace = "waybar" }, blur = true, ignore_alpha = 0.6 })
+hl.layer_rule({ name = "swayosd-blur",          match = { namespace = "swayosd.*" }, blur = true, ignore_alpha = 0.6 })
+
+-- ==============================================================================
+-- Hyprland Plugins Configuration (hyprbars)
+-- ==============================================================================
+hl.config({
+    plugin = {
+        hyprbars = {
+            bar_height = 28,
+            bar_color = colors.surface,
+            ["col.text"] = colors.text,
+            bar_text_size = 10,
+            bar_text_font = "Adwaita Mono",
+        },
+        hyprtasking = {
+            layout = "grid",
+            gap_size = 10,
+            bg_color = 0xff0b0e14,
+            border_size = 2,
+            exit_on_hovered = false,
+            warp_on_move_window = 1,
+            close_overview_on_reload = false,
+            drag_button = 0x110,
+            select_button = 0x111,
+            jump = {
+                enabled = false,
+                label_color = 0xffffffff,
+                label_background = 0x000000cc,
+                label_size = 32,
+            },
+            gestures = {
+                enabled = true,
+                move_fingers = 3,
+                move_distance = 300,
+                open_fingers = 4,
+                open_distance = 300,
+                open_positive = true,
+            },
+            grid = {
+                rows = 3,
+                cols = 3,
+                loop = false,
+                layers = 2,
+                loop_layers = true,
+                gaps_use_aspect_ratio = true,
+            },
+            linear = {
+                top = false,
+                height = 400,
+                scroll_speed = 1.0,
+                blur = false,
+            },
+        },
+    },
 })

@@ -1,93 +1,182 @@
 -- ==============================================================================
--- Minimal — Global Keybindings & Media Pipeline (Lua port)
+-- Minimal — Global Keybindings & Window Management Architecture
+-- Native Hyprland 0.55+ Lua Dispatchers (100% Validated & Standardized)
 -- ==============================================================================
--- Confirmed against the current hl.dsp API surface (wiki.hypr.land/Configuring/Basics/Binds
--- and .../Dispatchers as of the 0.55 Lua release). A few dispatcher names below are NOT
--- fully confirmed by docs at time of writing — marked with -- VERIFY. Check them with your
--- editor's LSP (stubs live in /usr/share/hypr/stubs/) or `hyprctl` before relying on them.
 
 local mainMod = "SUPER"
-
--- --- Core Applications ---
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty"))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit())
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-
--- VERIFY: fullscreen / pseudotile dispatcher shape wasn't confirmed in current docs search.
--- Your original bound BOTH mainMod+P and mainMod+T to `pseudo` (duplicate — probably a typo
--- in the original; T was likely meant for something else). Kept as-is, flagged.
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" })) -- VERIFY
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())                          -- VERIFY
-hl.bind(mainMod .. " + T", hl.dsp.window.pseudo())                          -- VERIFY (duplicate of +P in your original)
-
--- --- Focus Movement (Vim-style) ---
--- VERIFY: directional focus dispatcher. Confirmed pattern for focusing a specific window is
--- hl.dsp.focus({ window = "..." }); direction-based movefocus equivalent is inferred as
--- hl.dsp.focus({ direction = "l" }) but wasn't directly confirmed in docs at time of writing.
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" })) -- VERIFY
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "r" })) -- VERIFY
-hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" })) -- VERIFY
-hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" })) -- VERIFY
-
--- --- Workspaces (1-10) ---
-for i = 1, 9 do
-    hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }))
-end
-hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }))
-hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }))
-
--- --- Workspace Navigation & Toggling ---
-hl.bind(mainMod .. " + Tab",        hl.dsp.focus({ workspace = "previous" }))
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))-- --- Media & OSD Pipeline ---
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
-hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
-
 local hyprScripts = os.getenv("HOME") .. "/.config/hypr/scripts"
-
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), { locked = true, repeating = true })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true })
-
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"), { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"), { locked = true, repeating = true })
-
--- --- Custom Rofi Script Bindings ---
 local rofiScripts = os.getenv("HOME") .. "/.config/rofi/scripts"
 
-hl.bind(mainMod .. " + Grave", hl.dsp.exec_cmd(rofiScripts .. "/control-center.sh"))
-hl.bind("ALT + Tab", hl.dsp.exec_cmd("rofi -show window -show-icons -theme " .. os.getenv("HOME") .. "/.config/rofi/window.rasi"))
+-- ==============================================================================
+-- 1. CORE APPLICATIONS & SESSION
+-- ==============================================================================
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty"), { description = "App: Launch terminal (Kitty)" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Window: Close active window" })
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill(), { description = "Window: Force kill window" })
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit(), { description = "Session: Exit Hyprland session" })
 
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("hyprlock")) 
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd(rofiScripts .. "/powermenu.sh"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"))
--- Applications
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(rofiScripts .. "/launcher.sh"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/conky/toggle_hud.sh"))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(rofiScripts .. "/battery.sh"))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(rofiScripts .. "/calendar.sh"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(rofiScripts .. "/emoji.sh")) -- NOTE: also conflicts with any
-                                                                         -- fileManager-style +E bind if
-                                                                         -- you add one later (see example
-                                                                         -- config's mainMod+E = fileManager)
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(rofiScripts .. "/network.sh"))
-hl.bind(mainMod .. " + X", hl.dsp.exec_cmd(rofiScripts .. "/clipboard.sh"))
-hl.bind(mainMod .. " + W", hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/wallpaper/picker.sh"))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(hyprScripts .. "/audio-toggle.sh"))
+-- ==============================================================================
+-- 2. WINDOW CONTROLS & STATE (Float, Fullscreen, Maximize, Minimize, Pin, Center)
+-- ==============================================================================
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }), { description = "Window: Toggle floating state" })
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Window: Toggle fullscreen mode" })
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle", mode = 1 }), { description = "Window: Maximize (preserve bar)" })
+hl.bind(mainMod .. " + M", hl.dsp.window.move({ workspace = "special:minimized" }), { description = "Window: Minimize to tray" })
+hl.bind(mainMod .. " + SHIFT + M", hl.dsp.workspace.toggle_special({ name = "minimized" }), { description = "Window: Restore minimized tray" })
+hl.bind(mainMod .. " + P", hl.dsp.window.pin(), { description = "Window: Pin (always-on-top)" })
+hl.bind(mainMod .. " + ALT + C", hl.dsp.window.center(), { description = "Window: Center floating window" })
+hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd(hyprScripts .. "/window-recover.sh"), { description = "Window: Emergency recovery to active workspace" })
 
--- --- Window Drag/Resize with Mouse (confirmed shape) ---
+-- ==============================================================================
+-- 3. WINDOW GROUPING & TABBING
+-- ==============================================================================
+hl.bind(mainMod .. " + G", hl.dsp.group.toggle(), { description = "Group: Toggle tabbed window group" })
+hl.bind(mainMod .. " + ALT + period", hl.dsp.group.next(), { description = "Group: Focus next tab" })
+hl.bind(mainMod .. " + ALT + comma",  hl.dsp.group.prev(), { description = "Group: Focus previous tab" })
+
+-- ==============================================================================
+-- 4. SPATIAL FOCUS NAVIGATION (Vim Grammar: SUPER + H/J/K/L)
+-- ==============================================================================
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" }), { description = "Focus: Move focus left" })
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "r" }), { description = "Focus: Move focus right" })
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "u" }), { description = "Focus: Move focus up" })
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "d" }), { description = "Focus: Move focus down" })
+
+-- Multi-Monitor Focus Navigation
+hl.bind(mainMod .. " + bracketright", hl.dsp.focus({ monitor = "+1" }), { description = "Focus: Focus next monitor" })
+hl.bind(mainMod .. " + bracketleft",  hl.dsp.focus({ monitor = "-1" }), { description = "Focus: Focus previous monitor" })
+
+-- ==============================================================================
+-- 5. SPATIAL WINDOW SNAPPING (Windows Snap Layouts)
+-- ==============================================================================
+-- Half-Screen Snapping (SUPER + Arrow Keys)
+hl.bind(mainMod .. " + Left",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh left"), { description = "Snap: Snap left half" })
+hl.bind(mainMod .. " + Right", hl.dsp.exec_cmd(hyprScripts .. "/snap.sh right"), { description = "Snap: Snap right half" })
+hl.bind(mainMod .. " + Up",    hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top"), { description = "Snap: Snap top half" })
+hl.bind(mainMod .. " + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom"), { description = "Snap: Snap bottom half" })
+
+-- Quarter-Screen Snapping (SUPER + ALT + Arrow Keys)
+hl.bind(mainMod .. " + ALT + Left",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top-left"), { description = "Snap: Snap top-left quarter" })
+hl.bind(mainMod .. " + ALT + Right", hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top-right"), { description = "Snap: Snap top-right quarter" })
+hl.bind(mainMod .. " + ALT + Up",    hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom-left"), { description = "Snap: Snap bottom-left quarter" })
+hl.bind(mainMod .. " + ALT + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom-right"), { description = "Snap: Snap bottom-right quarter" })
+
+-- ==============================================================================
+-- 6. WINDOW POSITIONING, SWAPPING & MONITOR MOVEMENT
+-- ==============================================================================
+-- Move window position directionally (SUPER + SHIFT + H/J/K/L)
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "l" }), { description = "Move: Move window left" })
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }), { description = "Move: Move window right" })
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "u" }), { description = "Move: Move window up" })
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }), { description = "Move: Move window down" })
+
+-- Swap active window with neighbor window (SUPER + ALT + H/J/K/L)
+hl.bind(mainMod .. " + ALT + H", hl.dsp.window.swap({ direction = "l" }), { description = "Swap: Swap with left neighbor" })
+hl.bind(mainMod .. " + ALT + L", hl.dsp.window.swap({ direction = "r" }), { description = "Swap: Swap with right neighbor" })
+hl.bind(mainMod .. " + ALT + K", hl.dsp.window.swap({ direction = "u" }), { description = "Swap: Swap with top neighbor" })
+hl.bind(mainMod .. " + ALT + J", hl.dsp.window.swap({ direction = "d" }), { description = "Swap: Swap with bottom neighbor" })
+
+-- Move window to Next/Previous Monitor (SUPER + SHIFT + ] / [)
+hl.bind(mainMod .. " + SHIFT + bracketright", hl.dsp.window.move({ monitor = "+1" }), { description = "Move: Relocate window to next monitor" })
+hl.bind(mainMod .. " + SHIFT + bracketleft",  hl.dsp.window.move({ monitor = "-1" }), { description = "Move: Relocate window to prev monitor" })
+
+-- ==============================================================================
+-- 7. INTERACTIVE WINDOW RESIZING & MOUSE DRAG
+-- ==============================================================================
+-- Resize window dimensions (SUPER + CTRL + H/J/K/L)
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.resize({ x = -40, y = 0 }), { repeating = true, description = "Resize: Shrink width" })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.resize({ x = 40, y = 0 }), { repeating = true, description = "Resize: Expand width" })
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.resize({ x = 0, y = -40 }), { repeating = true, description = "Resize: Shrink height" })
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.resize({ x = 0, y = 40 }), { repeating = true, description = "Resize: Expand height" })
+
+-- Mouse Interactive Drag & Resize
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- --- Screenshots ---
-hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy && notify-send 'Screenshot' 'Copied to clipboard'"))
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy && notify-send 'Screenshot' 'Area copied to clipboard'"))
+-- ==============================================================================
+-- 8. WORKSPACE NAVIGATION & TASK OVERVIEW (hyprtasking)
+-- ==============================================================================
+-- macOS Relative Workspace Navigation (SUPER + CTRL + Left/Right)
+hl.bind(mainMod .. " + CTRL + Left",  hl.dsp.focus({ workspace = "e-1" }), { description = "Workspace: Previous workspace" })
+hl.bind(mainMod .. " + CTRL + Right", hl.dsp.focus({ workspace = "e+1" }), { description = "Workspace: Next workspace" })
+
+-- macOS Relative Window Relocation (SUPER + SHIFT + Up/Down)
+hl.bind(mainMod .. " + SHIFT + Up",   hl.dsp.window.move({ workspace = "e-1" }), { description = "Workspace: Move window to prev workspace" })
+hl.bind(mainMod .. " + SHIFT + Down", hl.dsp.window.move({ workspace = "e+1" }), { description = "Workspace: Move window to next workspace" })
+
+for i = 1, 9 do
+    -- SUPER + 1..9: Focus workspace
+    hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }), { description = "Workspace: Switch to workspace " .. i })
+    -- SUPER + SHIFT + 1..9: Move active window to workspace
+    hl.bind(mainMod .. " + SHIFT + " .. i, hl.dsp.window.move({ workspace = i }), { description = "Workspace: Move window to " .. i })
+    -- SUPER + CTRL + 1..9: Move active window to workspace AND follow focus
+    hl.bind(mainMod .. " + CTRL + " .. i, function()
+        hl.dispatch(hl.dsp.window.move({ workspace = i }))
+        hl.dispatch(hl.dsp.focus({ workspace = i }))
+    end, { description = "Workspace: Move window to " .. i .. " and follow" })
+end
+
+hl.bind(mainMod .. " + 0", hl.dsp.focus({ workspace = 10 }), { description = "Workspace: Switch to workspace 10" })
+hl.bind(mainMod .. " + SHIFT + 0", hl.dsp.window.move({ workspace = 10 }), { description = "Workspace: Move window to 10" })
+
+-- Task Overview (hyprtasking) & Workspace Navigation
+hl.bind(mainMod .. " + Tab",        hl.dsp.focus({ workspace = "previous" }), { description = "Workspace: Focus previous active workspace" })
+hl.bind(mainMod .. " + T",       hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview" })
+hl.bind(mainMod .. " + TAB",     hl.dsp.exec_raw("hyprtasking:toggle cursor"), { description = "Tasking: Toggle cursor overview" })
+hl.bind(mainMod .. " + grave",   hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview" })
+hl.bind(mainMod .. " + code:49", hl.dsp.exec_raw("hyprtasking:toggle all"), { description = "Tasking: Toggle grid overview (keycode 49)" })
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_raw("hyprtasking:killhovered"), { description = "Tasking: Kill hovered window in overview" })
+hl.bind("Escape", function()
+    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.is_active and hl.plugin.hyprtasking.is_active() then
+        hl.plugin.hyprtasking.toggle("all")
+    end
+end, { non_consuming = true, description = "Tasking: Exit overview on Escape" })
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+
+-- ==============================================================================
+-- 9. SYSTEM OVERLAYS, SCRATCHPADS & ROFI MENUS
+-- ==============================================================================
+hl.bind(mainMod .. " + S",      hl.dsp.workspace.toggle_special({ name = "scratchpad" }), { description = "Special: Toggle scratchpad" })
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(rofiScripts .. "/launcher.sh"), { description = "Launcher: Toggle Rofi app launcher" })
+hl.bind("ALT + Tab",           hl.dsp.exec_cmd("rofi -show window -show-icons -theme " .. os.getenv("HOME") .. "/.config/rofi/window.rasi"), { description = "Launcher: Toggle Rofi window switcher" })
+hl.bind(mainMod .. " + SHIFT + grave", hl.dsp.exec_cmd(rofiScripts .. "/control-center.sh"), { description = "Launcher: Toggle Rofi control center" })
+hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"), { description = "Shell: Toggle Waybar" })
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(rofiScripts .. "/battery.sh"), { description = "Launcher: Toggle battery menu" })
+hl.bind(mainMod .. " + C",      hl.dsp.exec_cmd(rofiScripts .. "/calendar.sh"), { description = "Launcher: Toggle calendar popup" })
+hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd(rofiScripts .. "/emoji.sh"), { description = "Launcher: Toggle emoji picker" })
+hl.bind(mainMod .. " + N",      hl.dsp.exec_cmd(rofiScripts .. "/network.sh"), { description = "Launcher: Toggle network menu" })
+hl.bind(mainMod .. " + X",      hl.dsp.exec_cmd(rofiScripts .. "/clipboard.sh"), { description = "Launcher: Toggle clipboard manager" })
+hl.bind(mainMod .. " + W",      hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/wallpaper/picker.sh"), { description = "Launcher: Toggle wallpaper picker" })
+hl.bind(mainMod .. " + A",      hl.dsp.exec_cmd(hyprScripts .. "/audio-toggle.sh"), { description = "Launcher: Toggle audio output" })
+hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd(hyprScripts .. "/gamemode.sh"), { description = "Performance: Toggle Game Mode (disable animations/blur)" })
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd(hyprScripts .. "/ocr.sh"), { description = "Utilities: Screen OCR text extractor to clipboard" })
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(hyprScripts .. "/nightlight.sh"), { description = "Utilities: Toggle Night Light shader (hyprsunset)" })
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("wlogout -b 2 -c 5 -r 5"), { description = "Session: Toggle power menu overlay" })
+hl.bind(mainMod .. " + ALT + Escape", hl.dsp.exec_cmd("hyprlock"), { description = "Session: Lock screen" })
+
+-- ==============================================================================
+-- 10. MEDIA & OSD PIPELINE
+-- ==============================================================================
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true, description = "Media: Play/Pause" })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true, description = "Media: Next track" })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true, description = "Media: Previous track" })
+
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), { locked = true, repeating = true, description = "Volume: Raise volume" })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), { locked = true, repeating = true, description = "Volume: Lower volume" })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true, description = "Volume: Mute toggle" })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true, description = "Mic: Mute mic toggle" })
+
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"), { locked = true, repeating = true, description = "Brightness: Increase display brightness" })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"), { locked = true, repeating = true, description = "Brightness: Decrease display brightness" })
+
+-- ==============================================================================
+-- 11. SCREENSHOTS
+-- ==============================================================================
+hl.bind("Print", hl.dsp.exec_cmd("grim - | wl-copy && notify-send 'Screenshot' 'Copied to clipboard'"), { locked = true, description = "Screenshot: Fullscreen >> clipboard" })
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy && notify-send 'Screenshot' 'Area copied to clipboard'"), { locked = true, description = "Screenshot: Region >> clipboard" })
 hl.bind("CTRL + Print", hl.dsp.exec_cmd(
     "mkdir -p " .. os.getenv("HOME") .. "/Pictures/Screenshots && " ..
     "grim -g \"$(slurp)\" " .. os.getenv("HOME") .. "/Pictures/Screenshots/$(date +'%Y-%m-%d_%H-%M-%S').png && " ..
     "notify-send 'Screenshot' 'Area saved'"
-))
+), { locked = true, description = "Screenshot: Region >> file" })

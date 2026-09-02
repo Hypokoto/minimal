@@ -47,7 +47,7 @@ element {
 element selected {
     background-color: @overlay;
     border:           1px;
-    border-color:     rgba(91, 140, 255, 0.4);
+    border-color:     @secondary;
 }
 
 element-text {
