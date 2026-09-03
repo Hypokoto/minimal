@@ -47,17 +47,11 @@ hl.bind(mainMod .. " + bracketleft",  hl.dsp.focus({ monitor = "-1" }), { descri
 -- ==============================================================================
 -- 5. SPATIAL WINDOW SNAPPING (Windows Snap Layouts)
 -- ==============================================================================
--- Half-Screen Snapping (SUPER + Arrow Keys)
-hl.bind(mainMod .. " + Left",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh left"), { description = "Snap: Snap left half" })
-hl.bind(mainMod .. " + Right", hl.dsp.exec_cmd(hyprScripts .. "/snap.sh right"), { description = "Snap: Snap right half" })
-hl.bind(mainMod .. " + Up",    hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top"), { description = "Snap: Snap top half" })
-hl.bind(mainMod .. " + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom"), { description = "Snap: Snap bottom half" })
-
--- Quarter-Screen Snapping (SUPER + ALT + Arrow Keys)
-hl.bind(mainMod .. " + ALT + Left",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top-left"), { description = "Snap: Snap top-left quarter" })
-hl.bind(mainMod .. " + ALT + Right", hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top-right"), { description = "Snap: Snap top-right quarter" })
-hl.bind(mainMod .. " + ALT + Up",    hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom-left"), { description = "Snap: Snap bottom-left quarter" })
-hl.bind(mainMod .. " + ALT + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom-right"), { description = "Snap: Snap bottom-right quarter" })
+-- Snapping (SUPER + Arrow Keys)
+hl.bind(mainMod .. " + Left",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh left"), { description = "Snap: Snap left" })
+hl.bind(mainMod .. " + Right", hl.dsp.exec_cmd(hyprScripts .. "/snap.sh right"), { description = "Snap: Snap right" })
+hl.bind(mainMod .. " + Up",    hl.dsp.exec_cmd(hyprScripts .. "/snap.sh top"), { description = "Snap: Snap top" })
+hl.bind(mainMod .. " + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom"), { description = "Snap: Snap bottom" })
 
 -- ==============================================================================
 -- 6. WINDOW POSITIONING, SWAPPING & MONITOR MOVEMENT
