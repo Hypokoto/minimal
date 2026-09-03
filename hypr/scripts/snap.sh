@@ -1,23 +1,51 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# snap.sh — Precision Spatial Window Snapping Helper for Hyprland
+# snap.sh — Precision Spatial Window Snapping & Tiling Helper for Hyprland
 #
-# Computes pixel-perfect snap coordinates respecting top bar height and gaps:
-#   left         — Snap to left 50% half
-#   right        — Snap to right 50% half
-#   top          — Snap to top 50% half
-#   bottom       — Snap to bottom 50% half
-#   top-left     — Snap to top-left quarter
-#   top-right    — Snap to top-right quarter
-#   bottom-left  — Snap to bottom-left quarter
-#   bottom-right — Snap to bottom-right quarter
+# Provides tmux-style automatic window layout adjustment without overlapping:
+#   left         — Snap/move window left half / tile left
+#   right        — Snap/move window right half / tile right
+#   top          — Snap/move window top half / tile up
+#   bottom       — Snap/move window bottom half / tile down
+#   top-left     — Snap top-left quarter
+#   top-right    — Snap top-right quarter
+#   bottom-left  — Snap bottom-left quarter
+#   bottom-right — Snap bottom-right quarter
 #   center       — Center window (70% width, 70% height)
 # ==============================================================================
 set -euo pipefail
 
 POSITION="${1:-center}"
 
-# Query active monitor geometry
+WINDOW_COUNT=$(hyprctl -j activeworkspace 2>/dev/null | jq -r '.windows // 0')
+
+# For multi-window tiling workspaces, directional snap moves tiled windows cleanly like tmux panes
+if [ "$WINDOW_COUNT" -gt 1 ]; then
+    case "$POSITION" in
+        left)
+            hyprctl dispatch 'hl.dsp.window.float({ action = "off" })' >/dev/null 2>&1 || true
+            hyprctl dispatch 'hl.dsp.window.move({ direction = "l" })' >/dev/null 2>&1 || true
+            exit 0
+            ;;
+        right)
+            hyprctl dispatch 'hl.dsp.window.float({ action = "off" })' >/dev/null 2>&1 || true
+            hyprctl dispatch 'hl.dsp.window.move({ direction = "r" })' >/dev/null 2>&1 || true
+            exit 0
+            ;;
+        top)
+            hyprctl dispatch 'hl.dsp.window.float({ action = "off" })' >/dev/null 2>&1 || true
+            hyprctl dispatch 'hl.dsp.window.move({ direction = "u" })' >/dev/null 2>&1 || true
+            exit 0
+            ;;
+        bottom)
+            hyprctl dispatch 'hl.dsp.window.float({ action = "off" })' >/dev/null 2>&1 || true
+            hyprctl dispatch 'hl.dsp.window.move({ direction = "d" })' >/dev/null 2>&1 || true
+            exit 0
+            ;;
+    esac
+fi
+
+# Single window or explicit quarter/center snap: compute pixel-perfect non-overlapping geometry
 MONITOR_JSON=$(hyprctl -j monitors 2>/dev/null | jq -r '.[0] // empty' 2>/dev/null || true)
 
 if [ -n "$MONITOR_JSON" ]; then
