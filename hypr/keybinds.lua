@@ -56,12 +56,6 @@ hl.bind(mainMod .. " + Down",  hl.dsp.exec_cmd(hyprScripts .. "/snap.sh bottom")
 -- ==============================================================================
 -- 6. WINDOW POSITIONING, SWAPPING & MONITOR MOVEMENT
 -- ==============================================================================
--- Move window position directionally (SUPER + SHIFT + H/J/K/L)
-hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.move({ direction = "l" }), { description = "Move: Move window left" })
-hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.move({ direction = "r" }), { description = "Move: Move window right" })
-hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.move({ direction = "u" }), { description = "Move: Move window up" })
-hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.move({ direction = "d" }), { description = "Move: Move window down" })
-
 -- Swap active window with neighbor window (SUPER + ALT + H/J/K/L)
 hl.bind(mainMod .. " + ALT + H", hl.dsp.window.swap({ direction = "l" }), { description = "Swap: Swap with left neighbor" })
 hl.bind(mainMod .. " + ALT + L", hl.dsp.window.swap({ direction = "r" }), { description = "Swap: Swap with right neighbor" })
@@ -75,11 +69,16 @@ hl.bind(mainMod .. " + SHIFT + bracketleft",  hl.dsp.window.move({ monitor = "-1
 -- ==============================================================================
 -- 7. INTERACTIVE WINDOW RESIZING & MOUSE DRAG
 -- ==============================================================================
--- Resize window dimensions (SUPER + CTRL + H/J/K/L)
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.resize({ x = -40, y = 0 }), { repeating = true, description = "Resize: Shrink width" })
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.resize({ x = 40, y = 0 }), { repeating = true, description = "Resize: Expand width" })
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.resize({ x = 0, y = -40 }), { repeating = true, description = "Resize: Shrink height" })
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.resize({ x = 0, y = 40 }), { repeating = true, description = "Resize: Expand height" })
+-- Resize window dimensions (SUPER + CTRL + H/J/K/L & SUPER + CTRL + Arrow Keys)
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.exec_cmd("hyprctl dispatch resizeactive -50 0"), { repeating = true, description = "Resize: Shrink width" })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 50 0"), { repeating = true, description = "Resize: Expand width" })
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 -50"), { repeating = true, description = "Resize: Shrink height" })
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 50"), { repeating = true, description = "Resize: Expand height" })
+
+hl.bind(mainMod .. " + CTRL + Left",  hl.dsp.exec_cmd("hyprctl dispatch resizeactive -50 0"), { repeating = true, description = "Resize: Shrink width" })
+hl.bind(mainMod .. " + CTRL + Right", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 50 0"), { repeating = true, description = "Resize: Expand width" })
+hl.bind(mainMod .. " + CTRL + Up",    hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 -50"), { repeating = true, description = "Resize: Shrink height" })
+hl.bind(mainMod .. " + CTRL + Down",  hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 50"), { repeating = true, description = "Resize: Expand height" })
 
 -- Mouse Interactive Drag & Resize
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

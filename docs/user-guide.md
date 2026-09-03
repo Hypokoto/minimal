@@ -20,8 +20,8 @@ Welcome to **Minimal OS Shell**, an Arch Linux Hyprland desktop environment engi
 - **`SUPER + F`**: Toggle fullscreen mode.
 - **`SUPER + G`**: Toggle Hyprland window tabbed container grouping (`hy3`).
 - **`SUPER + H / J / K / L`**: Vim-style spatial focus navigation (Left / Down / Up / Right).
-- **`SUPER + Shift + H / J / K / L`**: Move active window in direction.
 - **`SUPER + Arrow Keys`**: Spatial window snap / tile in direction (Left / Right / Up / Down).
+- **`SUPER + CTRL + H / J / K / L`** or **`SUPER + CTRL + Arrow Keys`**: Resize active window dimensions.
 - **`SUPER + ALT + R`**: **Window Rescue** — emergency center-snaps misplaced or offscreen floating windows at 65% width/height.
 
 ### 3. Workspaces & Visual Task Overview (`hyprtasking`)

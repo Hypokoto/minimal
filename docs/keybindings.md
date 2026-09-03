@@ -20,9 +20,9 @@ Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyp
 | `SUPER + Escape` | Toggle Quickshell Session / Power menu | Session |
 | `SUPER + ALT + Escape` | Lock screen (`hyprlock`) | Session |
 | `SUPER + H / J / K / L` | Focus window left / down / up / right | Vim Focus |
-| `SUPER + SHIFT + H / J / K / L` | Move window left / down / up / right | Window Movement |
 | `SUPER + CTRL + H / J / K / L` | Resize window dimensions (width/height) | Window Resize |
-| `SUPER + Left / Right / Up / Down` | Spatial window snap / tile (left/right/top/bottom) | Spatial Snapping |
+| `SUPER + CTRL + Arrow Keys` | Resize window dimensions (width/height) | Window Resize |
+| `SUPER + Arrow Keys` | Spatial window snap / tile (left/right/top/bottom) | Spatial Snapping |
 | `SUPER + Left Mouse Drag` | Interactive window move & drag | Mouse Action |
 | `SUPER + Right Mouse Drag` | Interactive window resize | Mouse Action |
 
