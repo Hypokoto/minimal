@@ -183,6 +183,7 @@ hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd(hyprScripts .. "/gamemode.sh"
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd(hyprScripts .. "/ocr.sh"), { description = "Utilities: Screen OCR text extractor to clipboard" })
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd(hyprScripts .. "/screen-record.sh"), { description = "Utilities: Toggle Screen Recording" })
 hl.bind(mainMod .. " + ALT + R",   hl.dsp.exec_cmd(hyprScripts .. "/screen-record.sh --region"), { description = "Utilities: Toggle Region Screen Recording" })
+hl.bind(mainMod .. " + SHIFT + A", hl.dsp.exec_cmd(hyprScripts .. "/screen-record.sh --audio"), { description = "Utilities: Toggle Audio Screen Recording" })
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(hyprScripts .. "/nightlight.sh"), { description = "Utilities: Toggle Night Light shader (hyprsunset)" })
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("quickshell ipc call minimal-shell toggleSession"), { description = "Session: Toggle power menu overlay" })
 hl.bind(mainMod .. " + ALT + Escape", hl.dsp.exec_cmd("quickshell ipc call minimal-shell lock"), { description = "Session: Lock screen" })

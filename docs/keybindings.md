@@ -48,6 +48,7 @@ Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyp
 |---|---|---|
 | `SUPER + SHIFT + R` | Toggle Fullscreen Screen Recording (`wf-recorder`) | Recording |
 | `SUPER + ALT + R` | Toggle Region Screen Recording (`slurp` + `wf-recorder`) | Recording |
+| `SUPER + SHIFT + A` | Toggle Screen Recording with System Audio | Recording |
 | `SUPER + SHIFT + G` | Toggle Game Mode (disable animations & blur for max FPS) | Performance |
 | `SUPER + SHIFT + N` | Toggle Night Light Shader (`hyprsunset` 4500K warm tint) | Display |
 | `SUPER + SHIFT + X` | Screen OCR text extractor to clipboard (`slurp` + Tesseract) | Utilities |
