@@ -11,7 +11,7 @@ jobs:
     name: Shellcheck
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@00b27aa7cb85167568cb48a3838b75f4265f2bca
         with:
@@ -22,7 +22,7 @@ jobs:
     name: Broken Symlink Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Find broken symlinks
         run: |
           broken=$(find . -xtype l)
@@ -36,7 +36,7 @@ jobs:
     name: Shell format (shfmt)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Run shfmt
         uses: mfinelli/setup-shfmt@36a296dd392ba4e3bbe7a5eaa6e7a97f8fbbd894
       - run: shfmt -d .
@@ -45,7 +45,7 @@ jobs:
     name: Package Tier Invariants
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Run package validation
         run: ./scripts/validate-packages.sh
 
@@ -53,7 +53,7 @@ jobs:
     name: Security Invariants
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Run security script audit
         run: ./scripts/audit-security.sh
 
@@ -61,7 +61,7 @@ jobs:
     name: Secret Scanning (Gitleaks)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           fetch-depth: 0
       - name: Gitleaks
@@ -73,7 +73,7 @@ jobs:
     name: Theme Invariants & Drift Check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - name: Build minimalctl and verify theme drift & git reproducibility
         run: |
           cargo build --release
