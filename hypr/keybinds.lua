@@ -15,9 +15,8 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.kill(), { description = "Window
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exit(), { description = "Session: Exit Hyprland session" })
 
 -- ==============================================================================
--- 2. WINDOW CONTROLS & STATE (Float, Fullscreen, Maximize, Minimize, Pin, Center)
+-- 2. WINDOW CONTROLS & STATE (Fullscreen, Maximize, Minimize, Pin, Center)
 -- ==============================================================================
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }), { description = "Window: Toggle floating state" })
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Window: Toggle fullscreen mode" })
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle", mode = 1 }), { description = "Window: Maximize (preserve bar)" })
 hl.bind(mainMod .. " + M", hl.dsp.window.move({ workspace = "special:minimized" }), { description = "Window: Minimize to tray" })
@@ -130,26 +129,6 @@ hl.bind(mainMod .. " + TAB", function()
         hl.plugin.hyprtasking.toggle("cursor")
     end
 end, { description = "Tasking: Toggle cursor overview" })
-hl.bind(mainMod .. " + grave", function()
-    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
-        hl.plugin.hyprtasking.toggle("all")
-    end
-end, { description = "Tasking: Toggle grid overview" })
-hl.bind(mainMod .. " + SHIFT + grave", function()
-    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
-        hl.plugin.hyprtasking.toggle("all")
-    end
-end, { description = "Tasking: Toggle grid overview (tilde)" })
-hl.bind(mainMod .. " + asciitilde", function()
-    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
-        hl.plugin.hyprtasking.toggle("all")
-    end
-end, { description = "Tasking: Toggle grid overview (asciitilde)" })
-hl.bind(mainMod .. " + code:49", function()
-    if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.toggle then
-        hl.plugin.hyprtasking.toggle("all")
-    end
-end, { description = "Tasking: Toggle grid overview (keycode 49)" })
 hl.bind(mainMod .. " + SHIFT + Q", function()
     if hl.plugin and hl.plugin.hyprtasking and hl.plugin.hyprtasking.killhovered then
         hl.plugin.hyprtasking.killhovered()

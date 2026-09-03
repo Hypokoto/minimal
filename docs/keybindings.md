@@ -4,29 +4,28 @@ Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyp
 
 ---
 
-## Window Management & Navigation
+## Window Management & Spatial Navigation
 
 | Key Combo | Action | Category |
 |---|---|---|
 | `SUPER + Return` | Launch Kitty terminal | Application |
 | `SUPER + SPACE` | Toggle Quickshell App Grid Launcher | Application |
 | `SUPER + X` | Toggle Quickshell Clipboard History Manager | Utilities |
+| `SUPER + W` | Toggle Quickshell Wallpaper Changer | Customization |
 | `SUPER + N` | Toggle Quickshell Control Center | Quick Settings |
 | `SUPER + Q` | Close active window | Window Control |
 | `SUPER + F` | Toggle fullscreen mode | Window Control |
-| `SUPER + V` | Toggle floating mode | Window Control |
 | `SUPER + G` | Toggle window tabbed container grouping (`hy3`) | Window Control |
 | `SUPER + B` | Toggle Quickshell Top Bar | Shell |
 | `SUPER + Escape` | Toggle Quickshell Session / Power menu | Session |
 | `SUPER + ALT + Escape` | Lock screen (`hyprlock`) | Session |
-| `SUPER + H` | Focus window to the left | Vim Navigation |
-| `SUPER + J` | Focus window down | Vim Navigation |
-| `SUPER + K` | Focus window up | Vim Navigation |
-| `SUPER + L` | Focus window to the right | Vim Navigation |
-| `SUPER + SHIFT + H` | Move window to the left | Window Movement |
-| `SUPER + SHIFT + J` | Move window down | Window Movement |
-| `SUPER + SHIFT + K` | Move window up | Window Movement |
-| `SUPER + SHIFT + L` | Move window to the right | Window Movement |
+| `SUPER + H / J / K / L` | Focus window left / down / up / right | Vim Focus |
+| `SUPER + SHIFT + H / J / K / L` | Move window left / down / up / right | Window Movement |
+| `SUPER + CTRL + H / J / K / L` | Resize window dimensions (width/height) | Window Resize |
+| `SUPER + Left / Right / Up / Down` | Snap window to screen half (left/right/top/bottom) | Spatial Snapping |
+| `SUPER + ALT + Left / Right / Up / Down` | Snap window to screen quarter | Spatial Snapping |
+| `SUPER + Left Mouse Drag` | Interactive window move & drag | Mouse Action |
+| `SUPER + Right Mouse Drag` | Interactive window resize | Mouse Action |
 
 ---
 
@@ -37,7 +36,7 @@ Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyp
 | `SUPER + 1..9` | Switch to workspace 1..9 | Workspaces |
 | `SUPER + SHIFT + 1..9` | Move window to workspace 1..9 | Workspaces |
 | `SUPER + S` | Toggle Special Scratchpad workspace | Workspaces |
-| `SUPER + T` / `SUPER + ~` | Toggle Hyprtasking 3x3 workspace grid overview | Overview |
+| `SUPER + T` | Toggle Hyprtasking 3x3 workspace grid overview | Overview |
 | `SUPER + TAB` | Toggle cursor-focused overview | Overview |
 | `SUPER + SHIFT + Q` | Kill hovered window in overview | Overview |
 
@@ -47,6 +46,8 @@ Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyp
 
 | Key Combo | Action | Category |
 |---|---|---|
+| `SUPER + SHIFT + R` | Toggle Fullscreen Screen Recording (`wf-recorder`) | Recording |
+| `SUPER + ALT + R` | Toggle Region Screen Recording (`slurp` + `wf-recorder`) | Recording |
 | `SUPER + SHIFT + G` | Toggle Game Mode (disable animations & blur for max FPS) | Performance |
 | `SUPER + SHIFT + N` | Toggle Night Light Shader (`hyprsunset` 4500K warm tint) | Display |
 | `SUPER + SHIFT + X` | Screen OCR text extractor to clipboard (`slurp` + Tesseract) | Utilities |

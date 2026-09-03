@@ -17,7 +17,6 @@ Welcome to **Minimal OS Shell**, an Arch Linux Hyprland desktop environment engi
 ### 2. Window Management & Spatial Navigation
 - **`SUPER + Return`**: Launch Terminal (`kitty`).
 - **`SUPER + Q`**: Close active window.
-- **`SUPER + V`**: Toggle floating mode for active window.
 - **`SUPER + F`**: Toggle fullscreen mode.
 - **`SUPER + G`**: Toggle Hyprland window tabbed container grouping (`hy3`).
 - **`SUPER + H / J / K / L`**: Vim-style spatial focus navigation (Left / Down / Up / Right).
@@ -30,7 +29,7 @@ Welcome to **Minimal OS Shell**, an Arch Linux Hyprland desktop environment engi
 - **`SUPER + 1..9`**: Switch to virtual workspace 1 through 9.
 - **`SUPER + Shift + 1..9`**: Move active window to workspace 1 through 9.
 - **`SUPER + S`**: Toggle Special Scratchpad workspace.
-- **`SUPER + T`** or **`SUPER + ~`**: Toggle `hyprtasking` visual 3x3 workspace grid overview.
+- **`SUPER + T`**: Toggle `hyprtasking` visual 3x3 workspace grid overview.
 - **`SUPER + TAB`**: Toggle cursor-focused overview.
 - **`SUPER + SHIFT + Q`**: Kill hovered window inside overview.
 
