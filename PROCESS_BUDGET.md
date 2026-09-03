@@ -28,6 +28,6 @@ These tools are explicitly forbidden from running continuously as daemons.
 
 ## Banned Machinery
 The following architectural patterns and tools are explicitly rejected:
-- **Conky** (Violates polling restrictions and overlaps Waybar functionality).
+- **Conky** (Violates polling restrictions and overlaps Quickshell functionality).
 - **Infinite Bash `while` polling loops** (Must use D-Bus/udev events).
-- **Heavyweight Frameworks** (AGS, Eww, Quickshell - unless justified by a capability Hyprland/Waybar absolutely cannot provide).
+- **Heavyweight Frameworks** (AGS, Eww - unless justified by a capability Hyprland/Quickshell absolutely cannot provide).
