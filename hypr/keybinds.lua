@@ -70,15 +70,15 @@ hl.bind(mainMod .. " + SHIFT + bracketleft",  hl.dsp.window.move({ monitor = "-1
 -- 7. INTERACTIVE WINDOW RESIZING & MOUSE DRAG
 -- ==============================================================================
 -- Resize window dimensions (SUPER + CTRL + H/J/K/L & SUPER + CTRL + Arrow Keys)
-hl.bind(mainMod .. " + CTRL + H", hl.dsp.exec_cmd("hyprctl dispatch resizeactive -50 0"), { repeating = true, description = "Resize: Shrink width" })
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 50 0"), { repeating = true, description = "Resize: Expand width" })
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 -50"), { repeating = true, description = "Resize: Shrink height" })
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 50"), { repeating = true, description = "Resize: Expand height" })
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.exec_cmd(hyprScripts .. "/resize.sh left"),  { repeating = true, description = "Resize: Shrink width" })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(hyprScripts .. "/resize.sh right"), { repeating = true, description = "Resize: Expand width" })
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.exec_cmd(hyprScripts .. "/resize.sh up"),    { repeating = true, description = "Resize: Shrink height" })
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.exec_cmd(hyprScripts .. "/resize.sh down"),  { repeating = true, description = "Resize: Expand height" })
 
-hl.bind(mainMod .. " + CTRL + Left",  hl.dsp.exec_cmd("hyprctl dispatch resizeactive -50 0"), { repeating = true, description = "Resize: Shrink width" })
-hl.bind(mainMod .. " + CTRL + Right", hl.dsp.exec_cmd("hyprctl dispatch resizeactive 50 0"), { repeating = true, description = "Resize: Expand width" })
-hl.bind(mainMod .. " + CTRL + Up",    hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 -50"), { repeating = true, description = "Resize: Shrink height" })
-hl.bind(mainMod .. " + CTRL + Down",  hl.dsp.exec_cmd("hyprctl dispatch resizeactive 0 50"), { repeating = true, description = "Resize: Expand height" })
+hl.bind(mainMod .. " + CTRL + Left",  hl.dsp.exec_cmd(hyprScripts .. "/resize.sh left"),  { repeating = true, description = "Resize: Shrink width" })
+hl.bind(mainMod .. " + CTRL + Right", hl.dsp.exec_cmd(hyprScripts .. "/resize.sh right"), { repeating = true, description = "Resize: Expand width" })
+hl.bind(mainMod .. " + CTRL + Up",    hl.dsp.exec_cmd(hyprScripts .. "/resize.sh up"),    { repeating = true, description = "Resize: Shrink height" })
+hl.bind(mainMod .. " + CTRL + Down",  hl.dsp.exec_cmd(hyprScripts .. "/resize.sh down"),  { repeating = true, description = "Resize: Expand height" })
 
 -- Mouse Interactive Drag & Resize
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
