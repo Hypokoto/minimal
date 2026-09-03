@@ -107,96 +107,7 @@ end
 local function generate_targets(base_dir)
     base_dir = base_dir or "."
 
-    -- 1. rofi/theme.rasi
-    local theme_rasi = string.format([[/**
- * theme.rasi — Bento Minimal Centralized Token Palette
- * Generated from palette.md — DO NOT edit directly.
- */
-
-* {
-    bg:        %s;
-    surface:   %s;
-    overlay:   %s;
-    fg:        %s;
-    muted:     %s;
-    primary:   %s;
-    secondary: %s;
-    highlight: %s;
-    success:   %s;
-    warning:   %s;
-    danger:    %s;
-    info:      %s;
-
-    /* transparent & overlay layering */
-    bg-trans:      %sEE;
-    surface-trans: %sF2;
-    overlay-trans: %sAA;
-
-    font: "AdwaitaMono Nerd Font 10.5";
-
-    background-color: transparent;
-    text-color:        @fg;
-    margin:  0px;
-    padding: 0px;
-    spacing: 0px;
-}
-
-window {
-    background-color: @surface-trans;
-    border:           1px;
-    border-color:     @overlay;
-    border-radius:    12px;
-}
-
-mainbox {
-    background-color: transparent;
-    padding:          20px;
-    spacing:          14px;
-}
-
-inputbar {
-    background-color: @overlay;
-    border-radius:    8px;
-    padding:          10px 14px;
-    spacing:          10px;
-    border:           1px;
-    border-color:     %s33;
-}
-
-listview {
-    spacing:          6px;
-    background-color: transparent;
-    border:           0px;
-}
-
-element {
-    padding:          16px 20px;
-    border-radius:    12px;
-    background-color: @surface;
-    border:           1px;
-    border-color:     @overlay;
-}
-
-element selected {
-    background-color: @overlay;
-    border-color:     @primary;
-    text-color:       @fg;
-}
-
-element normal {
-    background-color: transparent;
-    text-color:       @fg;
-}
-]],
-        hex_colors.background, hex_colors.surface, hex_colors.overlay,
-        hex_colors.text, hex_colors.muted, hex_colors.primary,
-        hex_colors.secondary, hex_colors.highlight, hex_colors.success,
-        hex_colors.warning, hex_colors.danger, hex_colors.info,
-        hex_colors.background, hex_colors.surface, hex_colors.overlay,
-        hex_colors.primary)
-    write_file(base_dir .. "/rofi/theme.rasi", theme_rasi)
-
-    -- 2. btop/btop.theme
+    -- 1. btop/btop.theme
     local btop_theme = string.format([[# btop tty theme — Minimal Bento
 # Generated from palette.md — DO NOT edit directly.
 
@@ -351,47 +262,6 @@ enabled_layouts tall,fat,grid,stack
         hex_colors.overlay, hex_colors.primary, hex_colors.surface, hex_colors.muted
     )
     write_file(base_dir .. "/kitty/kitty.conf", kitty_conf)
-
-    -- 4. mako/config
-    local mako_config = string.format([[# Minimal Mako Config — Bento Pill Notifications & OSD
-# Generated from palette.md — DO NOT edit directly.
-# Requires mako >= 1.7 for progress-bar 'value' hint rendering
-
-font=Adwaita Sans 10
-background-color=%s
-text-color=%s
-border-color=%s
-border-size=1
-border-radius=12
-padding=16,18
-margin=10
-width=340
-height=110
-default-timeout=4000
-progress-color=source %s
-
-[urgency=low]
-border-color=%s
-
-[urgency=normal]
-border-color=%s
-
-[urgency=critical]
-border-color=%s
-default-timeout=0
-
-# OSD notifications (volume: 91110 / brightness: 91111) — replace in place, zero latency
-[app-name="minimal-osd"]
-group-by=category
-default-timeout=1500
-border-color=%s
-progress-color=source %s
-]],
-        hex_colors.surface, hex_colors.text, hex_colors.overlay, hex_colors.primary,
-        hex_colors.overlay, hex_colors.overlay, hex_colors.danger,
-        hex_colors.overlay, hex_colors.primary
-    )
-    write_file(base_dir .. "/mako/config", mako_config)
 end
 
 local palette_path = find_palette_path()

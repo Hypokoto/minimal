@@ -5,7 +5,6 @@
 
 local mainMod = "SUPER"
 local hyprScripts = os.getenv("HOME") .. "/.config/hypr/scripts"
-local rofiScripts = os.getenv("HOME") .. "/.config/rofi/scripts"
 
 -- ==============================================================================
 -- 1. CORE APPLICATIONS & SESSION
@@ -196,22 +195,15 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 -- 9. SYSTEM OVERLAYS, SCRATCHPADS & ROFI MENUS
 -- ==============================================================================
 hl.bind(mainMod .. " + S",      hl.dsp.workspace.toggle_special({ name = "scratchpad" }), { description = "Special: Toggle scratchpad" })
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(rofiScripts .. "/launcher.sh"), { description = "Launcher: Toggle Rofi app launcher" })
-hl.bind("ALT + Tab",           hl.dsp.exec_cmd("rofi -show window -show-icons -theme " .. os.getenv("HOME") .. "/.config/rofi/window.rasi"), { description = "Launcher: Toggle Rofi window switcher" })
-hl.bind(mainMod .. " + SHIFT + grave", hl.dsp.exec_cmd(rofiScripts .. "/control-center.sh"), { description = "Launcher: Toggle Rofi control center" })
-hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"), { description = "Shell: Toggle Waybar" })
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd(rofiScripts .. "/battery.sh"), { description = "Launcher: Toggle battery menu" })
-hl.bind(mainMod .. " + C",      hl.dsp.exec_cmd(rofiScripts .. "/calendar.sh"), { description = "Launcher: Toggle calendar popup" })
-hl.bind(mainMod .. " + E",      hl.dsp.exec_cmd(rofiScripts .. "/emoji.sh"), { description = "Launcher: Toggle emoji picker" })
-hl.bind(mainMod .. " + N",      hl.dsp.exec_cmd(rofiScripts .. "/network.sh"), { description = "Launcher: Toggle network menu" })
-hl.bind(mainMod .. " + X",      hl.dsp.exec_cmd(rofiScripts .. "/clipboard.sh"), { description = "Launcher: Toggle clipboard manager" })
-hl.bind(mainMod .. " + W",      hl.dsp.exec_cmd(os.getenv("HOME") .. "/.config/hypr/wallpaper/picker.sh"), { description = "Launcher: Toggle wallpaper picker" })
-hl.bind(mainMod .. " + A",      hl.dsp.exec_cmd(hyprScripts .. "/audio-toggle.sh"), { description = "Launcher: Toggle audio output" })
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("quickshell ipc call minimal-shell toggleLauncher"), { description = "Launcher: Toggle app launcher" })
+hl.bind(mainMod .. " + X",      hl.dsp.exec_cmd("quickshell ipc call minimal-shell toggleClipboard"), { description = "Clipboard: Toggle clipboard history" })
+hl.bind(mainMod .. " + B",      hl.dsp.exec_cmd(hyprScripts .. "/toggle-bar.sh"), { description = "Shell: Toggle top bar" })
+hl.bind(mainMod .. " + N",      hl.dsp.exec_cmd("quickshell ipc call minimal-shell toggleControl"), { description = "Launcher: Toggle quick controls menu" })
 hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd(hyprScripts .. "/gamemode.sh"), { description = "Performance: Toggle Game Mode (disable animations/blur)" })
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd(hyprScripts .. "/ocr.sh"), { description = "Utilities: Screen OCR text extractor to clipboard" })
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(hyprScripts .. "/nightlight.sh"), { description = "Utilities: Toggle Night Light shader (hyprsunset)" })
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("wlogout -b 2 -c 5 -r 5"), { description = "Session: Toggle power menu overlay" })
-hl.bind(mainMod .. " + ALT + Escape", hl.dsp.exec_cmd("hyprlock"), { description = "Session: Lock screen" })
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("quickshell ipc call minimal-shell toggleSession"), { description = "Session: Toggle power menu overlay" })
+hl.bind(mainMod .. " + ALT + Escape", hl.dsp.exec_cmd("quickshell ipc call minimal-shell lock"), { description = "Session: Lock screen" })
 
 -- ==============================================================================
 -- 10. MEDIA & OSD PIPELINE
@@ -220,13 +212,13 @@ hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tru
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true, description = "Media: Next track" })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true, description = "Media: Previous track" })
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"), { locked = true, repeating = true, description = "Volume: Raise volume" })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"), { locked = true, repeating = true, description = "Volume: Lower volume" })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true, description = "Volume: Mute toggle" })
-hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"), { locked = true, description = "Mic: Mute mic toggle" })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true, description = "Volume: Raise volume (+5%)" })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true, description = "Volume: Lower volume (-5%)" })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, description = "Volume: Mute toggle" })
+hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, description = "Mic: Mute mic toggle" })
 
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("swayosd-client --brightness raise"), { locked = true, repeating = true, description = "Brightness: Increase display brightness" })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"), { locked = true, repeating = true, description = "Brightness: Decrease display brightness" })
+hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl set +5%"), { locked = true, repeating = true, description = "Brightness: Increase display brightness (+5%)" })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 5%-"), { locked = true, repeating = true, description = "Brightness: Decrease display brightness (-5%)" })
 
 -- ==============================================================================
 -- 11. SCREENSHOTS

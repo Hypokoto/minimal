@@ -16,7 +16,7 @@ log "=== STARTING MINIMAL DEPLOYMENT PIPELINE ==="
 
 # --- 1. Binary Presence Verification ---
 log "--- Phase 1: Binary Presence Verification ---"
-REQUIRED_BINARIES=(hyprland waybar rofi yazi starship mako cliphist atuin zoxide eza bat fd rg man)
+REQUIRED_BINARIES=(hyprland quickshell yazi starship cliphist atuin zoxide eza bat fd rg man)
 MISSING_COUNT=0
 
 for bin in "${REQUIRED_BINARIES[@]}"; do
@@ -32,14 +32,21 @@ if (( MISSING_COUNT > 0 )); then
     warn "$MISSING_COUNT required binaries missing. Continuing deployment, but some features may not function until installed."
 fi
 
-# --- 2. Color System Automation Execution ---
-log "--- Phase 2: Compiling Palette Targets ---"
-if command -v lua >/dev/null 2>&1; then
-    lua "$DOTFILES_DIR/hypr/colors.lua" || warn "Lua palette generator failed."
-elif command -v luajit >/dev/null 2>&1; then
-    luajit "$DOTFILES_DIR/hypr/colors.lua" || warn "LuaJIT palette generator failed."
-else
-    warn "Neither lua nor luajit found in PATH. Palette targets not recompiled."
+# --- 2. Compiling Native Control Plane & Palette Targets ---
+log "--- Phase 2: Compiling Native Control Plane & Palette Targets ---"
+mkdir -p "$HOME/.local/bin"
+
+if command -v cargo >/dev/null 2>&1 && [[ -f "$DOTFILES_DIR/Cargo.toml" ]]; then
+    log "Compiling native Rust control plane (minimalctl)..."
+    (cd "$DOTFILES_DIR" && cargo build --release >/dev/null 2>&1 || true)
+    if [[ -f "$DOTFILES_DIR/target/release/minimalctl" ]]; then
+        ln -sfn "$DOTFILES_DIR/target/release/minimalctl" "$HOME/.local/bin/minimalctl"
+        log "[OK] Installed minimalctl to ~/.local/bin/minimalctl"
+    fi
+fi
+
+if [[ -x "$HOME/.local/bin/minimalctl" ]]; then
+    "$HOME/.local/bin/minimalctl" theme apply "$DOTFILES_DIR/themes/obsidian.toml" || warn "minimalctl theme apply failed."
 fi
 
 # --- 3. Atomic Symlinking Pipeline ---
@@ -84,12 +91,9 @@ deploy_link() {
 }
 
 # Symlink top-level modules and shell integrations:
+deploy_link "$DOTFILES_DIR/quickshell"              "$HOME/.config/quickshell"
 deploy_link "$DOTFILES_DIR/hypr"                    "$HOME/.config/hypr"
-deploy_link "$DOTFILES_DIR/rofi"                    "$HOME/.config/rofi"
-deploy_link "$DOTFILES_DIR/waybar"                  "$HOME/.config/waybar"
 deploy_link "$DOTFILES_DIR/kitty"                   "$HOME/.config/kitty"
-deploy_link "$DOTFILES_DIR/mako"                    "$HOME/.config/mako"
-deploy_link "$DOTFILES_DIR/wlogout"                 "$HOME/.config/wlogout"
 deploy_link "$DOTFILES_DIR/yazi"                    "$HOME/.config/yazi"
 deploy_link "$DOTFILES_DIR/tmux"                    "$HOME/.config/tmux"
 deploy_link "$DOTFILES_DIR/tmux/tmux.conf"           "$HOME/.tmux.conf"
@@ -101,18 +105,7 @@ deploy_link "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 deploy_link "$DOTFILES_DIR/btop/btop.theme"        "$HOME/.config/btop/themes/btop.theme"
 deploy_link "$DOTFILES_DIR/git/config"              "$HOME/.config/git/config"
 
-mkdir -p "$HOME/.local/bin"
 ln -sfn "$DOTFILES_DIR/hypr/scripts/toggle-bar.sh"   "$HOME/.local/bin/toggle-bar.sh"
-
-if command -v cargo >/dev/null 2>&1 && [[ -f "$DOTFILES_DIR/Cargo.toml" ]]; then
-    log "Compiling native Rust control plane (minimalctl)..."
-    (cd "$DOTFILES_DIR" && cargo build --release >/dev/null 2>&1 || true)
-    if [[ -f "$DOTFILES_DIR/target/release/minimalctl" ]]; then
-        ln -sfn "$DOTFILES_DIR/target/release/minimalctl" "$HOME/.local/bin/minimalctl"
-        log "[OK] Installed minimalctl to ~/.local/bin/minimalctl"
-    fi
-fi
-
 mkdir -p "$HOME/Pictures/Wallpapers"
 
 # --- 4. Neovim / NvChad Environment Overlay ---
@@ -158,4 +151,6 @@ fi
 log "=== MINIMAL DEPLOYMENT COMPLETE ==="
 log "Log file saved to: $LOG_FILE"
 deploy_link "$DOTFILES_DIR/systemd" "$HOME/.config/systemd"
-systemctl --user daemon-reload && systemctl --user enable --now minimal-battery-monitor.service
+systemctl --user daemon-reload 2>/dev/null || true
+systemctl --user enable --now minimal-battery-monitor.service 2>/dev/null || true
+systemctl --user enable --now quickshell.service 2>/dev/null || true

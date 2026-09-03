@@ -1,0 +1,14 @@
+[Unit]
+Description=Quickshell Desktop Shell
+Documentation=https://git.outfoxxed.me/outfoxxed/quickshell
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/quickshell --daemonize
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=graphical-session.target

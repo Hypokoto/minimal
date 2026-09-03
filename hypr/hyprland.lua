@@ -11,11 +11,12 @@ require("keybinds")
 -- --- Autostart Applications ---
 hl.on("hyprland.start", function()
     hl.exec_cmd("hyprpm reload -n")
-    hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/waybar-start.sh")
+    hl.exec_cmd("hyprctl plugin unload /var/cache/hyprpm/hypokoto/hyprland-plugins/hyprbars.so 2>/dev/null || true")
+    hl.exec_cmd("hyprctl plugin unload /var/cache/hyprpm/hypokoto/hyprland-plugins/borders-plus-plus.so 2>/dev/null || true")
+    hl.exec_cmd("pgrep -x quickshell >/dev/null || quickshell --daemonize")
     hl.exec_cmd("awww-daemon")
     hl.exec_cmd("sleep 0.5 && " .. os.getenv("HOME") .. "/.config/hypr/wallpaper/restore.sh")
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("/usr/sbin/swayosd-server")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
@@ -283,25 +284,15 @@ hl.layer_rule({ name = "anyrun-noanim",        match = { namespace = "anyrun" },
 hl.layer_rule({ name = "hyprpicker-noanim",    match = { namespace = "hyprpicker" }, no_anim = true })
 hl.layer_rule({ name = "indicator-noanim",     match = { namespace = "indicator.*" }, no_anim = true })
 
--- Blur & Transparency Policies for Desktop Shell Components
-hl.layer_rule({ name = "gtk-shell-blur",       match = { namespace = "gtk-layer-shell" }, blur = true, ignore_alpha = 0 })
-hl.layer_rule({ name = "rofi-launcher-blur",   match = { namespace = "launcher" }, blur = true, ignore_alpha = 0.5 })
-hl.layer_rule({ name = "mako-notifications-blur", match = { namespace = "notifications" }, blur = true, ignore_alpha = 0.69 })
-hl.layer_rule({ name = "waybar-blur",          match = { namespace = "waybar" }, blur = true, ignore_alpha = 0.6 })
-hl.layer_rule({ name = "swayosd-blur",          match = { namespace = "swayosd.*" }, blur = true, ignore_alpha = 0.6 })
-
+-- Blur & Transparency Policies for Quickshell Presentation Layer
+hl.layer_rule({ name = "quickshell-blur",        match = { namespace = "quickshell.*" }, blur = true, ignore_alpha = 0.5 })
+hl.layer_rule({ name = "quickshell-launcher",    match = { namespace = "launcher" }, blur = true, ignore_alpha = 0.5 })
+hl.layer_rule({ name = "quickshell-notifications", match = { namespace = "notifications" }, blur = true, ignore_alpha = 0.5 })
 -- ==============================================================================
--- Hyprland Plugins Configuration (hyprbars)
+-- Hyprland Plugins Configuration (hyprtasking)
 -- ==============================================================================
 hl.config({
     plugin = {
-        hyprbars = {
-            bar_height = 28,
-            bar_color = colors.surface,
-            ["col.text"] = colors.text,
-            bar_text_size = 10,
-            bar_text_font = "Adwaita Mono",
-        },
         hyprtasking = {
             layout = "grid",
             gap_size = 4,
@@ -343,3 +334,5 @@ hl.config({
         },
     },
 })
+
+

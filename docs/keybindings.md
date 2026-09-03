@@ -1,36 +1,61 @@
-# Minimal OS Shell — Keybindings Reference
+# Keybindings Reference
 
-## ⌨️ Complete Keybindings Matrix
+Complete keybindings reference for Minimal OS Shell (Hyprland + Quickshell + Hyprtasking + hy3).
 
-| Shortcut | Description | Target Subsystem |
+---
+
+## Window Management & Navigation
+
+| Key Combo | Action | Category |
 |---|---|---|
-| `SUPER + Return` | Launch Terminal (`kitty`) | Core Applications |
-| `SUPER + SHIFT + Return` | Launch Web Browser | Core Applications |
-| `SUPER + SPACE` | Toggle Rofi App Launcher | Pickers & Menus |
-| `ALT + Tab` | Toggle Window Switcher | Pickers & Menus |
-| `SUPER + SHIFT + Grave` (`~`) | Toggle Rofi Control Center | Pickers & Menus |
-| `SUPER + Escape` | Toggle Power Menu (`wlogout`) | Session Control |
-| `SUPER + ALT + Escape` | Lock Screen (`hyprlock`) | Session Control |
-| `SUPER + Q` | Close Active Window | Window Management |
-| `SUPER + V` | Toggle Floating Mode | Window Management |
-| `SUPER + F` | Toggle Fullscreen Mode | Window Management |
-| `SUPER + H / J / K / L` | Vim Spatial Focus Navigation (Left / Down / Up / Right) | Window Navigation |
-| `SUPER + SHIFT + H / J / K / L` | Move Active Window in Direction | Window Navigation |
-| `SUPER + Arrow Keys` | Snap Window to Screen Half | Window Snapping |
-| `SUPER + ALT + Arrow Keys` | Snap Window to Screen Quarter | Window Snapping |
-| `SUPER + ALT + R` | **Window Rescue** (Center-snap misplaced windows at 65%) | Window Recovery |
-| `SUPER + 1..9` | Switch to Workspace 1 through 9 | Workspaces |
-| `SUPER + SHIFT + 1..9` | Move Window to Workspace 1 through 9 | Workspaces |
-| `SUPER + T` / `SUPER + ~` | Toggle `hyprtasking` Visual Grid Overview | Workspaces |
-| `SUPER + TAB` | Toggle `hyprtasking` Cursor Overview | Workspaces |
-| `SUPER + SHIFT + Q` | Kill Hovered Window in Overview (`hyprtasking`) | Workspaces |
-| `Escape` | Exit Overview (`hyprtasking`) | Workspaces |
-| `SUPER + SHIFT + N` | **Night Light Shader Toggle** (`hyprsunset` 4500K) | Utilities |
-| `SUPER + SHIFT + G` | **Game Mode Toggle** (Disable animations/blur for max FPS) | Performance |
-| `SUPER + SHIFT + X` | **Screen OCR Text Extractor** (Snip region & copy to clipboard) | Utilities |
-| `SUPER + X` | Toggle Clipboard History (`cliphist`) | Utilities |
-| `SUPER + W` | Toggle Wallpaper Picker | Utilities |
-| `SUPER + N` | Toggle Network Menu | Utilities |
-| `SUPER + C` | Toggle Calendar Popup | Utilities |
-| `SUPER + E` | Toggle Emoji Picker | Utilities |
-| `SUPER + B` | Toggle Waybar Visibility | Shell Control |
+| `SUPER + Return` | Launch Kitty terminal | Application |
+| `SUPER + SPACE` | Toggle Quickshell App Grid Launcher | Application |
+| `SUPER + X` | Toggle Quickshell Clipboard History Manager | Utilities |
+| `SUPER + N` | Toggle Quickshell Control Center | Quick Settings |
+| `SUPER + Q` | Close active window | Window Control |
+| `SUPER + F` | Toggle fullscreen mode | Window Control |
+| `SUPER + V` | Toggle floating mode | Window Control |
+| `SUPER + G` | Toggle window tabbed container grouping (`hy3`) | Window Control |
+| `SUPER + B` | Toggle Quickshell Top Bar | Shell |
+| `SUPER + Escape` | Toggle Quickshell Session / Power menu | Session |
+| `SUPER + ALT + Escape` | Lock screen (`hyprlock`) | Session |
+| `SUPER + H` | Focus window to the left | Vim Navigation |
+| `SUPER + J` | Focus window down | Vim Navigation |
+| `SUPER + K` | Focus window up | Vim Navigation |
+| `SUPER + L` | Focus window to the right | Vim Navigation |
+| `SUPER + SHIFT + H` | Move window to the left | Window Movement |
+| `SUPER + SHIFT + J` | Move window down | Window Movement |
+| `SUPER + SHIFT + K` | Move window up | Window Movement |
+| `SUPER + SHIFT + L` | Move window to the right | Window Movement |
+
+---
+
+## Workspace Navigation & Overview
+
+| Key Combo | Action | Category |
+|---|---|---|
+| `SUPER + 1..9` | Switch to workspace 1..9 | Workspaces |
+| `SUPER + SHIFT + 1..9` | Move window to workspace 1..9 | Workspaces |
+| `SUPER + S` | Toggle Special Scratchpad workspace | Workspaces |
+| `SUPER + T` / `SUPER + ~` | Toggle Hyprtasking 3x3 workspace grid overview | Overview |
+| `SUPER + TAB` | Toggle cursor-focused overview | Overview |
+| `SUPER + SHIFT + Q` | Kill hovered window in overview | Overview |
+
+---
+
+## Utilities & Performance Toggles
+
+| Key Combo | Action | Category |
+|---|---|---|
+| `SUPER + SHIFT + G` | Toggle Game Mode (disable animations & blur for max FPS) | Performance |
+| `SUPER + SHIFT + N` | Toggle Night Light Shader (`hyprsunset` 4500K warm tint) | Display |
+| `SUPER + SHIFT + X` | Screen OCR text extractor to clipboard (`slurp` + Tesseract) | Utilities |
+| `XF86AudioRaiseVolume` | Raise master volume (+5%) | Media |
+| `XF86AudioLowerVolume` | Lower master volume (-5%) | Media |
+| `XF86AudioMute` | Mute/unmute master audio sink | Media |
+| `XF86AudioMicMute` | Mute/unmute microphone input | Media |
+| `XF86MonBrightnessUp` | Increase screen brightness (+5%) | Display |
+| `XF86MonBrightnessDown` | Decrease screen brightness (-5%) | Display |
+| `XF86AudioPlay` | Media Play / Pause | Media |
+| `XF86AudioNext` | Media Next Track | Media |
+| `XF86AudioPrev` | Media Previous Track | Media |
