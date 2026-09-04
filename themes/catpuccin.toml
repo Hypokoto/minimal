@@ -1,19 +1,51 @@
 [meta]
-name = "catppuccin"
+name = "catpuccin"
 author = "Hypokoto"
-description = "Soft pastel accents over a soothing Mocha-inspired dark palette"
+description = "Mocha variant of Catppuccin with pastel accents"
 
 [tokens]
-background = "#11111B"
-surface    = "#181825"
-overlay    = "#313244"
-text       = "#CDD6F4"
-muted      = "#7F849C"
-primary    = "#89B4FA"
-secondary  = "#CBA6F7"
-highlight  = "#F5C2E7"
-success    = "#A6E3A1"
-warning    = "#F9E2AF"
-danger     = "#F38BA8"
-info       = "#89DCEB"
+background    = "#1E1E2E"
+surface       = "#181825"
+overlay       = "#313244"
+text          = "#CDD6F4"
+muted         = "#7F849C"
+disabled      = "#585B70"
+primary       = "#89B4FA"
+secondary     = "#F5C2E7"
+highlight     = "#CBA6F7"
+success       = "#A6E3A1"
+warning       = "#F9E2AF"
+danger        = "#F38BA8"
+info          = "#89B4FA"
+selection     = "#313244"
+hover         = "#45475A"
+pressed       = "#1E1E2E"
+focus         = "#89B4FA"
+panel         = "#181825"
+panel_variant = "#1E1E2E"
 
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

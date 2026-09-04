@@ -1,0 +1,51 @@
+[meta]
+name = "dark"
+author = "Aetheria"
+description = "Refined deep slate and sky blue desktop palette"
+
+[tokens]
+background    = "#0F172A"
+surface       = "#1E293B"
+overlay       = "#334155"
+text          = "#F8FAFC"
+muted         = "#94A3B8"
+disabled      = "#64748B"
+primary       = "#38BDF8"
+secondary     = "#818CF8"
+highlight     = "#C084FC"
+success       = "#4ADE80"
+warning       = "#FACC15"
+danger        = "#F87171"
+info          = "#38BDF8"
+selection     = "#334155"
+hover         = "#475569"
+pressed       = "#0F172A"
+focus         = "#38BDF8"
+panel         = "#0F172A"
+panel_variant = "#1E293B"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

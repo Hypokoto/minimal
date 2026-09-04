@@ -1,19 +1,51 @@
 [meta]
 name = "synthwave"
 author = "Hypokoto"
-description = "Dark violet synthwave with neon teal, coral, and electric cyan accents"
+description = "Neon retro-futuristic dark palette with hot magenta and cyan"
 
 [tokens]
-background = "#0E091D"
-surface    = "#160F29"
-overlay    = "#241638"
-text       = "#14B9B5"
-muted      = "#A60234"
-primary    = "#BE3F50"
-secondary  = "#FF7F41"
-highlight  = "#04C5F0"
-success    = "#7CD699"
-warning    = "#FFBE74"
-danger     = "#E20342"
-info       = "#04C5F0"
+background    = "#262335"
+surface       = "#241B2F"
+overlay       = "#342946"
+text          = "#F0EFF1"
+muted         = "#848BB6"
+disabled      = "#61678A"
+primary       = "#36F9F6"
+secondary     = "#FF7ED8"
+highlight     = "#FE4450"
+success       = "#72F1B8"
+warning       = "#FCEE09"
+danger        = "#FE4450"
+info          = "#36F9F6"
+selection     = "#342946"
+hover         = "#493961"
+pressed       = "#1A1523"
+focus         = "#36F9F6"
+panel         = "#241B2F"
+panel_variant = "#262335"
 
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

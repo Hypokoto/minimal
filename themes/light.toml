@@ -1,0 +1,51 @@
+[meta]
+name = "light"
+author = "Aetheria"
+description = "Clean crisp daylight palette with high-contrast slate text"
+
+[tokens]
+background    = "#F8FAFC"
+surface       = "#F1F5F9"
+overlay       = "#E2E8F0"
+text          = "#0F172A"
+muted         = "#64748B"
+disabled      = "#94A3B8"
+primary       = "#0284C7"
+secondary     = "#4F46E5"
+highlight     = "#7E22CE"
+success       = "#16A34A"
+warning       = "#CA8A04"
+danger        = "#DC2626"
+info          = "#0284C7"
+selection     = "#CBD5E1"
+hover         = "#E2E8F0"
+pressed       = "#CBD5E1"
+focus         = "#0284C7"
+panel         = "#F1F5F9"
+panel_variant = "#E2E8F0"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

@@ -1,19 +1,51 @@
 [meta]
 name = "ayu-dark"
 author = "Hypokoto"
-description = "Warm charcoal, amber, and muted ocean tones"
+description = "Ayu Dark theme with bright gold and oceanic accents"
 
 [tokens]
-background = "#0B0E14"
-surface    = "#11151C"
-overlay    = "#1A1F29"
-text       = "#E6E1CF"
-muted      = "#737D87"
-primary    = "#E6B450"
-secondary  = "#59C2FF"
-highlight  = "#D2A6FF"
-success    = "#AAD94C"
-warning    = "#FFB454"
-danger     = "#F07178"
-info       = "#59C2FF"
+background    = "#0F1419"
+surface       = "#131721"
+overlay       = "#1F2430"
+text          = "#E6B450"
+muted         = "#5C6773"
+disabled      = "#47525E"
+primary       = "#FFB454"
+secondary     = "#F29E74"
+highlight     = "#36A3D9"
+success       = "#B8CC52"
+warning       = "#FFB454"
+danger        = "#F07178"
+info          = "#36A3D9"
+selection     = "#1F2430"
+hover         = "#242936"
+pressed       = "#0F1419"
+focus         = "#FFB454"
+panel         = "#0F1419"
+panel_variant = "#131721"
 
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

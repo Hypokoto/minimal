@@ -4,16 +4,48 @@ author = "Hypokoto"
 description = "Retro warm dark palette with earthy Gruvbox tones"
 
 [tokens]
-background = "#1D2021"
-surface    = "#282828"
-overlay    = "#3C3836"
-text       = "#EBDBB2"
-muted      = "#928374"
-primary    = "#83A598"
-secondary  = "#D3869B"
-highlight  = "#D79921"
-success    = "#B8BB26"
-warning    = "#FABD2F"
-danger     = "#FB4934"
-info       = "#83A598"
+background    = "#1D2021"
+surface       = "#282828"
+overlay       = "#3C3836"
+text          = "#EBDBB2"
+muted         = "#928374"
+disabled      = "#665C54"
+primary       = "#83A598"
+secondary     = "#D3869B"
+highlight     = "#D79921"
+success       = "#B8BB26"
+warning       = "#FABD2F"
+danger        = "#FB4934"
+info          = "#83A598"
+selection     = "#3C3836"
+hover         = "#504945"
+pressed       = "#1D2021"
+focus         = "#83A598"
+panel         = "#1D2021"
+panel_variant = "#282828"
 
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"

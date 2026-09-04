@@ -1,0 +1,51 @@
+[meta]
+name = "amoled"
+author = "Aetheria"
+description = "Pure black OLED energy-efficient palette with vivid accents"
+
+[tokens]
+background    = "#000000"
+surface       = "#0A0A0A"
+overlay       = "#171717"
+text          = "#FFFFFF"
+muted         = "#888888"
+disabled      = "#444444"
+primary       = "#38BDF8"
+secondary     = "#818CF8"
+highlight     = "#C084FC"
+success       = "#4ADE80"
+warning       = "#FACC15"
+danger        = "#F87171"
+info          = "#38BDF8"
+selection     = "#262626"
+hover         = "#262626"
+pressed       = "#171717"
+focus         = "#38BDF8"
+panel         = "#000000"
+panel_variant = "#0A0A0A"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "Adwaita Sans"
+mono = "AdwaitaMono Nerd Font"
