@@ -6,7 +6,7 @@ After=graphical-session.target
 
 [Service]
 Type=exec
-ExecStart=/usr/bin/quickshell --daemonize
+ExecStart=/usr/bin/quickshell
 Restart=on-failure
 RestartSec=2s
 

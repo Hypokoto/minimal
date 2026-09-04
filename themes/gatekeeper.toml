@@ -1,0 +1,51 @@
+[meta]
+name = "gatekeeper"
+author = "Gemini"
+description = "Sleek industrial theme featuring deep grays and striking amber accents"
+
+[tokens]
+background    = "#0F1113"
+surface       = "#16191D"
+overlay       = "#20242B"
+text          = "#E6EDF3"
+muted         = "#8B949E"
+disabled      = "#484F58"
+primary       = "#F0883E"
+secondary     = "#58A6FF"
+highlight     = "#D29922"
+success       = "#3FB950"
+warning       = "#DB6D28"
+danger        = "#F85149"
+info          = "#79C0FF"
+selection     = "#262C36"
+hover         = "#21262D"
+pressed       = "#0A0C0E"
+focus         = "#F0883E"
+panel         = "#0F1113"
+panel_variant = "#16191D"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

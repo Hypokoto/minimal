@@ -1,0 +1,51 @@
+[meta]
+name = "neofusion"
+author = "Gemini"
+description = "Modern fusion theme combining cosmic indigos with electric violet and turquoise"
+
+[tokens]
+background    = "#0D0F18"
+surface       = "#131624"
+overlay       = "#1D2136"
+text          = "#E2E8F0"
+muted         = "#718096"
+disabled      = "#4A5568"
+primary       = "#06B6D4"
+secondary     = "#A855F7"
+highlight     = "#FBBF24"
+success       = "#10B981"
+warning       = "#F59E0B"
+danger        = "#EF4444"
+info          = "#3B82F6"
+selection     = "#27304D"
+hover         = "#1E2339"
+pressed       = "#080A0F"
+focus         = "#06B6D4"
+panel         = "#0D0F18"
+panel_variant = "#131624"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

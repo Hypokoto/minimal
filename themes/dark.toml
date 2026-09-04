@@ -1,6 +1,6 @@
 [meta]
 name = "dark"
-author = "Aetheria"
+author = "Minimal"
 description = "Refined deep slate and sky blue desktop palette"
 
 [tokens]
@@ -47,5 +47,5 @@ lg = 16
 xl = 24
 
 [typography]
-font = "Adwaita Sans"
-mono = "AdwaitaMono Nerd Font"
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

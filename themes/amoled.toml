@@ -1,6 +1,6 @@
 [meta]
 name = "amoled"
-author = "Aetheria"
+author = "Minimal"
 description = "Pure black OLED energy-efficient palette with vivid accents"
 
 [tokens]
@@ -47,5 +47,5 @@ lg = 16
 xl = 24
 
 [typography]
-font = "Adwaita Sans"
-mono = "AdwaitaMono Nerd Font"
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

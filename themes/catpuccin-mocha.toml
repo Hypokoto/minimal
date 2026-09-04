@@ -1,0 +1,51 @@
+[meta]
+name = "catppuccin-mocha"
+author = "Gemini"
+description = "Soothing pastel dark theme with soft purples and pinks"
+
+[tokens]
+background    = "#1E1E2E"
+surface       = "#181825"
+overlay       = "#313244"
+text          = "#CDD6F4"
+muted         = "#A6ADC8"
+disabled      = "#585B70"
+primary       = "#89B4FA"
+secondary     = "#F5C2E7"
+highlight     = "#FAB387"
+success       = "#A6E3A1"
+warning       = "#F9E2AF"
+danger        = "#F38BA8"
+info          = "#89B4FA"
+selection     = "#45475A"
+hover         = "#313244"
+pressed       = "#11111B"
+focus         = "#89B4FA"
+panel         = "#181825"
+panel_variant = "#1E1E2E"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

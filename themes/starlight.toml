@@ -1,0 +1,51 @@
+[meta]
+name = "starlight"
+author = "Gemini"
+description = "Ethereal midnight-blue theme with cool silver and celestial accents"
+
+[tokens]
+background    = "#0B0F19"
+surface       = "#131C2E"
+overlay       = "#1E2A42"
+text          = "#F1F5F9"
+muted         = "#94A3B8"
+disabled      = "#475569"
+primary       = "#60A5FA"
+secondary     = "#C084FC"
+highlight     = "#FDE047"
+success       = "#34D399"
+warning       = "#FACC15"
+danger        = "#F87171"
+info          = "#38BDF8"
+selection     = "#1E293B"
+hover         = "#22324D"
+pressed       = "#070A11"
+focus         = "#60A5FA"
+panel         = "#0B0F19"
+panel_variant = "#131C2E"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

@@ -1,0 +1,51 @@
+[meta]
+name = "gruvbox-light"
+author = "Gemini"
+description = "Retro warm light palette with earthy Gruvbox tones"
+
+[tokens]
+background    = "#FBF1C7"
+surface       = "#F2E5BC"
+overlay       = "#E0D0A6"
+text          = "#282828"
+muted         = "#665C54"
+disabled      = "#928374"
+primary       = "#076678"
+secondary     = "#8F3F71"
+highlight     = "#B57614"
+success       = "#79740E"
+warning       = "#B57614"
+danger        = "#9D0006"
+info          = "#076678"
+selection     = "#D5C4A1"
+hover         = "#E0D0A6"
+pressed       = "#D5C4A1"
+focus         = "#076678"
+panel         = "#F2E5BC"
+panel_variant = "#E0D0A6"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

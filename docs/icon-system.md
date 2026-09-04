@@ -1,7 +1,7 @@
-# Aetheria Custom SVG Icon System & Visual Grammar
+# Minimal Custom SVG Icon System & Visual Grammar
 
 ## 1. Overview
-Aetheria is an original, theme-aware SVG icon family designed specifically for the Minimal Arch Linux desktop running Hyprland and Quickshell.
+Minimal is an original, theme-aware SVG icon family designed specifically for the Minimal Arch Linux desktop running Hyprland and Quickshell.
 
 ## 2. Icon Specification & Geometry
 - **Canvas Size:** `24px × 24px`
@@ -24,7 +24,7 @@ icons/
 │   ├── places/
 │   └── status/
 └── dist/
-    └── Aetheria/
+    └── Minimal/
         ├── index.theme
         └── scalable/
             ├── actions/
@@ -50,11 +50,11 @@ Icons dynamically consume semantic theme roles from `minimalctl`:
 | `error` | `danger` | Red error status |
 | `info` | `info` | Sky cyan informational status |
 
-## 5. Quickshell Integration (`AetheriaIcon.qml`)
-Quickshell components consume icons through the reusable `AetheriaIcon` component:
+## 5. Quickshell Integration (`MinimalIcon.qml`)
+Quickshell components consume icons through the reusable `MinimalIcon` component:
 
 ```qml
-AetheriaIcon {
+MinimalIcon {
     name: "network-wifi"
     role: "active"
     size: 20
@@ -62,6 +62,6 @@ AetheriaIcon {
 ```
 
 ## 6. System Installation & Toolkit Binding
-- **Installation Path:** `~/.local/share/icons/Aetheria`
-- **GTK Settings:** `gtk-icon-theme-name=Aetheria` in `~/.config/gtk-3.0/settings.ini` and `~/.config/gtk-4.0/settings.ini`
-- **Qt Settings:** `icon_theme=Aetheria` in `~/.config/qt6ct/qt6ct.conf` and `~/.config/qt5ct/qt5ct.conf`
+- **Installation Path:** `~/.local/share/icons/Minimal`
+- **GTK Settings:** `gtk-icon-theme-name=Minimal` in `~/.config/gtk-3.0/settings.ini` and `~/.config/gtk-4.0/settings.ini`
+- **Qt Settings:** `icon_theme=Minimal` in `~/.config/qt6ct/qt6ct.conf` and `~/.config/qt5ct/qt5ct.conf`

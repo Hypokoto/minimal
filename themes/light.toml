@@ -1,6 +1,6 @@
 [meta]
 name = "light"
-author = "Aetheria"
+author = "Minimal"
 description = "Clean crisp daylight palette with high-contrast slate text"
 
 [tokens]
@@ -8,7 +8,7 @@ background    = "#F8FAFC"
 surface       = "#F1F5F9"
 overlay       = "#E2E8F0"
 text          = "#0F172A"
-muted         = "#64748B"
+muted         = "#475569"
 disabled      = "#94A3B8"
 primary       = "#0284C7"
 secondary     = "#4F46E5"
@@ -47,5 +47,5 @@ lg = 16
 xl = 24
 
 [typography]
-font = "Adwaita Sans"
-mono = "AdwaitaMono Nerd Font"
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

@@ -1,0 +1,51 @@
+[meta]
+name = "gruvbox-dark"
+author = "Gemini"
+description = "Classic dark variant with rich charcoal and warm retro accents"
+
+[tokens]
+background    = "#282828"
+surface       = "#3C3836"
+overlay       = "#504945"
+text          = "#EBDBB2"
+muted         = "#A89984"
+disabled      = "#665C54"
+primary       = "#83A598"
+secondary     = "#D3869B"
+highlight     = "#FABD2F"
+success       = "#B8BB26"
+warning       = "#FABD2F"
+danger        = "#FB4934"
+info          = "#83A598"
+selection     = "#504945"
+hover         = "#665C54"
+pressed       = "#1D2021"
+focus         = "#83A598"
+panel         = "#1D2021"
+panel_variant = "#282828"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"

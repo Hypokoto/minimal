@@ -1,0 +1,51 @@
+[meta]
+name = "fluoromachine"
+author = "Gemini"
+description = "High-contrast cybernetic theme with neon pinks and bright cyans"
+
+[tokens]
+background    = "#121319"
+surface       = "#1B1C25"
+overlay       = "#262835"
+text          = "#F8F8F2"
+muted         = "#6272A4"
+disabled      = "#44475A"
+primary       = "#00F6FF"
+secondary     = "#FF79C6"
+highlight     = "#FFB86C"
+success       = "#50FA7B"
+warning       = "#F1FA8C"
+danger        = "#FF5555"
+info          = "#8BE9FD"
+selection     = "#262835"
+hover         = "#2A2D3E"
+pressed       = "#0F1015"
+focus         = "#00F6FF"
+panel         = "#121319"
+panel_variant = "#1B1C25"
+
+[icon_roles]
+default  = "text"
+active   = "primary"
+muted    = "muted"
+disabled = "disabled"
+success  = "success"
+warning  = "warning"
+error    = "danger"
+info     = "info"
+
+[geometry]
+radius_sm = 6
+radius_md = 12
+radius_lg = 18
+
+[spacing]
+xs = 4
+sm = 8
+md = 12
+lg = 16
+xl = 24
+
+[typography]
+font = "JetBrainsMono Nerd Font"
+mono = "JetBrainsMono Nerd Font"
