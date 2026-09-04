@@ -1,0 +1,61 @@
+/* Minimal Desktop Environment — Wlogout Bento Aesthetics */
+
+* {
+    background-image: none;
+    box-shadow: none;
+    font-family: "JetBrainsMono Nerd Font", "Adwaita Sans", sans-serif;
+}
+
+window {
+    background-color: rgba(11, 14, 20, 0.85);
+}
+
+grid {
+    margin: 120px 240px;
+    spacing: 24px;
+}
+
+button {
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #E8EDF5;
+    background-color: rgba(255, 255, 255, 0.04);
+    background-repeat: no-repeat;
+    background-position: center 38%;
+    background-size: 80px;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 24px;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+button:focus, button:active, button:hover {
+    background-color: rgba(125, 211, 252, 0.12);
+    border: 2px solid #7DD3FC;
+    color: #7DD3FC;
+    outline-style: none;
+}
+
+#lock {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/screen-lock.svg"), url("/usr/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/logout.svg"), url("/usr/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/sleep.svg"), url("/usr/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/hibernate.svg"), url("/usr/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/shutdown.svg"), url("/usr/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/home/hypokoto/.local/share/icons/Minimal/scalable/status/restart.svg"), url("/usr/share/wlogout/icons/reboot.png"));
+}
