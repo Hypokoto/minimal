@@ -8,27 +8,27 @@ mapfile -t SINKS < <(pactl list sinks short | awk '{print $2}')
 CURRENT="$(pactl info | grep "Default Sink" | awk '{print $2}')"
 
 if [[ ${#SINKS[@]} -eq 0 ]]; then
-    exit 0
+	exit 0
 fi
 
 NEXT_SINK="${SINKS[0]}"
 for i in "${!SINKS[@]}"; do
-    if [[ "${SINKS[$i]}" == "$CURRENT" ]]; then
-        NEXT_INDEX=$(( (i + 1) % ${#SINKS[@]} ))
-        NEXT_SINK="${SINKS[$NEXT_INDEX]}"
-        break
-    fi
+	if [[ "${SINKS[$i]}" == "$CURRENT" ]]; then
+		NEXT_INDEX=$(((i + 1) % ${#SINKS[@]}))
+		NEXT_SINK="${SINKS[$NEXT_INDEX]}"
+		break
+	fi
 done
 
 pactl set-default-sink "$NEXT_SINK"
 
 LABEL="Default Audio Output"
 if [[ "$NEXT_SINK" == *"Speaker"* ]]; then
-    LABEL="Laptop Speakers"
+	LABEL="Laptop Speakers"
 elif [[ "$NEXT_SINK" == *"08_00.1"* ]]; then
-    LABEL="TV / HDMI Audio (iGPU)"
+	LABEL="TV / HDMI Audio (iGPU)"
 elif [[ "$NEXT_SINK" == *"03_00.1"* ]]; then
-    LABEL="TV / HDMI Audio (dGPU)"
+	LABEL="TV / HDMI Audio (dGPU)"
 fi
 
 notify-send -r 91110 -a "minimal-osd" -i "audio-speakers-symbolic" "Audio Output" "Switched to $LABEL" || true

@@ -27,69 +27,69 @@ alias ehypr='${EDITOR:-nvim} ~/.config/hypr/hyprland.conf'
 
 # 1. Listing (eza -> ls)
 if command -v eza >/dev/null 2>&1; then
-    alias ls='eza --color=auto --icons=auto'
-    alias ll='eza -lah --icons=auto --git --group-directories-first'
-    alias la='eza -a --icons=auto'
-    alias l='eza --icons=auto'
-    alias lt='eza --tree --level=2 --icons=auto --group-directories-first'
-    alias llt='eza --tree --level=3 --icons=auto --group-directories-first --git'
+	alias ls='eza --color=auto --icons=auto'
+	alias ll='eza -lah --icons=auto --git --group-directories-first'
+	alias la='eza -a --icons=auto'
+	alias l='eza --icons=auto'
+	alias lt='eza --tree --level=2 --icons=auto --group-directories-first'
+	alias llt='eza --tree --level=3 --icons=auto --group-directories-first --git'
 else
-    alias ls='ls --color=auto'
-    alias ll='ls -lAhF --color=auto'
-    alias la='ls -A --color=auto'
-    alias l='ls -CF --color=auto'
+	alias ls='ls --color=auto'
+	alias ll='ls -lAhF --color=auto'
+	alias la='ls -A --color=auto'
+	alias l='ls -CF --color=auto'
 fi
 
 # 2. File viewing (bat -> cat)
 if command -v bat >/dev/null 2>&1; then
-    alias cat='bat --style=plain --paging=never'
-    alias batp='bat --style=numbers'
+	alias cat='bat --style=plain --paging=never'
+	alias batp='bat --style=numbers'
 elif command -v batcat >/dev/null 2>&1; then
-    alias cat='batcat --style=plain --paging=never'
+	alias cat='batcat --style=plain --paging=never'
 fi
 
 # 3. Disk Usage (duf -> df, dust -> du)
 if command -v duf >/dev/null 2>&1; then
-    alias df='duf'
+	alias df='duf'
 else
-    alias df='df -h'
+	alias df='df -h'
 fi
 
 if command -v dust >/dev/null 2>&1; then
-    alias du='dust'
+	alias du='dust'
 else
-    alias du='du -sh'
+	alias du='du -sh'
 fi
 
 # 4. Process Monitor (btop -> top)
 if command -v btop >/dev/null 2>&1; then
-    alias top='btop'
+	alias top='btop'
 elif command -v btm >/dev/null 2>&1; then
-    alias top='btm'
+	alias top='btm'
 fi
 
 # 5. Safe Trash Deletion (trash-cli / trash-put)
 # POSIX tools tr / cut / sed MUST NOT be aliased — they are used in shell pipelines.
 if command -v trash-put >/dev/null 2>&1; then
-    alias rm='trash-put'
-    alias tp='trash-put'      # trash-put
-    alias tl='trash-list'     # trash-list
-    alias tre='trash-restore' # trash-restore (NOT tr — would break pipelines)
-    alias trm='trash-empty'   # trash-empty
-    alias rmf='/bin/rm -iv'   # bypass alias for permanent deletes
+	alias rm='trash-put'
+	alias tp='trash-put'      # trash-put
+	alias tl='trash-list'     # trash-list
+	alias tre='trash-restore' # trash-restore (NOT tr — would break pipelines)
+	alias trm='trash-empty'   # trash-empty
+	alias rmf='/bin/rm -iv'   # bypass alias for permanent deletes
 elif command -v trash >/dev/null 2>&1; then
-    alias rm='trash'
-    alias tp='trash'
-    alias rmf='/bin/rm -iv'
+	alias rm='trash'
+	alias tp='trash'
+	alias rmf='/bin/rm -iv'
 else
-    alias rm='rm -i'
+	alias rm='rm -i'
 fi
 
 # 6. Search tools (ripgrep)
 if command -v rg >/dev/null 2>&1; then
-    alias grep='rg'
+	alias grep='rg'
 else
-    alias grep='grep --color=auto'
+	alias grep='grep --color=auto'
 fi
 
 # --- Git Shortcuts ---

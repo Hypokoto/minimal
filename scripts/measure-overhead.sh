@@ -15,31 +15,31 @@ echo "Total processes for $USER: $USER_PROCS"
 echo ""
 echo "[*] Authorized Persistent Desktop Processes running:"
 for proc in Hyprland waybar mako hypridle awww-daemon polkit-gnome wl-paste swayosd-server; do
-    count=$(pgrep -x "$proc" | wc -l)
-    if [ "$count" -gt 0 ]; then
-        echo " - $proc: Running ($count)"
-    else
-        echo " - $proc: Not running"
-    fi
+	count=$(pgrep -x "$proc" | wc -l)
+	if [ "$count" -gt 0 ]; then
+		echo " - $proc: Running ($count)"
+	else
+		echo " - $proc: Not running"
+	fi
 done
 
 echo ""
 echo "[*] Banned/Duplicate Processes Check:"
 for proc in conky nm-applet nwg-drawer hyprlauncher; do
-    if pgrep -x "$proc" >/dev/null; then
-        echo " [!] VIOLATION: $proc is running!"
-    else
-        echo " - $proc: Clean"
-    fi
+	if pgrep -x "$proc" >/dev/null; then
+		echo " [!] VIOLATION: $proc is running!"
+	else
+		echo " - $proc: Clean"
+	fi
 done
 
 echo ""
 echo "[*] Battery Monitor (Event-Driven) CPU Usage:"
 BAT_PID=$(pgrep -f "battery-monitor.sh" | head -n1 || true)
 if [[ -n "${BAT_PID:-}" ]]; then
-    ps -p "$BAT_PID" -o %cpu,%mem,cmd --no-headers
+	ps -p "$BAT_PID" -o %cpu,%mem,cmd --no-headers
 else
-    echo " - battery-monitor.service is not currently running."
+	echo " - battery-monitor.service is not currently running."
 fi
 
 echo ""

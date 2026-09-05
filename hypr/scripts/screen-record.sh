@@ -12,9 +12,9 @@ RECORDINGS_DIR="${HOME}/Pictures/recordings"
 
 # If wf-recorder is currently running, stop it cleanly
 if pgrep -x wf-recorder >/dev/null 2>&1; then
-    pkill -SIGINT wf-recorder || true
-    notify-send -t 3000 -i video-x-generic "Screen Recorder" "Recording saved to ~/Pictures/recordings"
-    exit 0
+	pkill -SIGINT wf-recorder || true
+	notify-send -t 3000 -i video-x-generic "Screen Recorder" "Recording saved to ~/Pictures/recordings"
+	exit 0
 fi
 
 # Ensure recordings directory exists
@@ -27,13 +27,13 @@ MODE="${1:-}"
 EXTRA_ARGS=("-r" "60")
 
 if [ "$MODE" = "--region" ]; then
-    GEOM=$(slurp -b "#00000080" -c "#7dd3fcff" -w 1 2>/dev/null) || {
-        notify-send -t 1500 "Screen Recorder" "Region selection cancelled"
-        exit 0
-    }
-    EXTRA_ARGS+=("-g" "$GEOM")
+	GEOM=$(slurp -b "#00000080" -c "#7dd3fcff" -w 1 2>/dev/null) || {
+		notify-send -t 1500 "Screen Recorder" "Region selection cancelled"
+		exit 0
+	}
+	EXTRA_ARGS+=("-g" "$GEOM")
 elif [ "$MODE" = "--audio" ]; then
-    EXTRA_ARGS+=("-a")
+	EXTRA_ARGS+=("-a")
 fi
 
 # Send quick notification BEFORE recording starts (fades in 1.5s so it doesn't pollute the video)

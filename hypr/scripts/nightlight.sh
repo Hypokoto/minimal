@@ -6,9 +6,9 @@
 set -euo pipefail
 
 if pgrep -x hyprsunset >/dev/null 2>&1; then
-    pkill -x hyprsunset >/dev/null 2>&1 || true
-    notify-send -i display-brightness "Night Light" "Deactivated — Normal color temperature restored"
+	pkill -x hyprsunset >/dev/null 2>&1 || true
+	notify-send -i display-brightness "Night Light" "Deactivated — Normal color temperature restored"
 else
-    hyprsunset -t 4500 >/dev/null 2>&1 &
-    notify-send -i display-brightness "Night Light" "Activated — Warm color temperature (4500K)"
+	hyprsunset -t 4500 >/dev/null 2>&1 &
+	notify-send -i display-brightness "Night Light" "Activated — Warm color temperature (4500K)"
 fi

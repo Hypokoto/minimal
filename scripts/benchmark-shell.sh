@@ -5,7 +5,7 @@
 set -euo pipefail
 
 log() {
-    echo -e "\033[1;34m[BENCHMARK]\033[0m $1"
+	echo -e "\033[1;34m[BENCHMARK]\033[0m $1"
 }
 
 log "=== MINIMAL SHELL PERFORMANCE TELEMETRY ==="
@@ -14,10 +14,10 @@ log "=== MINIMAL SHELL PERFORMANCE TELEMETRY ==="
 QS_PID=$(pgrep -f "quickshell" | head -n 1 || true)
 
 if [[ -z "$QS_PID" ]]; then
-    log "Quickshell is not running. Starting daemon for benchmark..."
-    quickshell --daemonize
-    sleep 1
-    QS_PID=$(pgrep -f "quickshell" | head -n 1)
+	log "Quickshell is not running. Starting daemon for benchmark..."
+	quickshell --daemonize
+	sleep 1
+	QS_PID=$(pgrep -f "quickshell" | head -n 1)
 fi
 
 log "Quickshell PID: $QS_PID"
@@ -40,7 +40,7 @@ log "Testing IPC Theme Reload Latency..."
 START_TIME=$(date +%s%N)
 quickshell ipc call minimal-shell reloadTheme >/dev/null 2>&1 || true
 END_TIME=$(date +%s%N)
-LATENCY_MS=$(( (END_TIME - START_TIME) / 1000000 ))
+LATENCY_MS=$(((END_TIME - START_TIME) / 1000000))
 
 log "IPC reloadTheme Latency: ${LATENCY_MS} ms"
 

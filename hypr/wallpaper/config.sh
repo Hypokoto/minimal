@@ -13,4 +13,3 @@ NOTIFY_APP_NAME="Wallpaper"
 
 # Used by the picker action. Leave empty to use xdg-open.
 FILE_MANAGER_COMMAND=()
-

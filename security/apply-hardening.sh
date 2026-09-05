@@ -11,24 +11,24 @@ echo "=== System Hardening ==="
 # 1. System Package Updates (Kernel patching)
 echo "[*] Updating system packages to patch recent vulnerabilities (Copy Fail / IPv6)..."
 if command -v yay >/dev/null 2>&1; then
-    yay -Syu --noconfirm || echo "[-] WARN: System update failed (AUR timeout?). Continuing with local hardening..."
+	yay -Syu --noconfirm || echo "[-] WARN: System update failed (AUR timeout?). Continuing with local hardening..."
 elif command -v pacman >/dev/null 2>&1; then
-    sudo pacman -Syu --noconfirm || echo "[-] WARN: System update failed. Continuing with local hardening..."
+	sudo pacman -Syu --noconfirm || echo "[-] WARN: System update failed. Continuing with local hardening..."
 else
-    echo "[-] WARN: Arch Linux package manager not found. Skipping pacman updates."
+	echo "[-] WARN: Arch Linux package manager not found. Skipping pacman updates."
 fi
 
 # 2. Sysctl & Kernel Modules Deployment
 echo "[*] Deploying security hardening rules..."
 if [[ -d /etc/sysctl.d ]]; then
-    sudo cp "$DIR/99-security-hardening.conf" /etc/sysctl.d/
-    sudo sysctl --system
+	sudo cp "$DIR/99-security-hardening.conf" /etc/sysctl.d/
+	sudo sysctl --system
 else
-    echo "[-] WARN: /etc/sysctl.d/ not found. Are you on a supported Linux?"
+	echo "[-] WARN: /etc/sysctl.d/ not found. Are you on a supported Linux?"
 fi
 
 if [[ -d /etc/modprobe.d ]]; then
-    sudo cp "$DIR/99-security-blacklist.conf" /etc/modprobe.d/
+	sudo cp "$DIR/99-security-blacklist.conf" /etc/modprobe.d/
 fi
 
 echo "=== Hardening Complete ==="

@@ -1,0 +1,9 @@
+[submodule "hy3"]
+	path = hy3
+	url = https://github.com/outfoxxed/hy3.git
+[submodule "hyprtasking"]
+	path = hyprtasking
+	url = https://github.com/raybbian/hyprtasking.git
+[submodule "quickshell"]
+	path = quickshell
+	url = https://github.com/tripathiji1312/quickshell.git
