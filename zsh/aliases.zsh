@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 # ==============================================================================
 # Minimal zsh/aliases.zsh — Modular & Defensive Shell Aliases
 # Every binary alias is wrapped in command -v checks so the shell never breaks

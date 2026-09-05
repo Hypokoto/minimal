@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2034
 # User configuration for the Hyprland wallpaper dashboard.
 
 WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
