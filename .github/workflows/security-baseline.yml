@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - name: Run shfmt
-        uses: mfinelli/setup-shfmt@36a296dd392ba4e3bbe7a5eaa6e7a97f8fbbd894
+        uses: mfinelli/setup-shfmt@1a143389339b48c4b48ae3cdc058f3dbe336a701
       - run: shfmt -d .
 
   validate-packages:
